@@ -1,21 +1,28 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Wrench, Shield, Award } from "lucide-react";
 import heroCar from "@/assets/hero-car.jpg";
+import heroVideo from "@/assets/hero-bg.mp4";
 
 export const Hero = () => {
   return (
     <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Background image */}
+      {/* Background video */}
       <div className="absolute inset-0">
-        <img
-          src={heroCar}
-          alt="Carro esportivo na oficina Adricar"
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={heroCar}
           className="w-full h-full object-cover"
-          width={1920}
-          height={1080}
-        />
+          aria-hidden="true"
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
+        {/* Dark overlays for legibility */}
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-background/70" />
+        <div className="absolute inset-0 bg-background/30" />
       </div>
 
       {/* Speed line accent */}
