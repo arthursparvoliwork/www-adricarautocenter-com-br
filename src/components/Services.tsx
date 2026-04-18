@@ -2,6 +2,7 @@ import {
   Wrench, Disc, Droplets, Zap, Cog, Gauge, Wind, Activity,
   Settings, Cpu, CircleDot, Truck, Car, ShieldCheck, Hammer, Battery
 } from "lucide-react";
+import { VideoBackdrop } from "@/components/VideoBackdrop";
 
 const services = [
   { icon: Wrench, title: "Mecânica Geral", desc: "Manutenção completa para todas as marcas" },
@@ -24,8 +25,9 @@ const services = [
 
 export const Services = () => {
   return (
-    <section id="servicos" className="relative py-24 lg:py-32 bg-stripes">
-      <div className="container-x">
+    <section id="servicos" className="relative py-24 lg:py-32 bg-stripes overflow-hidden">
+      <VideoBackdrop overlay={0.88} flip />
+      <div className="container-x relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <div className="inline-block px-4 py-1.5 rounded-full border border-secondary/40 bg-secondary/10 mb-6">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-secondary">Nossos Serviços</span>
