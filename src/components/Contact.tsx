@@ -1,10 +1,12 @@
 import { MapPin, Phone, Clock, Instagram, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { VideoBackdrop } from "@/components/VideoBackdrop";
 
 export const Contact = () => {
   return (
-    <section id="contato" className="relative py-24 lg:py-32">
-      <div className="container-x">
+    <section id="contato" className="relative py-24 lg:py-32 overflow-hidden">
+      <VideoBackdrop overlay={0.9} />
+      <div className="container-x relative z-10">
         <div className="max-w-3xl mb-16">
           <div className="inline-block px-4 py-1.5 rounded-full border border-primary/40 bg-primary/10 mb-6">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Contato</span>

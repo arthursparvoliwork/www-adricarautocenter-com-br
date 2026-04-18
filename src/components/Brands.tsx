@@ -1,4 +1,5 @@
 import { GraduationCap, Award } from "lucide-react";
+import senaiLogo from "@/assets/senai-logo.png";
 
 const brands = [
   "PIRELLI", "MICHELIN", "BRIDGESTONE", "FIRESTONE", "CONTINENTAL",
@@ -34,14 +35,15 @@ export const Brands = () => {
               className="shrink-0 group/logo"
               aria-label="SENAI – Serviço Nacional de Aprendizagem Industrial"
             >
-              <div className="relative w-32 h-32 sm:w-40 sm:h-40 bg-primary rounded-2xl flex items-center justify-center shadow-[0_0_40px_hsl(0_100%_55%/0.5)] group-hover/logo:scale-105 transition-transform">
-                <span
-                  className="font-display text-white text-4xl sm:text-5xl tracking-tight italic"
-                  style={{ textShadow: "2px 2px 0 rgba(0,0,0,0.2)" }}
-                >
-                  SENAI
-                </span>
-                <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-white/80" />
+              <div className="relative bg-white rounded-2xl p-4 shadow-[0_0_40px_hsl(0_100%_55%/0.4)] group-hover/logo:scale-105 transition-transform">
+                <img
+                  src={senaiLogo}
+                  alt="SENAI – Serviço Nacional de Aprendizagem Industrial"
+                  className="w-40 sm:w-48 h-auto object-contain"
+                  width={192}
+                  height={60}
+                  loading="lazy"
+                />
               </div>
             </a>
 
