@@ -188,11 +188,42 @@
 
   /* Floating logo animation */
   @keyframes float-slow {
-    0%, 100% { transform: translateY(0) rotate(var(--tw-rotate, -12deg)); }
-    50% { transform: translateY(-15px) rotate(calc(var(--tw-rotate, -12deg) + 3deg)); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
   }
   .animate-float-slow {
     animation: float-slow 8s ease-in-out infinite;
+  }
+
+  /* Slow continuous rotation for gears/cogs */
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 25s linear infinite;
+  }
+
+  /* White corner brackets (industrial frame) */
+  .corner-brackets {
+    position: relative;
+  }
+  .corner-brackets::before,
+  .corner-brackets::after {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border: 2px solid hsl(0 0% 100% / 0.6);
+    pointer-events: none;
+  }
+  .corner-brackets::before {
+    top: 8px; left: 8px;
+    border-right: none; border-bottom: none;
+  }
+  .corner-brackets::after {
+    bottom: 8px; right: 8px;
+    border-left: none; border-top: none;
   }
 
   /* Speed lines */
