@@ -1,3 +1,5 @@
+import { GraduationCap, Award } from "lucide-react";
+
 const brands = [
   "PIRELLI", "MICHELIN", "BRIDGESTONE", "FIRESTONE", "CONTINENTAL",
   "NAKATA", "SACHS", "TRW", "COFAP", "MAGNETI MARELLI",
@@ -15,6 +17,62 @@ export const Brands = () => {
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl leading-tight">
             Trabalhamos com as <span className="text-fire">melhores marcas</span> do mercado
           </h2>
+        </div>
+      </div>
+
+      {/* SENAI – Parceiro principal de formação */}
+      <div className="container-x mb-14">
+        <div className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden border-2 border-primary/40 bg-gradient-to-br from-card via-card to-background p-8 sm:p-10 group hover:border-primary transition-all">
+          <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 blur-3xl rounded-full" />
+          <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-secondary/10 blur-3xl rounded-full" />
+
+          <div className="relative flex flex-col sm:flex-row items-center gap-8">
+            <a
+              href="https://www.sp.senai.br"
+              target="_blank"
+              rel="noopener"
+              className="shrink-0 group/logo"
+              aria-label="SENAI – Serviço Nacional de Aprendizagem Industrial"
+            >
+              <div className="relative w-32 h-32 sm:w-40 sm:h-40 bg-primary rounded-2xl flex items-center justify-center shadow-[0_0_40px_hsl(0_100%_55%/0.5)] group-hover/logo:scale-105 transition-transform">
+                <span
+                  className="font-display text-white text-4xl sm:text-5xl tracking-tight italic"
+                  style={{ textShadow: "2px 2px 0 rgba(0,0,0,0.2)" }}
+                >
+                  SENAI
+                </span>
+                <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-white/80" />
+              </div>
+            </a>
+
+            <div className="flex-1 text-center sm:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/40 bg-primary/10 mb-3">
+                <GraduationCap className="w-3.5 h-3.5 text-primary" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+                  Parceiro Oficial de Formação
+                </span>
+              </div>
+              <h3 className="font-display text-2xl sm:text-3xl mb-3 text-foreground">
+                Equipe formada pelo <span className="text-fire">SENAI</span>
+              </h3>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                Nossos mecânicos têm formação técnica certificada pelo SENAI — referência
+                nacional em capacitação automotiva. Conhecimento técnico de verdade,
+                aplicado ao seu carro com precisão e responsabilidade.
+              </p>
+              <div className="flex flex-wrap gap-3 mt-4 justify-center sm:justify-start">
+                <span className="inline-flex items-center gap-1.5 text-xs text-secondary font-semibold">
+                  <Award className="w-3.5 h-3.5" /> Mecânica Geral
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-xs text-secondary font-semibold">
+                  <Award className="w-3.5 h-3.5" /> Injeção Eletrônica
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-xs text-secondary font-semibold">
+                  <Award className="w-3.5 h-3.5" /> Diagnóstico Automotivo
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
