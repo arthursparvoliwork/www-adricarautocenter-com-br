@@ -73,9 +73,14 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
-    background-image: 
-      radial-gradient(circle at 20% 0%, hsl(0 90% 20% / 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 100%, hsl(50 100% 30% / 0.1) 0%, transparent 50%);
+    background-image:
+      radial-gradient(circle at 20% 0%, hsl(0 90% 20% / 0.18) 0%, transparent 50%),
+      radial-gradient(circle at 80% 100%, hsl(50 100% 30% / 0.12) 0%, transparent 50%),
+      /* subtle white grid lines */
+      linear-gradient(hsl(0 0% 100% / 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(0 0% 100% / 0.025) 1px, transparent 1px);
+    background-size: auto, auto, 80px 80px, 80px 80px;
+    background-attachment: fixed, fixed, fixed, fixed;
   }
 
   h1, h2, h3, h4 {
@@ -158,6 +163,36 @@
       hsl(0 90% 55%) 30px 50px,
       hsl(0 0% 8%) 50px 60px
     );
+  }
+
+  /* White accent details */
+  .accent-line-white {
+    background: linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.5), transparent);
+    height: 1px;
+  }
+
+  .text-stroke-white {
+    -webkit-text-stroke: 1px hsl(0 0% 100% / 0.6);
+  }
+
+  /* Tire track pattern (subtle white) */
+  .tire-tracks {
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 30px,
+        hsl(0 0% 100% / 0.04) 30px 32px,
+        transparent 32px 60px
+      );
+  }
+
+  /* Floating logo animation */
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0) rotate(var(--tw-rotate, -12deg)); }
+    50% { transform: translateY(-15px) rotate(calc(var(--tw-rotate, -12deg) + 3deg)); }
+  }
+  .animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
   }
 
   /* Speed lines */
