@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
+import { WhyChoose } from "@/components/WhyChoose";
 import { Services } from "@/components/Services";
 import { Gallery } from "@/components/Gallery";
 import { Brands } from "@/components/Brands";
@@ -19,7 +20,9 @@ const Index = () => {
         <Navbar />
         <main>
           <Hero />
+          <div className="divider-tread" />
           <About />
+          <WhyChoose />
           <Services />
           <Gallery />
           <Brands />
@@ -34,3 +37,4 @@ const Index = () => {
 };
 
 export default Index;
+
