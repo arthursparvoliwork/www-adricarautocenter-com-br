@@ -1,5 +1,6 @@
 import { GraduationCap, Award } from "lucide-react";
 import senaiLogo from "@/assets/senai-logo.png";
+import { VideoBackdrop } from "@/components/VideoBackdrop";
 
 const brands = [
   "PIRELLI", "MICHELIN", "BRIDGESTONE", "FIRESTONE", "CONTINENTAL",
@@ -9,8 +10,11 @@ const brands = [
 
 export const Brands = () => {
   return (
-    <section id="marcas" className="relative py-20 bg-carbon overflow-hidden border-y border-border">
-      <div className="container-x mb-12">
+    <section id="marcas" className="relative py-20 overflow-hidden border-y border-white/10">
+      <VideoBackdrop overlay={0.92} source="workshop" tint="fire" />
+      {/* Top white accent line */}
+      <div className="absolute top-0 inset-x-0 accent-line-white z-10" />
+      <div className="container-x mb-12 relative z-10">
         <div className="text-center max-w-2xl mx-auto">
           <div className="inline-block px-4 py-1.5 rounded-full border border-secondary/40 bg-secondary/10 mb-6">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-secondary">Marcas Parceiras</span>
