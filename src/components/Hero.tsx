@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Wrench, Shield, Award } from "lucide-react";
 import heroCar from "@/assets/hero-car.jpg";
-import heroVideo from "@/assets/hero-bg.mp4";
+import engineHeroMeta from "@/assets/engine-hero-bg.mp4.asset.json";
 
 export const Hero = () => {
   return (
@@ -17,7 +17,7 @@ export const Hero = () => {
           className="w-full h-full object-cover"
           aria-hidden="true"
         >
-          <source src={heroVideo} type="video/mp4" />
+          <source src={engineHeroMeta.url} type="video/mp4" />
         </video>
         {/* Dark overlays for legibility */}
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
