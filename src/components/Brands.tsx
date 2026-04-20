@@ -26,8 +26,8 @@ export const Brands = () => {
       </div>
 
       {/* SENAI – Parceiro principal de formação */}
-      <div className="container-x mb-14">
-        <div className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden border-2 border-primary/40 bg-gradient-to-br from-card via-card to-background p-8 sm:p-10 group hover:border-primary transition-all">
+      <div className="container-x mb-14 relative z-10">
+        <div className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden border-2 border-primary/40 bg-gradient-to-br from-card/90 via-card/95 to-background/95 backdrop-blur-sm p-8 sm:p-10 group hover:border-primary transition-all corner-brackets">
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 blur-3xl rounded-full" />
           <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-secondary/10 blur-3xl rounded-full" />
 
@@ -83,7 +83,7 @@ export const Brands = () => {
       </div>
 
       {/* Marquee */}
-      <div className="relative">
+      <div className="relative z-10">
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
@@ -91,7 +91,7 @@ export const Brands = () => {
           {[...brands, ...brands].map((brand, i) => (
             <div
               key={`${brand}-${i}`}
-              className="shrink-0 mx-6 px-8 py-6 border border-border rounded-xl bg-card/50 hover:border-secondary/60 hover:bg-card transition-all group min-w-[200px] flex items-center justify-center"
+              className="shrink-0 mx-6 px-8 py-6 border border-white/10 rounded-xl bg-card/60 backdrop-blur-sm hover:border-secondary/60 hover:bg-card transition-all group min-w-[200px] flex items-center justify-center"
             >
               <span className="font-display text-xl text-muted-foreground group-hover:text-secondary group-hover:scale-110 transition-all">
                 {brand}
@@ -100,6 +100,8 @@ export const Brands = () => {
           ))}
         </div>
       </div>
+      {/* Bottom white accent */}
+      <div className="absolute bottom-0 inset-x-0 accent-line-white z-10" />
     </section>
   );
 };
