@@ -1,4 +1,5 @@
 import { Trophy, Clock4, Wrench, Shield, CreditCard, MapPinned } from "lucide-react";
+import { VideoBackdrop } from "@/components/VideoBackdrop";
 
 const stats = [
   { num: "30+", label: "Anos no mercado", desc: "Tradição que cuida do seu carro desde 1994" },
@@ -18,13 +19,14 @@ const reasons = [
 
 export const WhyChoose = () => {
   return (
-    <section className="relative py-20 lg:py-28 overflow-hidden bg-carbon">
+    <section className="relative py-20 lg:py-28 overflow-hidden">
+      <VideoBackdrop overlay={0.88} source="nightDrive" tint="fire" />
       {/* White accent rails (top + bottom) */}
-      <div className="absolute top-0 inset-x-0 accent-line-white" />
-      <div className="absolute bottom-0 inset-x-0 accent-line-white" />
+      <div className="absolute top-0 inset-x-0 accent-line-white z-10" />
+      <div className="absolute bottom-0 inset-x-0 accent-line-white z-10" />
 
       {/* Tire tracks pattern */}
-      <div className="absolute inset-0 tire-tracks opacity-60 pointer-events-none" />
+      <div className="absolute inset-0 tire-tracks opacity-40 pointer-events-none z-10" />
 
       <div className="container-x relative z-10">
         {/* Stats strip */}
