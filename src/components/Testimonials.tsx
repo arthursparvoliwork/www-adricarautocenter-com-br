@@ -1,4 +1,5 @@
 import { Star, Quote } from "lucide-react";
+import { VideoBackdrop } from "@/components/VideoBackdrop";
 
 const reviews = [
   {
@@ -21,9 +22,12 @@ const reviews = [
 export const Testimonials = () => {
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+      <VideoBackdrop overlay={0.92} source="workshop" flip tint="yellow" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent z-0" />
+      {/* Top white accent line */}
+      <div className="absolute top-0 inset-x-0 accent-line-white z-10" />
 
-      <div className="container-x relative">
+      <div className="container-x relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-secondary/40 bg-secondary/10 mb-6">
             <div className="flex gap-0.5">

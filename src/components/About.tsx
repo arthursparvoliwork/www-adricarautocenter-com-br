@@ -1,13 +1,19 @@
 import { CheckCircle2, Users, Wrench, MapPin } from "lucide-react";
 import oficina from "@/assets/oficina-motor.jpg";
+import { VideoBackdrop } from "@/components/VideoBackdrop";
 
 export const About = () => {
   return (
     <section id="sobre" className="relative py-24 lg:py-32 overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-radial-glow opacity-50 pointer-events-none"
+      <VideoBackdrop overlay={0.93} source="workshop" tint="white" />
+      {/* White accent corner brackets vibe */}
+      <div className="absolute top-0 left-0 w-24 h-24 border-l-2 border-t-2 border-white/30 z-10 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-24 h-24 border-r-2 border-b-2 border-white/30 z-10 pointer-events-none" />
+
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-radial-glow opacity-50 pointer-events-none z-0"
         style={{ background: "radial-gradient(circle at right, hsl(0 90% 30% / 0.15) 0%, transparent 60%)" }} />
 
-      <div className="container-x grid lg:grid-cols-2 gap-16 items-center">
+      <div className="container-x grid lg:grid-cols-2 gap-16 items-center relative z-10">
         <div className="relative">
           <div className="absolute -inset-2 bg-gradient-fire opacity-30 blur-2xl rounded-2xl" />
           <div className="relative rounded-2xl overflow-hidden border-2 border-primary/30">
