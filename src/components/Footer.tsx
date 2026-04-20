@@ -1,5 +1,6 @@
 import logo from "@/assets/adricar-logo.png";
-import { Instagram, Phone, MapPin, Globe } from "lucide-react";
+import { Instagram, Phone, MapPin, Globe, MessageCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const Footer = () => {
   return (
@@ -70,7 +71,7 @@ export const Footer = () => {
 
           <div>
             <h4 className="font-display text-foreground mb-4 uppercase tracking-wider">Contato</h4>
-            <ul className="space-y-3 text-sm text-muted-foreground">
+            <ul className="space-y-3 text-sm text-muted-foreground mb-5">
               <li className="flex gap-2">
                 <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                 Av. Dona Belmira Marin, 1670/1674 — Grajaú, SP
@@ -80,6 +81,16 @@ export const Footer = () => {
                 (11) 98537-0952
               </li>
             </ul>
+            <Button variant="whatsapp" size="sm" asChild className="w-full">
+              <a
+                href="https://wa.me/5511985370952?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento%20na%20Adricar."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Orçamento Grátis
+              </a>
+            </Button>
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/adricar-logo.png";
@@ -32,11 +32,14 @@ export const Navbar = () => {
           : "bg-transparent"
       )}
     >
+      {/* Top white hairline detail */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+
       <div className="container-x flex items-center justify-between h-20">
         <a href="#inicio" className="flex items-center gap-3 group">
           <div className="relative">
             <div className="absolute inset-0 rounded-full bg-primary/40 blur-xl group-hover:bg-primary/60 transition-all" />
-            <img src={logo} alt="Adricar Centro Automotivo" className="relative w-12 h-12 rounded-full object-cover" />
+            <img src={logo} alt="Adricar Centro Automotivo" className="relative w-12 h-12 rounded-full object-cover ring-2 ring-white/20" />
           </div>
           <div className="hidden sm:block leading-tight">
             <div className="font-display text-xl text-foreground tracking-wider">ADRICAR</div>
@@ -58,12 +61,19 @@ export const Navbar = () => {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <a href="tel:+5511985370952" className="flex items-center gap-2 text-secondary font-semibold">
+          <a href="tel:+5511985370952" className="flex items-center gap-2 text-secondary font-semibold hover:text-secondary-glow transition-colors">
             <Phone className="w-4 h-4" />
             (11) 98537-0952
           </a>
-          <Button variant="hero" size="sm" asChild>
-            <a href="#contato">Orçamento</a>
+          <Button variant="whatsapp" size="sm" asChild>
+            <a
+              href="https://wa.me/5511985370952?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento%20na%20Adricar."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Orçamento
+            </a>
           </Button>
         </div>
 
@@ -89,8 +99,16 @@ export const Navbar = () => {
                 {l.label}
               </a>
             ))}
-            <Button variant="hero" asChild>
-              <a href="#contato">Solicitar Orçamento</a>
+            <Button variant="whatsapp" asChild>
+              <a
+                href="https://wa.me/5511985370952?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento%20na%20Adricar."
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+              >
+                <MessageCircle className="w-4 h-4" />
+                Solicitar Orçamento WhatsApp
+              </a>
             </Button>
           </nav>
         </div>
