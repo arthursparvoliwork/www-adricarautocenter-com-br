@@ -80,7 +80,7 @@ export const ChatBot = () => {
               <div className="flex-1">
                 <div className="font-display text-primary-foreground">Atendente Adricar</div>
                 <div className="text-[10px] text-primary-foreground/80 flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
                   Online agora
                 </div>
               </div>
