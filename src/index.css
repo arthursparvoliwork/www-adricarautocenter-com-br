@@ -252,4 +252,15 @@
       cursor: none !important;
     }
   }
+
+  /* Race mode easter egg — acelera animações */
+  html.race-mode * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.15s !important;
+  }
+  html.race-mode body {
+    background-image:
+      repeating-linear-gradient(135deg, hsl(0 90% 50% / 0.08) 0 4px, transparent 4px 24px),
+      radial-gradient(circle at 50% 50%, hsl(50 100% 50% / 0.1) 0%, transparent 60%) !important;
+  }
 }

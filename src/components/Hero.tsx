@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { SparkParticles } from "@/components/SparkParticles";
 import { GuaranteeBadge } from "@/components/GuaranteeBadge";
+import { Speedometer } from "@/components/Speedometer";
 import heroCar from "@/assets/hero-car.jpg";
 import engineHeroMeta from "@/assets/engine-hero-bg.mp4.asset.json";
 
@@ -87,6 +88,11 @@ export const Hero = () => {
               </div>
             ))}
           </div>
+
+          {/* Speedometer (mobile/tablet) */}
+          <div className="lg:hidden pt-4">
+            <Speedometer to={210} label="ADRICAR PERFORMANCE" />
+          </div>
         </div>
 
         {/* Side stats card */}
@@ -115,6 +121,10 @@ export const Hero = () => {
             {/* Selo de garantia flutuante */}
             <div className="absolute -bottom-12 -left-12 hidden xl:block animate-float">
               <GuaranteeBadge />
+            </div>
+            {/* Velocímetro */}
+            <div className="mt-8">
+              <Speedometer to={210} label="ADRICAR PERFORMANCE" />
             </div>
           </div>
         </div>

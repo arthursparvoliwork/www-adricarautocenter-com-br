@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { UrgencyBadge } from "@/components/UrgencyBadge";
+import { fireSparks } from "@/components/ConfettiSparks";
+import { GuaranteePDF } from "@/components/GuaranteePDF";
 
 export const QuoteForm = () => {
   const [loading, setLoading] = useState(false);
@@ -46,6 +48,7 @@ export const QuoteForm = () => {
       supabase.functions.invoke("notify-new-lead", { body: form }).catch(() => {});
 
       setSuccess(true);
+      fireSparks();
       toast.success("Pedido enviado! Te chamamos no WhatsApp em instantes.");
 
       // Abre WhatsApp com mensagem pré-formatada
@@ -119,6 +122,10 @@ export const QuoteForm = () => {
       <p className="text-xs text-muted-foreground text-center">
         Ao enviar, abrimos o WhatsApp com seus dados pré-preenchidos.
       </p>
+
+      <div className="pt-3 border-t border-border flex justify-center">
+        <GuaranteePDF variant="outlineNeon" size="default" />
+      </div>
     </motion.form>
   );
 };
