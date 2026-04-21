@@ -1,6 +1,7 @@
 import heroVideo from "@/assets/hero-bg.mp4";
 import workshopVideoMeta from "@/assets/workshop-bg.mp4.asset.json";
 import nightDriveMeta from "@/assets/night-drive-bg.mp4.asset.json";
+import mechanicMeta from "@/assets/mechanic-hands-bg.mp4.asset.json";
 
 interface VideoBackdropProps {
   /** Overlay opacity 0-1 over the video. Higher = darker / less video visible. */
@@ -10,7 +11,7 @@ interface VideoBackdropProps {
   /** Mirror the video horizontally. */
   flip?: boolean;
   /** Which video source to use. Defaults to "pagani". */
-  source?: "pagani" | "workshop" | "nightDrive";
+  source?: "pagani" | "workshop" | "nightDrive" | "mechanic";
   /** Tint accent color over the video. */
   tint?: "fire" | "white" | "yellow" | "none";
 }
@@ -31,6 +32,8 @@ export const VideoBackdrop = ({
       ? workshopVideoMeta.url
       : source === "nightDrive"
       ? nightDriveMeta.url
+      : source === "mechanic"
+      ? mechanicMeta.url
       : heroVideo;
 
   const tintClass =
