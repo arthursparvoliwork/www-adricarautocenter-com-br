@@ -8,7 +8,7 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Loader2, LogOut, RefreshCw, Search, Phone, MessageCircle } from "lucide-react";
+import { Loader2, LogOut, RefreshCw, Search, Phone, MessageCircle, Star } from "lucide-react";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -220,10 +220,20 @@ const Admin = () => {
                       </Button>
                       <Button size="sm" variant="ghost" asChild>
                         <a
-                          href={`https://wa.me/55${lead.telefone.replace(/\D/g, "")}?text=Olá ${lead.nome}, sou da Adricar! Recebi seu pedido.`}
+                          href={`https://wa.me/55${lead.telefone.replace(/\D/g, "")}?text=${encodeURIComponent(`Olá ${lead.nome}, sou da Adricar! Recebi seu pedido.`)}`}
                           target="_blank" rel="noopener" title="WhatsApp"
                         ><MessageCircle className="w-4 h-4" /></a>
                       </Button>
+                      {lead.status === "fechado" && (
+                        <Button size="sm" variant="ghost" asChild className="text-yellow-500 hover:text-yellow-400">
+                          <a
+                            href={`https://wa.me/55${lead.telefone.replace(/\D/g, "")}?text=${encodeURIComponent(
+                              `Olá ${lead.nome}! Aqui é da Adricar Centro Automotivo. Esperamos que tenha gostado do nosso atendimento. 🚗⭐\n\nVocê poderia nos ajudar deixando uma avaliação no Google? Leva só 30 segundos:\n\nhttps://g.page/r/CbADRICAR/review\n\nMuito obrigado pela confiança!`
+                            )}`}
+                            target="_blank" rel="noopener" title="Pedir avaliação no Google"
+                          ><Star className="w-4 h-4" /></a>
+                        </Button>
+                      )}
                     </div>
                   </TableCell>
                 </TableRow>
