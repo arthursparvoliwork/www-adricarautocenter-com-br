@@ -54,18 +54,13 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display text-foreground mb-4 uppercase tracking-wider">Navegação</h4>
+            <h4 className="font-display text-foreground mb-4 uppercase tracking-wider">Serviços</h4>
             <ul className="space-y-2 text-sm">
-              {["Início", "Sobre", "Serviços", "Galeria", "Marcas", "Contato"].map((l) => (
-                <li key={l}>
-                  <a
-                    href={`#${l.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace("í", "i")}`}
-                    className="text-muted-foreground hover:text-secondary transition-colors"
-                  >
-                    {l}
-                  </a>
-                </li>
-              ))}
+              <li><a href="/servicos/freios" className="text-muted-foreground hover:text-secondary transition-colors">Freios</a></li>
+              <li><a href="/servicos/injecao-eletronica" className="text-muted-foreground hover:text-secondary transition-colors">Injeção Eletrônica</a></li>
+              <li><a href="/servicos/suspensao" className="text-muted-foreground hover:text-secondary transition-colors">Suspensão</a></li>
+              <li><a href="/servicos/alinhamento-balanceamento" className="text-muted-foreground hover:text-secondary transition-colors">Alinhamento</a></li>
+              <li><a href="/#servicos" className="text-muted-foreground hover:text-secondary transition-colors">Ver todos</a></li>
             </ul>
           </div>
 
