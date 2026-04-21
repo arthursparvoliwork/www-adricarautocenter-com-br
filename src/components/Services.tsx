@@ -1,23 +1,25 @@
 import {
   Wrench, Disc, Droplets, Zap, Cog, Gauge, Wind, Activity,
-  Settings, Cpu, CircleDot, Truck, Car, ShieldCheck, Hammer, Battery
+  Settings, Cpu, CircleDot, Truck, ShieldCheck, Hammer, ArrowUpRight,
+  type LucideIcon,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import { VideoBackdrop } from "@/components/VideoBackdrop";
 
-const services = [
+const services: { icon: LucideIcon; title: string; desc: string; slug?: string }[] = [
   { icon: Wrench, title: "Mecânica Geral", desc: "Manutenção completa para todas as marcas" },
   { icon: CircleDot, title: "Rodas e Pneus", desc: "Pirelli, Michelin, Bridgestone, Firestone" },
   { icon: Droplets, title: "Troca de Óleo", desc: "Óleos sintéticos e semissintéticos" },
   { icon: Wind, title: "Escapamentos", desc: "Reparo, troca e personalização" },
-  { icon: Gauge, title: "Alinhamento", desc: "Precisão e segurança na direção" },
-  { icon: Disc, title: "Balanceamento", desc: "Conforto e durabilidade dos pneus" },
+  { icon: Gauge, title: "Alinhamento", desc: "Precisão e segurança na direção", slug: "alinhamento-balanceamento" },
+  { icon: Disc, title: "Balanceamento", desc: "Conforto e durabilidade dos pneus", slug: "alinhamento-balanceamento" },
   { icon: Zap, title: "Elétrica Automotiva", desc: "Diagnóstico e reparo elétrico" },
   { icon: Cpu, title: "Eletrônica Embarcada", desc: "ABS, Air Bag, Rede CAN, ECU" },
   { icon: Wind, title: "Ar Condicionado", desc: "Higienização, gás e manutenção" },
   { icon: Settings, title: "Caixa de Direção", desc: "Hidráulica e elétrica" },
-  { icon: Activity, title: "Suspensão", desc: "Estabilidade e absorção de impactos" },
-  { icon: ShieldCheck, title: "Sistema de Freios", desc: "Pastilhas, discos e sangria" },
-  { icon: Cpu, title: "Injeção Eletrônica", desc: "Scanner, reset e reprogramação" },
+  { icon: Activity, title: "Suspensão", desc: "Estabilidade e absorção de impactos", slug: "suspensao" },
+  { icon: ShieldCheck, title: "Sistema de Freios", desc: "Pastilhas, discos e sangria", slug: "freios" },
+  { icon: Cpu, title: "Injeção Eletrônica", desc: "Scanner, reset e reprogramação", slug: "injecao-eletronica" },
   { icon: Cog, title: "Motor e Câmbio", desc: "Retífica, troca e revisão" },
   { icon: Hammer, title: "Cambagem", desc: "Geometria precisa do veículo" },
   { icon: Truck, title: "Correia Dentada", desc: "Troca preventiva e tensionador" },
@@ -43,25 +45,39 @@ export const Services = () => {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {services.map((s, i) => (
-            <div
-              key={s.title}
-              className="group relative bg-card border border-border rounded-2xl p-6 hover:border-primary/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_hsl(0_100%_50%/0.2)] overflow-hidden"
-              style={{ animationDelay: `${i * 50}ms` }}
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/0 group-hover:bg-primary/10 blur-2xl rounded-full transition-all duration-500" />
-              <div className="relative">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-[0_0_20px_hsl(0_100%_50%/0.3)]">
-                  <s.icon className="w-7 h-7 text-primary-foreground" />
+          {services.map((s, i) => {
+            const cls = "group relative bg-card border border-border rounded-2xl p-6 hover:border-primary/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_hsl(0_100%_50%/0.2)] overflow-hidden block";
+            const inner = (
+              <>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/0 group-hover:bg-primary/10 blur-2xl rounded-full transition-all duration-500" />
+                <div className="relative">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-[0_0_20px_hsl(0_100%_50%/0.3)]">
+                    <s.icon className="w-7 h-7 text-primary-foreground" />
+                  </div>
+                  <h3 className="font-display text-xl mb-2 text-foreground group-hover:text-secondary transition-colors flex items-center gap-1.5">
+                    {s.title}
+                    {s.slug && <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                  <div className="mt-4 h-px w-12 bg-gradient-to-r from-primary to-transparent group-hover:w-full transition-all duration-500" />
+                  {s.slug && (
+                    <div className="mt-3 text-xs uppercase tracking-wider text-secondary font-bold">
+                      Saiba mais →
+                    </div>
+                  )}
                 </div>
-                <h3 className="font-display text-xl mb-2 text-foreground group-hover:text-secondary transition-colors">
-                  {s.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-                <div className="mt-4 h-px w-12 bg-gradient-to-r from-primary to-transparent group-hover:w-full transition-all duration-500" />
+              </>
+            );
+            return s.slug ? (
+              <Link key={s.title + i} to={`/servicos/${s.slug}`} className={cls} style={{ animationDelay: `${i * 50}ms` }}>
+                {inner}
+              </Link>
+            ) : (
+              <div key={s.title + i} className={cls} style={{ animationDelay: `${i * 50}ms` }}>
+                {inner}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Payment banner */}
