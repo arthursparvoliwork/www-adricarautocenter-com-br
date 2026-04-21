@@ -7,6 +7,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Loader2 } from "lucide-react";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import { CustomCursor } from "@/components/CustomCursor";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { LoadingScreen } from "@/components/LoadingScreen";
+import { ChatBot } from "@/components/ChatBot";
 
 const Auth = lazy(() => import("./pages/Auth.tsx"));
 const Admin = lazy(() => import("./pages/Admin.tsx"));
@@ -25,6 +29,9 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <LoadingScreen />
+      <ScrollProgress />
+      <CustomCursor />
       <BrowserRouter>
         <Suspense fallback={<PageFallback />}>
           <Routes>
@@ -36,6 +43,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
+        <ChatBot />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

@@ -5,6 +5,8 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { VideoBackdrop } from "@/components/VideoBackdrop";
+import { TiltCard } from "@/components/TiltCard";
+import { motion } from "framer-motion";
 
 const services: { icon: LucideIcon; title: string; desc: string; slug?: string }[] = [
   { icon: Wrench, title: "Mecânica Geral", desc: "Manutenção completa para todas as marcas" },
@@ -46,11 +48,11 @@ export const Services = () => {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {services.map((s, i) => {
-            const cls = "group relative bg-card border border-border rounded-2xl p-6 hover:border-primary/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_hsl(0_100%_50%/0.2)] overflow-hidden block";
+            const cls = "group relative bg-card border border-border rounded-2xl p-6 hover:border-primary/60 transition-all duration-500 hover:shadow-[0_20px_60px_hsl(0_100%_50%/0.25)] overflow-hidden block h-full";
             const inner = (
               <>
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/0 group-hover:bg-primary/10 blur-2xl rounded-full transition-all duration-500" />
-                <div className="relative">
+                <div className="relative" style={{ transform: "translateZ(30px)" }}>
                   <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-[0_0_20px_hsl(0_100%_50%/0.3)]">
                     <s.icon className="w-7 h-7 text-primary-foreground" />
                   </div>
@@ -68,14 +70,22 @@ export const Services = () => {
                 </div>
               </>
             );
-            return s.slug ? (
-              <Link key={s.title + i} to={`/servicos/${s.slug}`} className={cls} style={{ animationDelay: `${i * 50}ms` }}>
-                {inner}
-              </Link>
-            ) : (
-              <div key={s.title + i} className={cls} style={{ animationDelay: `${i * 50}ms` }}>
-                {inner}
-              </div>
+            return (
+              <motion.div
+                key={s.title + i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: (i % 4) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <TiltCard className="h-full">
+                  {s.slug ? (
+                    <Link to={`/servicos/${s.slug}`} className={cls}>{inner}</Link>
+                  ) : (
+                    <div className={cls}>{inner}</div>
+                  )}
+                </TiltCard>
+              </motion.div>
             );
           })}
         </div>
