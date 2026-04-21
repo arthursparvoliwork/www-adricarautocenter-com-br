@@ -5,7 +5,7 @@ import { VideoBackdrop } from "@/components/VideoBackdrop";
 export const About = () => {
   return (
     <section id="sobre" className="relative py-24 lg:py-32 overflow-hidden">
-      <VideoBackdrop overlay={0.93} source="workshop" tint="white" />
+      <VideoBackdrop overlay={0.92} source="mechanic" tint="fire" />
       {/* White accent corner brackets vibe */}
       <div className="absolute top-0 left-0 w-24 h-24 border-l-2 border-t-2 border-white/30 z-10 pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-24 h-24 border-r-2 border-b-2 border-white/30 z-10 pointer-events-none" />

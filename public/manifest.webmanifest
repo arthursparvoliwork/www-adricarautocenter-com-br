@@ -1,0 +1,13 @@
+{
+  "name": "Adricar Centro Automotivo",
+  "short_name": "Adricar",
+  "description": "Mecânica completa no Grajaú — São Paulo. 30 anos de tradição.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "64x64", "type": "image/x-icon" },
+    { "src": "/placeholder.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

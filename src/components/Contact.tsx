@@ -1,6 +1,7 @@
-import { MapPin, Phone, Clock, Instagram, Globe } from "lucide-react";
+import { MapPin, Phone, Clock, Instagram, Navigation } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { VideoBackdrop } from "@/components/VideoBackdrop";
+import { QuoteForm } from "@/components/QuoteForm";
 
 export const Contact = () => {
   return (
@@ -18,7 +19,7 @@ export const Contact = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
-          {/* Info */}
+          {/* Info + Form */}
           <div className="space-y-5">
             {[
               {
@@ -31,7 +32,7 @@ export const Contact = () => {
                 icon: Phone,
                 title: "Telefone & WhatsApp",
                 content: "(11) 98537-0952\n(11) 2667-9953",
-                cta: { label: "Chamar no WhatsApp", href: "https://wa.me/5511985370952" },
+                cta: { label: "Ligar agora", href: "tel:+551126679953" },
               },
               {
                 icon: Clock,
@@ -59,7 +60,7 @@ export const Contact = () => {
                     {item.cta && (
                       <a
                         href={item.cta.href}
-                        target="_blank"
+                        target={item.cta.href.startsWith("http") ? "_blank" : undefined}
                         rel="noopener"
                         className="inline-flex items-center gap-1 mt-3 text-sm font-semibold text-secondary hover:text-secondary-glow transition-colors"
                       >
@@ -70,11 +71,26 @@ export const Contact = () => {
                 </div>
               </div>
             ))}
+
+            {/* Como Chegar (Waze + Google Maps direções) */}
+            <div className="grid grid-cols-2 gap-3">
+              <Button variant="outlineNeon" asChild>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Av.+Dona+Belmira+Marin,+1670,+S%C3%A3o+Paulo,+SP" target="_blank" rel="noopener">
+                  <Navigation className="w-4 h-4" /> Google Maps
+                </a>
+              </Button>
+              <Button variant="outlineNeon" asChild>
+                <a href="https://waze.com/ul?q=Av.%20Dona%20Belmira%20Marin%2C%201670%2C%20S%C3%A3o%20Paulo&navigate=yes" target="_blank" rel="noopener">
+                  <Navigation className="w-4 h-4" /> Waze
+                </a>
+              </Button>
+            </div>
           </div>
 
-          {/* Map */}
-          <div className="relative">
-            <div className="sticky top-24 rounded-2xl overflow-hidden border-2 border-primary/30 h-[600px] glow-red">
+          {/* Form + Map */}
+          <div className="space-y-6">
+            <QuoteForm />
+            <div className="rounded-2xl overflow-hidden border-2 border-primary/30 h-[350px] glow-red">
               <iframe
                 src="https://www.google.com/maps?q=Av.+Dona+Belmira+Marin,+1670,+São+Paulo,+SP&output=embed"
                 title="Localização Adricar Auto Center"

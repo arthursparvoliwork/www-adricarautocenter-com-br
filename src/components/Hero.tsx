@@ -1,13 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Wrench, Shield, Award } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 import heroCar from "@/assets/hero-car.jpg";
 import engineHeroMeta from "@/assets/engine-hero-bg.mp4.asset.json";
 
 export const Hero = () => {
+  const { scrollY } = useScroll();
+  const videoY = useTransform(scrollY, [0, 600], [0, 120]);
+  const contentY = useTransform(scrollY, [0, 600], [0, -40]);
+
   return (
     <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Background video */}
-      <div className="absolute inset-0">
+      {/* Background video with parallax */}
+      <motion.div className="absolute inset-0" style={{ y: videoY }}>
         <video
           autoPlay
           muted
@@ -23,13 +29,13 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-background/70" />
         <div className="absolute inset-0 bg-background/30" />
-      </div>
+      </motion.div>
 
       {/* Speed line accent */}
       <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary to-transparent opacity-60" />
       <div className="absolute bottom-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-60" />
 
-      <div className="container-x relative z-10 grid lg:grid-cols-2 gap-12 items-center py-16">
+      <motion.div className="container-x relative z-10 grid lg:grid-cols-2 gap-12 items-center py-16" style={{ y: contentY }}>
         <div className="space-y-8 animate-fade-in">
           {/* Badge 30 anos */}
           <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-secondary/40 bg-secondary/10 backdrop-blur-sm">
@@ -94,14 +100,16 @@ export const Hero = () => {
                   className="bg-card/80 backdrop-blur-md border border-border rounded-xl p-6 hover:border-primary/60 transition-all duration-500 hover:-translate-y-1"
                   style={{ animationDelay: `${i * 100}ms` }}
                 >
-                  <div className="font-display text-4xl text-fire mb-1">{s.num}</div>
+                  <div className="font-display text-4xl text-fire mb-1">
+                    <AnimatedCounter value={s.num} />
+                  </div>
                   <div className="text-xs uppercase tracking-wider text-muted-foreground">{s.label}</div>
                 </div>
               ))}
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float hidden md:flex flex-col items-center gap-2 text-secondary/70">
