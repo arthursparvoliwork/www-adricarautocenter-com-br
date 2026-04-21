@@ -13,27 +13,30 @@ import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { FloatingDecorations } from "@/components/FloatingDecorations";
 import { SEO } from "@/components/SEO";
+import { Reveal } from "@/components/Reveal";
+import { QuickInfoPanel } from "@/components/QuickInfoPanel";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden relative">
       <SEO />
       <FloatingDecorations />
+      <QuickInfoPanel />
 
       <div className="relative z-10">
         <Navbar />
         <main>
           <Hero />
           <div className="divider-tread" />
-          <About />
-          <WhyChoose />
+          <Reveal><About /></Reveal>
+          <Reveal><WhyChoose /></Reveal>
           <Services />
-          <Gallery />
-          <BeforeAfterSection />
-          <Brands />
-          <Testimonials />
-          <FAQ />
-          <Contact />
+          <Reveal><Gallery /></Reveal>
+          <Reveal><BeforeAfterSection /></Reveal>
+          <Reveal><Brands /></Reveal>
+          <Reveal><Testimonials /></Reveal>
+          <Reveal><FAQ /></Reveal>
+          <Reveal><Contact /></Reveal>
         </main>
         <Footer />
         <WhatsAppFloat />
