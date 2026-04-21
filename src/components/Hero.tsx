@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Wrench, Shield, Award } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { SparkParticles } from "@/components/SparkParticles";
+import { GuaranteeBadge } from "@/components/GuaranteeBadge";
 import heroCar from "@/assets/hero-car.jpg";
 import engineHeroMeta from "@/assets/engine-hero-bg.mp4.asset.json";
 
@@ -30,6 +32,9 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-background/70" />
         <div className="absolute inset-0 bg-background/30" />
       </motion.div>
+
+      {/* Spark particles */}
+      <SparkParticles density={45} />
 
       {/* Speed line accent */}
       <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary to-transparent opacity-60" />
@@ -106,6 +111,10 @@ export const Hero = () => {
                   <div className="text-xs uppercase tracking-wider text-muted-foreground">{s.label}</div>
                 </div>
               ))}
+            </div>
+            {/* Selo de garantia flutuante */}
+            <div className="absolute -bottom-12 -left-12 hidden xl:block animate-float">
+              <GuaranteeBadge />
             </div>
           </div>
         </div>
