@@ -225,7 +225,7 @@ const Admin = () => {
                         ><MessageCircle className="w-4 h-4" /></a>
                       </Button>
                       {lead.status === "fechado" && (
-                        <Button size="sm" variant="ghost" asChild className="text-yellow-500 hover:text-yellow-400">
+                        <Button size="sm" variant="ghost" asChild className="text-secondary hover:text-secondary-glow">
                           <a
                             href={`https://wa.me/55${lead.telefone.replace(/\D/g, "")}?text=${encodeURIComponent(
                               `Olá ${lead.nome}! Aqui é da Adricar Centro Automotivo. Esperamos que tenha gostado do nosso atendimento. 🚗⭐\n\nVocê poderia nos ajudar deixando uma avaliação no Google? Leva só 30 segundos:\n\nhttps://g.page/r/CbADRICAR/review\n\nMuito obrigado pela confiança!`
