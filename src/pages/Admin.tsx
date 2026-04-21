@@ -232,24 +232,22 @@ const Admin = () => {
           </Table>
         </div>
 
-        {leads.length > 0 && lead_mensagens(filtered)}
+        {leads.length > 0 && (() => {
+          const withMsg = filtered.filter((l) => l.mensagem);
+          if (withMsg.length === 0) return null;
+          return (
+            <div className="space-y-3">
+              <h2 className="font-display text-xl">Mensagens detalhadas</h2>
+              {withMsg.map((l) => (
+                <div key={l.id} className="bg-card border border-border rounded-xl p-4">
+                  <div className="text-sm font-semibold mb-1">{l.nome} — {l.telefone}</div>
+                  <p className="text-sm text-muted-foreground italic">"{l.mensagem}"</p>
+                </div>
+              ))}
+            </div>
+          );
+        })()}
       </div>
-    </div>
-  );
-};
-
-const lead_mensagens = (leads: Lead[]) => {
-  const withMsg = leads.filter((l) => l.mensagem);
-  if (withMsg.length === 0) return null;
-  return (
-    <div className="space-y-3">
-      <h2 className="font-display text-xl">Mensagens detalhadas</h2>
-      {withMsg.map((l) => (
-        <div key={l.id} className="bg-card border border-border rounded-xl p-4">
-          <div className="text-sm font-semibold mb-1">{l.nome} — {l.telefone}</div>
-          <p className="text-sm text-muted-foreground italic">"{l.mensagem}"</p>
-        </div>
-      ))}
     </div>
   );
 };

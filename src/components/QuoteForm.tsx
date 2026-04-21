@@ -72,6 +72,7 @@ export const QuoteForm = () => {
       onSubmit={handleSubmit}
       className="bg-card/80 backdrop-blur-md border border-border rounded-2xl p-6 lg:p-8 space-y-4 hover:border-primary/40 transition-colors"
     >
+      <UrgencyBadge />
       <div>
         <h3 className="font-display text-2xl mb-1">Peça seu <span className="text-fire">orçamento grátis</span></h3>
         <p className="text-sm text-muted-foreground">Resposta em até 30 minutos no horário comercial.</p>
