@@ -10,10 +10,12 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { FloatingDecorations } from "@/components/FloatingDecorations";
+import { SEO } from "@/components/SEO";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden relative">
+      <SEO />
       <FloatingDecorations />
 
       <div className="relative z-10">
