@@ -15,6 +15,9 @@ import { FloatingDecorations } from "@/components/FloatingDecorations";
 import { SEO } from "@/components/SEO";
 import { Reveal } from "@/components/Reveal";
 import { QuickInfoPanel } from "@/components/QuickInfoPanel";
+import { PlansComparison } from "@/components/PlansComparison";
+import { GoogleReviews } from "@/components/GoogleReviews";
+import { RaceMode } from "@/components/RaceMode";
 
 const Index = () => {
   return (
@@ -31,6 +34,8 @@ const Index = () => {
           <Reveal><About /></Reveal>
           <Reveal><WhyChoose /></Reveal>
           <Services />
+          <Reveal><PlansComparison /></Reveal>
+          <Reveal><GoogleReviews /></Reveal>
           <Reveal><Gallery /></Reveal>
           <Reveal><BeforeAfterSection /></Reveal>
           <Reveal><Brands /></Reveal>
@@ -40,6 +45,7 @@ const Index = () => {
         </main>
         <Footer />
         <WhatsAppFloat />
+        <RaceMode />
       </div>
     </div>
   );
