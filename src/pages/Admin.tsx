@@ -8,10 +8,15 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Loader2, LogOut, RefreshCw, Search, Phone, MessageCircle, Star } from "lucide-react";
+import { Loader2, LogOut, RefreshCw, Search, Phone, MessageCircle, Star, BarChart3, Kanban, Table as TableIcon } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { AdminDashboard } from "@/components/admin/AdminDashboard";
+import { LeadsKanban } from "@/components/admin/LeadsKanban";
+import { ExportLeads } from "@/components/admin/ExportLeads";
+import { PushNotifyToggle } from "@/components/admin/PushNotifyToggle";
 
 interface Lead {
   id: string;
@@ -32,6 +37,7 @@ const Admin = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [pushEnabled, setPushEnabled] = useState(false);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
@@ -132,14 +138,32 @@ const Admin = () => {
             <h1 className="font-display text-3xl lg:text-4xl">Painel Adricar</h1>
             <p className="text-muted-foreground">Gestão de orçamentos do site</p>
           </div>
-          <div className="flex gap-2">
-            <Button variant="outline" onClick={fetchLeads}><RefreshCw className="w-4 h-4" /> Atualizar</Button>
-            <Button variant="outline" onClick={handleLogout}><LogOut className="w-4 h-4" /> Sair</Button>
+          <div className="flex flex-wrap gap-2">
+            <PushNotifyToggle enabled={pushEnabled} setEnabled={setPushEnabled} />
+            <ExportLeads leads={filtered} />
+            <Button variant="outline" size="sm" onClick={fetchLeads}><RefreshCw className="w-4 h-4" /> Atualizar</Button>
+            <Button variant="outline" size="sm" onClick={handleLogout}><LogOut className="w-4 h-4" /> Sair</Button>
           </div>
         </header>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <Tabs defaultValue="dashboard" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-3 max-w-md">
+            <TabsTrigger value="dashboard"><BarChart3 className="w-4 h-4 mr-1" /> Dashboard</TabsTrigger>
+            <TabsTrigger value="kanban"><Kanban className="w-4 h-4 mr-1" /> Kanban</TabsTrigger>
+            <TabsTrigger value="tabela"><TableIcon className="w-4 h-4 mr-1" /> Tabela</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="dashboard">
+            <AdminDashboard leads={leads} />
+          </TabsContent>
+
+          <TabsContent value="kanban">
+            <LeadsKanban leads={leads} onStatusChange={updateStatus} />
+          </TabsContent>
+
+          <TabsContent value="tabela" className="space-y-6">
+            {/* Stats */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             { label: "Total", value: stats.total, color: "text-foreground" },
             { label: "Novos", value: stats.novos, color: "text-primary" },
@@ -255,8 +279,9 @@ const Admin = () => {
                 </div>
               ))}
             </div>
-          );
-        })()}
+            })()}
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
