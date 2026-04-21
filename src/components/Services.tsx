@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { VideoBackdrop } from "@/components/VideoBackdrop";
 import { TiltCard } from "@/components/TiltCard";
 import { motion } from "framer-motion";
+import { CarXRay } from "@/components/CarXRay";
 
 const services: { icon: LucideIcon; title: string; desc: string; slug?: string }[] = [
   { icon: Wrench, title: "Mecânica Geral", desc: "Manutenção completa para todas as marcas" },
@@ -63,9 +64,14 @@ export const Services = () => {
                   <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
                   <div className="mt-4 h-px w-12 bg-gradient-to-r from-primary to-transparent group-hover:w-full transition-all duration-500" />
                   {s.slug && (
-                    <div className="mt-3 text-xs uppercase tracking-wider text-secondary font-bold">
-                      Saiba mais →
-                    </div>
+                    <>
+                      <div className="mt-3 max-h-0 group-hover:max-h-32 overflow-hidden transition-all duration-500 opacity-0 group-hover:opacity-100">
+                        <CarXRay highlight={s.slug} />
+                      </div>
+                      <div className="mt-3 text-xs uppercase tracking-wider text-secondary font-bold">
+                        Saiba mais →
+                      </div>
+                    </>
                   )}
                 </div>
               </>
