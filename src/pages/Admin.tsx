@@ -228,7 +228,7 @@ const Admin = () => {
                         <Button size="sm" variant="ghost" asChild className="text-secondary hover:text-secondary-glow">
                           <a
                             href={`https://wa.me/55${lead.telefone.replace(/\D/g, "")}?text=${encodeURIComponent(
-                              `Olá ${lead.nome}! Aqui é da Adricar Centro Automotivo. Esperamos que tenha gostado do nosso atendimento. 🚗⭐\n\nVocê poderia nos ajudar deixando uma avaliação no Google? Leva só 30 segundos:\n\nhttps://g.page/r/CbADRICAR/review\n\nMuito obrigado pela confiança!`
+                              `Olá ${lead.nome}! Aqui é da Adricar Centro Automotivo. Esperamos que tenha gostado do nosso atendimento. 🚗⭐\n\nVocê poderia nos ajudar deixando uma avaliação no Google? Leva só 30 segundos:\n\nhttps://www.google.com/maps/place/Adricar+Centro+Automotivo\n\nMuito obrigado pela confiança!`
                             )}`}
                             target="_blank" rel="noopener" title="Pedir avaliação no Google"
                           ><Star className="w-4 h-4" /></a>
