@@ -14,6 +14,87 @@ export type Database = {
   }
   public: {
     Tables: {
+      agendamentos: {
+        Row: {
+          created_at: string
+          data_agendada: string
+          id: string
+          modelo_carro: string | null
+          nome: string
+          observacoes: string | null
+          servico: string
+          status: string
+          telefone: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          data_agendada: string
+          id?: string
+          modelo_carro?: string | null
+          nome: string
+          observacoes?: string | null
+          servico: string
+          status?: string
+          telefone: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          data_agendada?: string
+          id?: string
+          modelo_carro?: string | null
+          nome?: string
+          observacoes?: string | null
+          servico?: string
+          status?: string
+          telefone?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      blog_posts: {
+        Row: {
+          autor: string
+          conteudo: string
+          created_at: string
+          id: string
+          imagem_capa: string | null
+          publicado: boolean
+          publicado_em: string | null
+          resumo: string
+          slug: string
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          autor?: string
+          conteudo: string
+          created_at?: string
+          id?: string
+          imagem_capa?: string | null
+          publicado?: boolean
+          publicado_em?: string | null
+          resumo: string
+          slug: string
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          autor?: string
+          conteudo?: string
+          created_at?: string
+          id?: string
+          imagem_capa?: string | null
+          publicado?: boolean
+          publicado_em?: string | null
+          resumo?: string
+          slug?: string
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           created_at: string
