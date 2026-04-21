@@ -279,7 +279,8 @@ const Admin = () => {
                 </div>
               ))}
             </div>
-            })()}
+          );
+        })()}
           </TabsContent>
         </Tabs>
       </div>
