@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { FAQ_SCHEMA } from "@/components/FAQ";
 
 export const SEO = () => {
   const schema = {
@@ -37,6 +38,7 @@ export const SEO = () => {
       <link rel="manifest" href="/manifest.webmanifest" />
       <meta name="theme-color" content="#0a0a0a" />
       <script type="application/ld+json">{JSON.stringify(schema)}</script>
+      <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
     </Helmet>
   );
 };

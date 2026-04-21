@@ -4,8 +4,10 @@ import { About } from "@/components/About";
 import { WhyChoose } from "@/components/WhyChoose";
 import { Services } from "@/components/Services";
 import { Gallery } from "@/components/Gallery";
+import { BeforeAfterSection } from "@/components/BeforeAfterSection";
 import { Brands } from "@/components/Brands";
 import { Testimonials } from "@/components/Testimonials";
+import { FAQ } from "@/components/FAQ";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
@@ -27,8 +29,10 @@ const Index = () => {
           <WhyChoose />
           <Services />
           <Gallery />
+          <BeforeAfterSection />
           <Brands />
           <Testimonials />
+          <FAQ />
           <Contact />
         </main>
         <Footer />
@@ -39,4 +43,3 @@ const Index = () => {
 };
 
 export default Index;
-
