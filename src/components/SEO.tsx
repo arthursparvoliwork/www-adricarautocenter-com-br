@@ -35,7 +35,10 @@ export const SEO = () => {
 
   return (
     <Helmet>
-      <link rel="manifest" href="/manifest.webmanifest" />
+      <title>Adricar Auto Center</title>
+      <link rel="icon" href="/favicon.png?v=20260422" type="image/png" />
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=20260422" />
+      <link rel="manifest" href="/manifest.webmanifest?v=20260422" />
       <meta name="theme-color" content="#0a0a0a" />
       <script type="application/ld+json">{JSON.stringify(schema)}</script>
       <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
