@@ -30,7 +30,7 @@ const App = () => (
       <Sonner />
       <LoadingScreen />
       <ScrollProgress />
-      <CustomCursor />
+      
       <BrowserRouter>
         <Suspense fallback={<PageFallback />}>
           <Routes>
