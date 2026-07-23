@@ -59,7 +59,10 @@ const Index = () => {
 
           <ChapterMark number="05" kicker="Capítulo" label="Parceria" title="MARCAS QUE CONFIAM." />
           <Reveal><Brands /></Reveal>
+          <BrandMarquee />
           <Reveal><Testimonials /></Reveal>
+
+          <UrgencyCTA />
 
           <ChapterMark number="06" kicker="Capítulo" label="Contato" title="TRAGA SEU CARRO." />
           <Reveal><FAQ /></Reveal>
