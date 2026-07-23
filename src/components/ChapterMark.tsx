@@ -10,7 +10,7 @@ interface ChapterMarkProps {
 /** Editorial numbered chapter label — magazine/premium style transition between sections. */
 export const ChapterMark = ({ number, label, title, kicker }: ChapterMarkProps) => {
   return (
-    <div className="container-x py-16 sm:py-24">
+    <div className="container-x py-8 sm:py-12">
       <div className="grid grid-cols-12 gap-4 items-end">
         <motion.div
           initial={{ opacity: 0, x: -20 }}

@@ -6,7 +6,7 @@ import { SparkParticles } from "@/components/SparkParticles";
 import { GuaranteeBadge } from "@/components/GuaranteeBadge";
 import { Speedometer } from "@/components/Speedometer";
 import { Magnetic } from "@/components/Magnetic";
-import { TelemetryHUD } from "@/components/TelemetryHUD";
+
 import heroCar from "@/assets/hero-car.jpg";
 import engineHeroMeta from "@/assets/engine-hero-bg.mp4.asset.json";
 
@@ -39,8 +39,6 @@ export const Hero = () => {
       {/* Spark particles */}
       <SparkParticles density={45} />
 
-      {/* Telemetry HUD overlay */}
-      <TelemetryHUD />
 
       {/* Speed line accent */}
       <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary to-transparent opacity-60" />
