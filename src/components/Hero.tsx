@@ -6,7 +6,7 @@ import { SparkParticles } from "@/components/SparkParticles";
 import { GuaranteeBadge } from "@/components/GuaranteeBadge";
 import { Speedometer } from "@/components/Speedometer";
 import { Magnetic } from "@/components/Magnetic";
-import { TelemetryHUD } from "@/components/TelemetryHUD";
+
 import heroCar from "@/assets/hero-car.jpg";
 import engineHeroMeta from "@/assets/engine-hero-bg.mp4.asset.json";
 
