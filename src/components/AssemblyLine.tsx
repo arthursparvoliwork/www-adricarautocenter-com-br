@@ -15,7 +15,10 @@ export const AssemblyLine = () => {
   const ref = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [travel, setTravel] = useState(0);
-  const { scrollYProgress } = useScroll({ target: ref });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
 
   useLayoutEffect(() => {
     const track = trackRef.current;
