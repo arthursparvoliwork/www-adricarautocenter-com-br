@@ -21,6 +21,7 @@ import { RaceMode } from "@/components/RaceMode";
 import { ChapterMark } from "@/components/ChapterMark";
 import { EngineBlueprint } from "@/components/EngineBlueprint";
 import { AssemblyLine } from "@/components/AssemblyLine";
+import { SpecSheet } from "@/components/SpecSheet";
 
 const Index = () => {
   return (
@@ -46,6 +47,7 @@ const Index = () => {
 
           <ChapterMark number="03" kicker="Capítulo" label="Serviços" title="MECÂNICA COMPLETA." />
           <Services />
+          <SpecSheet />
           <Reveal><PlansComparison /></Reveal>
 
           <ChapterMark number="04" kicker="Capítulo" label="Reputação" title="A VOZ DE QUEM ROLOU CONOSCO." />
