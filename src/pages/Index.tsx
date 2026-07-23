@@ -22,6 +22,8 @@ import { ChapterMark } from "@/components/ChapterMark";
 import { EngineBlueprint } from "@/components/EngineBlueprint";
 import { AssemblyLine } from "@/components/AssemblyLine";
 import { SpecSheet } from "@/components/SpecSheet";
+import { BrandMarquee } from "@/components/BrandMarquee";
+import { UrgencyCTA } from "@/components/UrgencyCTA";
 
 const Index = () => {
   return (
