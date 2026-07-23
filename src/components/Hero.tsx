@@ -5,6 +5,7 @@ import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { SparkParticles } from "@/components/SparkParticles";
 import { GuaranteeBadge } from "@/components/GuaranteeBadge";
 import { Speedometer } from "@/components/Speedometer";
+import { Magnetic } from "@/components/Magnetic";
 import heroCar from "@/assets/hero-car.jpg";
 import engineHeroMeta from "@/assets/engine-hero-bg.mp4.asset.json";
 
@@ -64,15 +65,19 @@ export const Hero = () => {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <Button variant="hero" size="xl" asChild>
-              <a href="https://wa.me/5511985370952" target="_blank" rel="noopener">
-                Agende sua Revisão
-                <ArrowRight className="w-5 h-5" />
-              </a>
-            </Button>
-            <Button variant="outlineNeon" size="xl" asChild>
-              <a href="#servicos">Ver Serviços</a>
-            </Button>
+            <Magnetic>
+              <Button variant="hero" size="xl" asChild>
+                <a href="https://wa.me/5511985370952" target="_blank" rel="noopener">
+                  Agende sua Revisão
+                  <ArrowRight className="w-5 h-5" />
+                </a>
+              </Button>
+            </Magnetic>
+            <Magnetic>
+              <Button variant="outlineNeon" size="xl" asChild>
+                <a href="#servicos">Ver Serviços</a>
+              </Button>
+            </Magnetic>
           </div>
 
           {/* Mini features */}

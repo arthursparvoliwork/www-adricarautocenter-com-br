@@ -20,6 +20,7 @@ import { GoogleReviews } from "@/components/GoogleReviews";
 import { RaceMode } from "@/components/RaceMode";
 import { ChapterMark } from "@/components/ChapterMark";
 import { EngineBlueprint } from "@/components/EngineBlueprint";
+import { AssemblyLine } from "@/components/AssemblyLine";
 
 const Index = () => {
   return (
@@ -41,6 +42,7 @@ const Index = () => {
           <Reveal><WhyChoose /></Reveal>
 
           <EngineBlueprint />
+          <AssemblyLine />
 
           <ChapterMark number="03" kicker="Capítulo" label="Serviços" title="MECÂNICA COMPLETA." />
           <Services />
