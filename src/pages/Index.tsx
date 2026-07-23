@@ -24,6 +24,7 @@ import { AssemblyLine } from "@/components/AssemblyLine";
 import { SpecSheet } from "@/components/SpecSheet";
 import { BrandMarquee } from "@/components/BrandMarquee";
 import { UrgencyCTA } from "@/components/UrgencyCTA";
+import { Timeline30Years } from "@/components/Timeline30Years";
 
 const Index = () => {
   return (
@@ -40,6 +41,7 @@ const Index = () => {
 
           <ChapterMark number="01" kicker="Capítulo" label="Sobre a Adricar" title="TRÊS DÉCADAS DE ASFALTO." />
           <Reveal><About /></Reveal>
+          <Timeline30Years />
 
           <ChapterMark number="02" kicker="Capítulo" label="Diferenciais" title="POR QUE ADRICAR." />
           <Reveal><WhyChoose /></Reveal>

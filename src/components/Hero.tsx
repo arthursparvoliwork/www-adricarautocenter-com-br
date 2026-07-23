@@ -39,6 +39,9 @@ export const Hero = () => {
       {/* Spark particles */}
       <SparkParticles density={45} />
 
+      {/* Telemetry HUD overlay */}
+      <TelemetryHUD />
+
       {/* Speed line accent */}
       <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary to-transparent opacity-60" />
       <div className="absolute bottom-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-60" />
