@@ -18,6 +18,8 @@ import { QuickInfoPanel } from "@/components/QuickInfoPanel";
 import { PlansComparison } from "@/components/PlansComparison";
 import { GoogleReviews } from "@/components/GoogleReviews";
 import { RaceMode } from "@/components/RaceMode";
+import { ChapterMark } from "@/components/ChapterMark";
+import { EngineBlueprint } from "@/components/EngineBlueprint";
 
 const Index = () => {
   return (
@@ -31,15 +33,29 @@ const Index = () => {
         <main>
           <Hero />
           <div className="divider-tread" />
+
+          <ChapterMark number="01" kicker="Capítulo" label="Sobre a Adricar" title="TRÊS DÉCADAS DE ASFALTO." />
           <Reveal><About /></Reveal>
+
+          <ChapterMark number="02" kicker="Capítulo" label="Diferenciais" title="POR QUE ADRICAR." />
           <Reveal><WhyChoose /></Reveal>
+
+          <EngineBlueprint />
+
+          <ChapterMark number="03" kicker="Capítulo" label="Serviços" title="MECÂNICA COMPLETA." />
           <Services />
           <Reveal><PlansComparison /></Reveal>
+
+          <ChapterMark number="04" kicker="Capítulo" label="Reputação" title="A VOZ DE QUEM ROLOU CONOSCO." />
           <Reveal><GoogleReviews /></Reveal>
           <Reveal><Gallery /></Reveal>
           <Reveal><BeforeAfterSection /></Reveal>
+
+          <ChapterMark number="05" kicker="Capítulo" label="Parceria" title="MARCAS QUE CONFIAM." />
           <Reveal><Brands /></Reveal>
           <Reveal><Testimonials /></Reveal>
+
+          <ChapterMark number="06" kicker="Capítulo" label="Contato" title="TRAGA SEU CARRO." />
           <Reveal><FAQ /></Reveal>
           <Reveal><Contact /></Reveal>
         </main>
