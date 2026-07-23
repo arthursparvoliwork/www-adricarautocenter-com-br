@@ -22,6 +22,8 @@ import { ChapterMark } from "@/components/ChapterMark";
 import { EngineBlueprint } from "@/components/EngineBlueprint";
 import { AssemblyLine } from "@/components/AssemblyLine";
 import { SpecSheet } from "@/components/SpecSheet";
+import { BrandMarquee } from "@/components/BrandMarquee";
+import { UrgencyCTA } from "@/components/UrgencyCTA";
 
 const Index = () => {
   return (
@@ -57,7 +59,10 @@ const Index = () => {
 
           <ChapterMark number="05" kicker="Capítulo" label="Parceria" title="MARCAS QUE CONFIAM." />
           <Reveal><Brands /></Reveal>
+          <BrandMarquee />
           <Reveal><Testimonials /></Reveal>
+
+          <UrgencyCTA />
 
           <ChapterMark number="06" kicker="Capítulo" label="Contato" title="TRAGA SEU CARRO." />
           <Reveal><FAQ /></Reveal>
