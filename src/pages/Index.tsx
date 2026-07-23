@@ -28,7 +28,7 @@ import { Timeline30Years } from "@/components/Timeline30Years";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden relative">
+    <div className="min-h-screen bg-background overflow-x-clip relative">
       <SEO />
       <FloatingDecorations />
       <QuickInfoPanel />

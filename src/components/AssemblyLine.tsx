@@ -1,5 +1,5 @@
-import { motion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
-import { useRef } from "react";
+import { motion, useSpring, useTransform, useScroll } from "framer-motion";
+import { useLayoutEffect, useRef, useState } from "react";
 import { ClipboardCheck, Wrench, Cog, SprayCan, Flag } from "lucide-react";
 
 const STAGES = [
@@ -12,16 +12,46 @@ const STAGES = [
 
 /** Horizontal scroll-pinned assembly line — cinematic journey of a car through Adricar. */
 export const AssemblyLine = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref });
+  const ref = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [travel, setTravel] = useState(0);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
 
-  // 5 stages → translate the strip from 0% to -80% (last stage aligns right)
-  const rawX = useTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const measure = () => {
+      const edgePadding = window.innerWidth * 0.08;
+      setTravel(Math.max(track.scrollWidth - window.innerWidth + edgePadding, 0));
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(track);
+    window.addEventListener("resize", measure);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
+
+  // Move only the track's real width. The former -80% transform overshot the
+  // cards and left several empty black viewports before the next section.
+  const rawX = useTransform(scrollYProgress, [0, 1], [0, -travel]);
   const x = useSpring(rawX, { stiffness: 80, damping: 20, mass: 0.5 });
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section ref={ref} className="relative" style={{ height: "500vh" }}>
+    <section
+      ref={ref}
+      className="relative"
+      style={{ height: travel > 0 ? `calc(100vh + ${Math.ceil(travel * 1.15)}px)` : "220vh" }}
+    >
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center bg-carbon">
         {/* Ambient glow */}
         <div className="absolute inset-0 bg-gradient-radial-glow opacity-20" />
@@ -52,7 +82,7 @@ export const AssemblyLine = () => {
         </div>
 
         {/* Rail with stages */}
-        <motion.div style={{ x }} className="flex gap-8 pl-[10vw] pr-[10vw] will-change-transform">
+        <motion.div ref={trackRef} style={{ x }} className="flex w-max gap-8 pl-[10vw] pr-[10vw] will-change-transform">
           {STAGES.map((s, i) => (
             <div
               key={s.num}
