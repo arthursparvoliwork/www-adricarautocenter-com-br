@@ -80,6 +80,7 @@ const Index = () => {
         <Footer />
         <WhatsAppFloat />
         <RaceMode />
+        <ExitIntentOffer />
       </div>
     </div>
   );
