@@ -2,7 +2,9 @@ import { motion } from "framer-motion";
 import {
   Cog, Disc3, ShieldCheck, Wrench, Wind, Zap, Cpu,
 } from "lucide-react";
-import { StarRail } from "@/components/StarRail";
+import arte from "@/assets/arte-adricar.png.asset.json";
+import lockup from "@/assets/adricar-lockup.png.asset.json";
+
 
 const CHIPS = [
   { icon: Cog, title: "SUSPENSÃO", sub: "Perfeita" },
