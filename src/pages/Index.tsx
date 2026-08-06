@@ -25,6 +25,10 @@ import { SpecSheet } from "@/components/SpecSheet";
 import { BrandMarquee } from "@/components/BrandMarquee";
 import { UrgencyCTA } from "@/components/UrgencyCTA";
 import { Timeline30Years } from "@/components/Timeline30Years";
+import { HexServiceStrip } from "@/components/HexServiceStrip";
+import { PhoneCTABar } from "@/components/PhoneCTABar";
+import { LeadMagnet } from "@/components/LeadMagnet";
+import { ExitIntentOffer } from "@/components/ExitIntentOffer";
 
 const Index = () => {
   return (
@@ -37,7 +41,10 @@ const Index = () => {
         <Navbar />
         <main>
           <Hero />
+          <HexServiceStrip />
+          <PhoneCTABar />
           <div className="divider-tread" />
+          <LeadMagnet />
 
           <ChapterMark number="01" kicker="Capítulo" label="Sobre a Adricar" title="TRÊS DÉCADAS DE ASFALTO." />
           <Reveal><About /></Reveal>
@@ -73,6 +80,7 @@ const Index = () => {
         <Footer />
         <WhatsAppFloat />
         <RaceMode />
+        <ExitIntentOffer />
       </div>
     </div>
   );
