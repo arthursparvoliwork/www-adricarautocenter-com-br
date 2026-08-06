@@ -25,6 +25,10 @@ import { SpecSheet } from "@/components/SpecSheet";
 import { BrandMarquee } from "@/components/BrandMarquee";
 import { UrgencyCTA } from "@/components/UrgencyCTA";
 import { Timeline30Years } from "@/components/Timeline30Years";
+import { HexServiceStrip } from "@/components/HexServiceStrip";
+import { PhoneCTABar } from "@/components/PhoneCTABar";
+import { LeadMagnet } from "@/components/LeadMagnet";
+import { ExitIntentOffer } from "@/components/ExitIntentOffer";
 
 const Index = () => {
   return (
