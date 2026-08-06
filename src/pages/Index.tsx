@@ -41,7 +41,10 @@ const Index = () => {
         <Navbar />
         <main>
           <Hero />
+          <HexServiceStrip />
+          <PhoneCTABar />
           <div className="divider-tread" />
+          <LeadMagnet />
 
           <ChapterMark number="01" kicker="Capítulo" label="Sobre a Adricar" title="TRÊS DÉCADAS DE ASFALTO." />
           <Reveal><About /></Reveal>
