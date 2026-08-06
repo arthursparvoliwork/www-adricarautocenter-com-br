@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { StarRail } from "@/components/StarRail";
-import arte from "@/assets/arte-adricar.png.asset.json";
+import arte from "@/assets/arte-adricar.jpg";
 import { fireSparks } from "@/components/ConfettiSparks";
 
 const BENEFITS = [
@@ -53,7 +53,7 @@ export const LeadMagnet = () => {
 
   return (
     <section id="oferta" className="relative py-16 sm:py-24 overflow-hidden bg-carbon">
-      <img src={arte.url} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-20" />
+      <img src={arte} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-20" />
       <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/95" />
       <div className="absolute inset-0 bg-gradient-radial-glow opacity-60" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-fire" />

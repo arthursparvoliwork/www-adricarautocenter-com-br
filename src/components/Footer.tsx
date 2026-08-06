@@ -1,4 +1,4 @@
-import lockup from "@/assets/adricar-lockup.png.asset.json";
+import lockup from "@/assets/adricar-lockup.jpg";
 import { Instagram, Phone, MapPin, Globe, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -11,7 +11,7 @@ export const Footer = () => {
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <img src={lockup.url} alt="Adricar Centro Automotivo" className="w-56 sm:w-72 drop-shadow-[0_8px_30px_rgba(230,57,70,0.45)]" />
+              <img src={lockup} alt="Adricar Centro Automotivo" className="w-56 sm:w-72 drop-shadow-[0_8px_30px_rgba(230,57,70,0.45)]" />
               <div>
                 <div className="font-display text-2xl tracking-wider">ADRICAR</div>
                 <div className="text-xs uppercase tracking-[0.25em] text-secondary">Centro Automotivo</div>

@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import {
   Cog, Disc3, ShieldCheck, Wrench, Wind, Zap, Cpu,
 } from "lucide-react";
-import arte from "@/assets/arte-adricar.png.asset.json";
-import lockup from "@/assets/adricar-lockup.png.asset.json";
+import arte from "@/assets/arte-adricar.jpg";
+import lockup from "@/assets/adricar-lockup.jpg";
 
 
 const CHIPS = [
@@ -29,7 +29,7 @@ export const HexServiceStrip = () => {
     <section className="relative py-14 sm:py-20 overflow-hidden bg-carbon">
       {/* Arte oficial como plano de fundo */}
       <img
-        src={arte.url}
+        src={arte}
         alt=""
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover opacity-30"
@@ -40,7 +40,7 @@ export const HexServiceStrip = () => {
 
       <div className="container-x relative z-10">
         <motion.img
-          src={lockup.url}
+          src={lockup}
           alt="Adricar Centro Automotivo"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

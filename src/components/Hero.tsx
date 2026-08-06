@@ -9,7 +9,7 @@ import { Magnetic } from "@/components/Magnetic";
 
 import heroCar from "@/assets/hero-car.jpg";
 import engineHeroMeta from "@/assets/engine-hero-bg.mp4.asset.json";
-import lockup from "@/assets/adricar-lockup.png.asset.json";
+import lockup from "@/assets/adricar-lockup.jpg";
 
 export const Hero = () => {
   const { scrollY } = useScroll();
@@ -49,7 +49,7 @@ export const Hero = () => {
         <div className="space-y-8 animate-fade-in">
           {/* Lockup oficial da arte Adricar */}
           <motion.img
-            src={lockup.url}
+            src={lockup}
             alt="Adricar Centro Automotivo"
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
