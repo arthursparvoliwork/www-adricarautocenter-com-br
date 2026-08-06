@@ -27,24 +27,31 @@ const TRUST = [
 export const HexServiceStrip = () => {
   return (
     <section className="relative py-14 sm:py-20 overflow-hidden bg-carbon">
-      <div
-        className="absolute inset-0 opacity-[0.18]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 50% 0%, hsl(0 90% 45% / 0.6) 0%, transparent 60%)",
-        }}
+      {/* Arte oficial como plano de fundo */}
+      <img
+        src={arte.url}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover opacity-30"
       />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/60 to-background/95" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-fire" />
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-fire" />
 
       <div className="container-x relative z-10">
-        <StarRail className="mb-6" />
-        <h2 className="text-center font-display text-3xl sm:text-5xl leading-none">
-          <span className="text-fire">CENTRO AUTOMOTIVO</span>
-        </h2>
-        <p className="mt-3 text-center text-[10px] sm:text-xs font-mono uppercase tracking-[0.35em] text-white/60">
+        <motion.img
+          src={lockup.url}
+          alt="Adricar Centro Automotivo"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mx-auto w-full max-w-2xl drop-shadow-[0_16px_60px_rgba(230,57,70,0.5)]"
+        />
+        <p className="mt-4 text-center text-[10px] sm:text-xs font-mono uppercase tracking-[0.35em] text-white/70">
           30 anos · peças e serviços · garantia real
         </p>
+
 
         <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
           {CHIPS.map((c, i) => (
