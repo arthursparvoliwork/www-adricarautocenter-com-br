@@ -9,6 +9,7 @@ import { Magnetic } from "@/components/Magnetic";
 
 import heroCar from "@/assets/hero-car.jpg";
 import engineHeroMeta from "@/assets/engine-hero-bg.mp4.asset.json";
+import lockup from "@/assets/adricar-lockup-clean.png";
 
 export const Hero = () => {
   const { scrollY } = useScroll();
@@ -46,6 +47,16 @@ export const Hero = () => {
 
       <motion.div className="container-x relative z-10 grid lg:grid-cols-2 gap-12 items-center py-16" style={{ y: contentY }}>
         <div className="space-y-8 animate-fade-in">
+          {/* Lockup oficial da arte Adricar */}
+          <motion.img
+            src={lockup}
+            alt="Adricar Centro Automotivo"
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="w-full max-w-lg drop-shadow-[0_10px_50px_rgba(230,57,70,0.55)]"
+          />
+
           {/* Badge 30 anos */}
           <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-secondary/40 bg-secondary/10 backdrop-blur-sm">
             <Award className="w-4 h-4 text-secondary" />
@@ -53,6 +64,7 @@ export const Hero = () => {
               30 Anos de Tradição
             </span>
           </div>
+
 
           <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[0.9] tracking-tight">
             <span className="block text-foreground">SEU CARRO</span>
