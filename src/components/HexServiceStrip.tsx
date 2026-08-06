@@ -3,7 +3,7 @@ import {
   Cog, Disc3, ShieldCheck, Wrench, Wind, Zap, Cpu,
 } from "lucide-react";
 import arte from "@/assets/arte-adricar.jpg";
-import lockup from "@/assets/adricar-lockup.jpg";
+import lockup from "@/assets/adricar-lockup-clean.png";
 
 
 const CHIPS = [

@@ -1,4 +1,4 @@
-import lockup from "@/assets/adricar-lockup.jpg";
+import lockup from "@/assets/adricar-lockup-clean.png";
 import { Instagram, Phone, MapPin, Globe, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
