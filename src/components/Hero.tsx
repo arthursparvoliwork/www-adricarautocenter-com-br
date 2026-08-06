@@ -9,6 +9,7 @@ import { Magnetic } from "@/components/Magnetic";
 
 import heroCar from "@/assets/hero-car.jpg";
 import engineHeroMeta from "@/assets/engine-hero-bg.mp4.asset.json";
+import lockup from "@/assets/adricar-lockup.png.asset.json";
 
 export const Hero = () => {
   const { scrollY } = useScroll();
