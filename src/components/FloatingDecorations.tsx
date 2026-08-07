@@ -1,11 +1,10 @@
 import { Cog, Wrench, Car, Settings, Zap, CircleDot, Disc3, Gauge } from "lucide-react";
-import badge from "@/assets/adricar-badge.png.asset.json";
 
 type IconType = typeof Cog;
 
 interface FloatingItem {
   Icon?: IconType;
-  isLogo?: boolean;
+  isText?: boolean;
   top: string;
   left?: string;
   right?: string;
@@ -22,7 +21,7 @@ const items: FloatingItem[] = [
   // Around About
   { Icon: Cog, top: "105vh", left: "3%", size: 100, rotate: 0, opacity: 0.07, duration: 30, delay: 0, spin: true, color: "white" },
   { Icon: Wrench, top: "125vh", right: "6%", size: 70, rotate: 35, opacity: 0.09, duration: 14, delay: 1, color: "secondary" },
-  { isLogo: true, top: "155vh", left: "-40px", size: 200, rotate: -15, opacity: 0.06, duration: 10, delay: 0 },
+  { isText: true, top: "155vh", left: "-40px", size: 200, rotate: -15, opacity: 0.06, duration: 10, delay: 0 },
 
   // Around Services
   { Icon: Settings, top: "215vh", right: "4%", size: 130, rotate: 0, opacity: 0.06, duration: 35, delay: 2, spin: true, color: "primary" },
@@ -30,7 +29,7 @@ const items: FloatingItem[] = [
   { Icon: Gauge, top: "275vh", right: "10%", size: 75, rotate: 12, opacity: 0.09, duration: 12, delay: 3, color: "secondary" },
 
   // Around Gallery
-  { isLogo: true, top: "320vh", right: "-40px", size: 220, rotate: 18, opacity: 0.05, duration: 12, delay: 1 },
+  { isText: true, top: "320vh", right: "-40px", size: 220, rotate: 18, opacity: 0.05, duration: 12, delay: 1 },
   { Icon: Car, top: "345vh", left: "8%", size: 100, rotate: -8, opacity: 0.08, duration: 16, delay: 2, color: "primary" },
   { Icon: CircleDot, top: "365vh", left: "45%", size: 60, rotate: 0, opacity: 0.07, duration: 10, delay: 0, color: "white" },
 
@@ -39,7 +38,7 @@ const items: FloatingItem[] = [
   { Icon: Cog, top: "455vh", right: "8%", size: 140, rotate: 0, opacity: 0.06, duration: 40, delay: 0, spin: true, color: "white" },
 
   // Around Testimonials
-  { isLogo: true, top: "510vh", left: "3%", size: 180, rotate: -20, opacity: 0.06, duration: 11, delay: 2 },
+  { isText: true, top: "510vh", left: "3%", size: 180, rotate: -20, opacity: 0.06, duration: 11, delay: 2 },
   { Icon: Wrench, top: "545vh", right: "6%", size: 90, rotate: -25, opacity: 0.08, duration: 15, delay: 1, color: "primary" },
 
   // Around Contact
@@ -80,12 +79,11 @@ export const FloatingDecorations = () => {
         return (
           <div key={i} className="absolute" style={wrapperStyle}>
             <div className={`w-full h-full ${animationClass}`} style={innerStyle}>
-              {item.isLogo ? (
-                <img
-                  src={badge.url}
-                  alt=""
-                  className="w-full h-full object-contain drop-shadow-[0_0_30px_hsl(50_100%_55%/0.5)]"
-                />
+              {item.isText ? (
+                <div className="w-full h-full flex flex-col items-center justify-center text-center select-none">
+                  <span className="font-display text-secondary leading-none" style={{ fontSize: item.size * 0.3 }}>ADRICAR</span>
+                  <span className="uppercase text-foreground tracking-[0.3em] leading-none" style={{ fontSize: item.size * 0.09 }}>Centro Automotivo</span>
+                </div>
               ) : (
                 item.Icon && (
                   <item.Icon className={`w-full h-full ${colorClass}`} strokeWidth={1.2} />
