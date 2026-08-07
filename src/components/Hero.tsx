@@ -45,17 +45,20 @@ export const Hero = () => {
       <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary to-transparent opacity-60" />
       <div className="absolute bottom-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-60" />
 
-      <motion.div className="container-x relative z-10 grid lg:grid-cols-2 gap-12 items-center py-16" style={{ y: contentY }}>
+      <motion.div className="container-x relative z-10 py-16" style={{ y: contentY }}>
+        {/* Lockup oficial da arte Adricar — centralizado */}
+        <motion.img
+          src={lockup}
+          alt="Adricar Centro Automotivo"
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="mx-auto w-full max-w-xl lg:max-w-2xl drop-shadow-[0_10px_50px_rgba(230,57,70,0.55)]"
+        />
+
+        <div className="mt-12 grid lg:grid-cols-2 gap-12 items-center">
         <div className="space-y-8 animate-fade-in">
-          {/* Lockup oficial da arte Adricar */}
-          <motion.img
-            src={lockup}
-            alt="Adricar Centro Automotivo"
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="w-full max-w-lg drop-shadow-[0_10px_50px_rgba(230,57,70,0.55)]"
-          />
+
 
           {/* Badge 30 anos */}
           <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-secondary/40 bg-secondary/10 backdrop-blur-sm">
