@@ -46,15 +46,19 @@ export const Hero = () => {
       <div className="absolute bottom-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-60" />
 
       <motion.div className="container-x relative z-10 py-16" style={{ y: contentY }}>
-        {/* Lockup oficial da arte Adricar — centralizado */}
-        <motion.img
-          src={lockup}
-          alt="Adricar Centro Automotivo"
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="mx-auto w-full max-w-xl lg:max-w-2xl drop-shadow-[0_10px_50px_rgba(230,57,70,0.55)]"
-        />
+        {/* Lockup oficial da arte Adricar — centralizado com aura interativa */}
+        <div className="flex justify-center">
+          <LogoAura intensity="lg" className="w-full max-w-xl lg:max-w-2xl">
+            <motion.img
+              src={lockup}
+              alt="Adricar Centro Automotivo"
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              className="w-full drop-shadow-[0_10px_50px_rgba(230,57,70,0.55)]"
+            />
+          </LogoAura>
+        </div>
 
         <div className="mt-12 grid lg:grid-cols-2 gap-12 items-center">
         <div className="space-y-8 animate-fade-in">
