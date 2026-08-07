@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/adricar-logo.png";
+import badge from "@/assets/adricar-badge.png.asset.json";
+import lockup from "@/assets/adricar-lockup-clean.png";
 
 const links = [
   { href: "#inicio", label: "Início" },
