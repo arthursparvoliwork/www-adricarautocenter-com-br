@@ -1,5 +1,5 @@
 import { Cog, Wrench, Car, Settings, Zap, CircleDot, Disc3, Gauge } from "lucide-react";
-import logo from "@/assets/adricar-logo.png";
+import badge from "@/assets/adricar-badge.png.asset.json";
 
 type IconType = typeof Cog;
 
