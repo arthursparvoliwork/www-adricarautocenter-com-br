@@ -1,5 +1,5 @@
 import { Cog, Wrench, Car, Settings, Zap, CircleDot, Disc3, Gauge } from "lucide-react";
-import logo from "@/assets/adricar-logo.png";
+import badge from "@/assets/adricar-badge.png.asset.json";
 
 type IconType = typeof Cog;
 
@@ -82,7 +82,7 @@ export const FloatingDecorations = () => {
             <div className={`w-full h-full ${animationClass}`} style={innerStyle}>
               {item.isLogo ? (
                 <img
-                  src={logo}
+                  src={badge.url}
                   alt=""
                   className="w-full h-full object-contain drop-shadow-[0_0_30px_hsl(50_100%_55%/0.5)]"
                 />
