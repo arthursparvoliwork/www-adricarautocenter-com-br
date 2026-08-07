@@ -11,12 +11,9 @@ export const Footer = () => {
       <div className="container-x">
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <img src={lockup} alt="Adricar Centro Automotivo" className="w-56 sm:w-72 drop-shadow-[0_8px_30px_rgba(230,57,70,0.45)]" />
-              <div>
-                <div className="font-display text-2xl tracking-wider">ADRICAR</div>
-                <div className="text-xs uppercase tracking-[0.25em] text-secondary">Centro Automotivo</div>
-              </div>
+            <div className="flex items-center gap-4 mb-4">
+              <img src={badge.url} alt="Adricar Centro Automotivo" className="w-14 h-14 rounded-full object-cover ring-2 ring-secondary/40 shrink-0" />
+              <img src={lockup} alt="" aria-hidden="true" className="w-48 sm:w-64 drop-shadow-[0_8px_30px_rgba(230,57,70,0.45)]" />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-md">
               Há mais de 30 anos cuidando do seu veículo com excelência.
