@@ -3,6 +3,7 @@ import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import lockup from "@/assets/adricar-lockup-clean.png";
+import { LogoAura } from "@/components/LogoAura";
 
 const links = [
   { href: "#inicio", label: "Início" },
