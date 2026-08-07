@@ -37,17 +37,17 @@ export const Navbar = () => {
 
       <div className="container-x flex items-center justify-between h-20">
         <a href="#inicio" className="flex items-center gap-3 group">
-          <div className="relative shrink-0">
-            <div className="absolute inset-0 rounded-full bg-primary/40 blur-xl group-hover:bg-primary/60 transition-all" />
-            <img src={badge.url} alt="Adricar Centro Automotivo" className="relative w-12 h-12 rounded-full object-cover ring-2 ring-secondary/40" />
-          </div>
           <img
             src={lockup}
-            alt=""
-            aria-hidden="true"
-            className="hidden sm:block h-10 w-auto object-contain drop-shadow-[0_4px_18px_rgba(230,57,70,0.45)]"
+            alt="Adricar Centro Automotivo"
+            className="h-10 w-auto object-contain drop-shadow-[0_4px_18px_rgba(230,57,70,0.45)]"
           />
+          <span className="hidden sm:flex flex-col leading-none">
+            <span className="font-display text-lg text-foreground tracking-wide">ADRICAR</span>
+            <span className="text-[10px] uppercase tracking-[0.3em] text-secondary">Centro Automotivo</span>
+          </span>
         </a>
+
 
         <nav className="hidden lg:flex items-center gap-8">
           {links.map((l) => (
