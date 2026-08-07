@@ -150,6 +150,7 @@ export const Hero = () => {
             </div>
           </div>
         </div>
+        </div>
       </motion.div>
 
       {/* Scroll indicator */}
