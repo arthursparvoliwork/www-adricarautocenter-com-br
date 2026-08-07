@@ -3,6 +3,7 @@ import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import lockup from "@/assets/adricar-lockup-clean.png";
+import { LogoAura } from "@/components/LogoAura";
 
 const links = [
   { href: "#inicio", label: "Início" },
@@ -37,11 +38,13 @@ export const Navbar = () => {
 
       <div className="container-x flex items-center justify-between h-20">
         <a href="#inicio" className="flex items-center gap-3 group">
-          <img
-            src={lockup}
-            alt="Adricar Centro Automotivo"
-            className="h-10 w-auto object-contain drop-shadow-[0_4px_18px_rgba(230,57,70,0.45)]"
-          />
+          <LogoAura intensity="sm">
+            <img
+              src={lockup}
+              alt="Adricar Centro Automotivo"
+              className="h-10 w-auto object-contain drop-shadow-[0_4px_18px_rgba(230,57,70,0.45)]"
+            />
+          </LogoAura>
           <span className="hidden sm:flex flex-col leading-none">
             <span className="font-display text-lg text-foreground tracking-wide">ADRICAR</span>
             <span className="text-[10px] uppercase tracking-[0.3em] text-secondary">Centro Automotivo</span>
