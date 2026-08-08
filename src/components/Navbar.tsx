@@ -72,7 +72,7 @@ export const Navbar = () => {
           </span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1 rounded-full border border-border/60 bg-card/40 backdrop-blur-md px-1.5 py-1.5">
           {links.map((l) => {
             const isActive = active === l.href;
             return (
@@ -81,14 +81,14 @@ export const Navbar = () => {
                 href={l.href}
                 aria-current={isActive ? "true" : undefined}
                 className={cn(
-                  "relative px-3.5 py-2 rounded-lg text-sm font-semibold uppercase tracking-wider transition-colors",
-                  isActive ? "text-secondary" : "text-muted-foreground hover:text-foreground"
+                  "relative px-3.5 py-1.5 rounded-full text-[13px] font-semibold uppercase tracking-wider transition-colors duration-300",
+                  isActive ? "text-secondary-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {isActive && (
                   <motion.span
                     layoutId="nav-pill"
-                    className="absolute inset-0 rounded-lg border border-secondary/40 bg-secondary/10"
+                    className="absolute inset-0 rounded-full bg-gradient-yellow shadow-[0_0_18px_hsl(50_100%_55%/0.45)]"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     aria-hidden="true"
                   />
@@ -102,15 +102,20 @@ export const Navbar = () => {
         <div className="hidden lg:flex items-center gap-3">
           <a
             href="tel:+5511985370952"
-            className="flex items-center gap-2 px-3.5 py-2 rounded-lg border border-secondary/30 bg-secondary/5 text-sm font-semibold text-secondary transition-all duration-300 hover:bg-secondary/15 hover:border-secondary/60 hover:shadow-[0_0_18px_hsl(50_100%_55%/0.35)]"
+            className="group flex items-center gap-2.5 pl-2.5 pr-4 py-2 rounded-full border border-secondary/25 bg-secondary/5 text-sm font-semibold text-secondary transition-all duration-300 hover:border-secondary/60 hover:bg-secondary/10 hover:shadow-[0_0_20px_hsl(50_100%_55%/0.3)]"
           >
-            <Phone className="w-4 h-4" />
-            (11) 98537-0952
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary/15 transition-colors duration-300 group-hover:bg-secondary/25">
+              <Phone className="w-3.5 h-3.5" />
+            </span>
+            <span className="flex flex-col leading-none text-left">
+              <span className="text-[9px] uppercase tracking-[0.2em] text-secondary/60">Ligue agora</span>
+              <span className="tabular-nums">(11) 98537-0952</span>
+            </span>
           </a>
           <Button
             variant="whatsapp"
             size="sm"
-            className="rounded-lg shadow-[0_6px_20px_hsl(145_70%_35%/0.35)] transition-transform duration-300 hover:-translate-y-0.5"
+            className="rounded-full px-5 shadow-[0_8px_24px_hsl(145_70%_35%/0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_30px_hsl(145_70%_35%/0.5)]"
             asChild
           >
             <a
@@ -133,18 +138,31 @@ export const Navbar = () => {
         </button>
       </div>
 
-      {/* Divisão inferior: linha fina vermelho→amarelo */}
+      {/* Divisão inferior: hairline branco + degradê vermelho→amarelo */}
       <div
         className={cn(
-          "absolute bottom-0 inset-x-0 h-px transition-opacity duration-500",
-          scrolled ? "opacity-100" : "opacity-40"
+          "absolute bottom-0 inset-x-0 transition-opacity duration-500",
+          scrolled ? "opacity-100" : "opacity-50"
         )}
-        style={{
-          background:
-            "linear-gradient(90deg, transparent, hsl(var(--primary)/0.8) 25%, hsl(var(--secondary)/0.8) 75%, transparent)",
-        }}
         aria-hidden="true"
-      />
+      >
+        <div
+          className="h-px"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, hsl(0 0% 100%/0.25) 30%, hsl(0 0% 100%/0.25) 70%, transparent)",
+          }}
+        />
+        <div
+          className="h-[2px]"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, hsl(var(--primary)/0.9) 28%, hsl(30 100% 55%/0.9) 50%, hsl(var(--secondary)/0.9) 72%, transparent)",
+            boxShadow: "0 0 14px hsl(0 100% 55%/0.35)",
+          }}
+        />
+      </div>
+
 
       {open && (
         <div className="lg:hidden bg-background/95 backdrop-blur-xl border-t border-primary/30 animate-fade-in">
