@@ -1,4 +1,4 @@
-import { Phone, MessageCircle, MapPin } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Clock } from "lucide-react";
 
 const WA = "https://wa.me/5511985370952?text=Ol%C3%A1!%20Quero%20um%20or%C3%A7amento%20na%20Adricar.";
 
