@@ -180,7 +180,15 @@ export const Navbar = () => {
                 {l.label}
               </a>
             ))}
-            <Button variant="whatsapp" className="mt-4 rounded-lg" asChild>
+            <a
+              href="tel:+5511985370952"
+              onClick={() => setOpen(false)}
+              className="mt-4 flex items-center gap-3 rounded-lg border border-secondary/30 bg-secondary/5 px-4 py-3 text-secondary"
+            >
+              <Phone className="w-4 h-4" />
+              <span className="font-semibold tabular-nums">(11) 98537-0952</span>
+            </a>
+            <Button variant="whatsapp" className="mt-2 rounded-lg" asChild>
               <a
                 href="https://wa.me/5511985370952?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento%20na%20Adricar."
                 target="_blank"
