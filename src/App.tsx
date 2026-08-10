@@ -14,6 +14,7 @@ import { ChatBot } from "@/components/ChatBot";
 const Auth = lazy(() => import("./pages/Auth.tsx"));
 const Admin = lazy(() => import("./pages/Admin.tsx"));
 const ServicePage = lazy(() => import("./pages/ServicePage.tsx"));
+const Obrigado = lazy(() => import("./pages/Obrigado.tsx"));
 
 const queryClient = new QueryClient();
 

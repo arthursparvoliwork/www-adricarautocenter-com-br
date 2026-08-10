@@ -58,6 +58,7 @@ export default {
         "gradient-dark": "var(--gradient-dark)",
         "gradient-red": "var(--gradient-red)",
         "gradient-yellow": "var(--gradient-yellow)",
+        "gradient-radial-glow": "var(--gradient-radial-glow)",
       },
       borderRadius: {
         lg: "var(--radius)",
