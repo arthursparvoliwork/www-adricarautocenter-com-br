@@ -10,8 +10,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { UrgencyBadge } from "@/components/UrgencyBadge";
 import { fireSparks } from "@/components/ConfettiSparks";
 import { GuaranteePDF } from "@/components/GuaranteePDF";
+import { useNavigate } from "react-router-dom";
+import { originLabel } from "@/lib/tracking";
 
 export const QuoteForm = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [form, setForm] = useState({
@@ -40,7 +43,7 @@ export const QuoteForm = () => {
         modelo_carro: form.modelo_carro.trim() || null,
         servico: form.servico.trim() || null,
         mensagem: form.mensagem.trim() || null,
-        origem: "formulario_site",
+        origem: originLabel("formulario_site"),
       });
       if (error) throw error;
 
@@ -58,7 +61,7 @@ export const QuoteForm = () => {
       }, 800);
 
       setForm({ nome: "", telefone: "", modelo_carro: "", servico: "", mensagem: "" });
-      setTimeout(() => setSuccess(false), 4000);
+      setTimeout(() => navigate("/obrigado?src=formulario_site"), 1200);
     } catch (err) {
       console.error(err);
       toast.error("Erro ao enviar. Chame direto no WhatsApp.");
