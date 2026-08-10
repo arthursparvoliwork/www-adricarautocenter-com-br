@@ -29,7 +29,11 @@ export const SEO = () => {
       },
       { "@type": "OpeningHoursSpecification", dayOfWeek: "Sunday", opens: "10:00", closes: "15:00" },
     ],
-    sameAs: ["https://instagram.com/adricarautocenter"],
+    hasMap: "https://www.google.com/maps/search/?api=1&query=Av.+Dona+Belmira+Marin,+1670,+S%C3%A3o+Paulo",
+    areaServed: ["Grajaú", "Interlagos", "Cidade Dutra", "Parelheiros", "Jardim Ângela", "Zona Sul de São Paulo"].map(
+      (n) => ({ "@type": "City", name: n })
+    ),
+    sameAs: ["https://instagram.com/adricarautocenter", "https://wa.me/5511985370952"],
     aggregateRating: { "@type": "AggregateRating", ratingValue: "4.4", reviewCount: "120" },
   };
 

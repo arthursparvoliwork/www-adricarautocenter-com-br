@@ -8,6 +8,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { StarRail } from "@/components/StarRail";
 import arte from "@/assets/arte-adricar.jpg";
 import { fireSparks } from "@/components/ConfettiSparks";
+import { useNavigate } from "react-router-dom";
+import { originLabel } from "@/lib/tracking";
 
 const BENEFITS = [
   { icon: ShieldCheck, t: "Checklist de 30 pontos", s: "Diagnóstico visual gratuito na sua primeira visita" },
@@ -17,6 +19,7 @@ const BENEFITS = [
 
 /** Oferta de entrada (lead magnet): captura nome + WhatsApp em troca do cupom + checklist. */
 export const LeadMagnet = () => {
+  const navigate = useNavigate();
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
   const [loading, setLoading] = useState(false);
@@ -34,7 +37,7 @@ export const LeadMagnet = () => {
         nome: nome.trim(),
         telefone: telefone.trim(),
         servico: "Cupom 10% + Checklist 30 pontos",
-        origem: "lead_magnet_cupom",
+        origem: originLabel("lead_magnet_cupom"),
       });
       if (error) throw error;
       supabase.functions.invoke("notify-new-lead", { body: { nome, telefone, origem: "lead_magnet_cupom" } }).catch(() => {});
@@ -43,6 +46,7 @@ export const LeadMagnet = () => {
       toast.success("Cupom garantido! Te chamamos no WhatsApp.");
       const msg = `Ol%C3%A1! Sou ${encodeURIComponent(nome)} e quero resgatar meu cupom de 10%25 OFF + checklist de 30 pontos.`;
       setTimeout(() => window.open(`https://wa.me/5511985370952?text=${msg}`, "_blank", "noopener"), 700);
+      setTimeout(() => navigate("/obrigado?src=lead_magnet_cupom"), 1400);
     } catch (err) {
       console.error(err);
       toast.error("Erro ao enviar. Chame direto no WhatsApp.");

@@ -29,6 +29,8 @@ import { HexServiceStrip } from "@/components/HexServiceStrip";
 import { PhoneCTABar } from "@/components/PhoneCTABar";
 import { LeadMagnet } from "@/components/LeadMagnet";
 import { ExitIntentOffer } from "@/components/ExitIntentOffer";
+import { LocalPresence } from "@/components/LocalPresence";
+import { InstagramFeed } from "@/components/InstagramFeed";
 
 const Index = () => {
   return (
@@ -70,12 +72,14 @@ const Index = () => {
           <Reveal><Brands /></Reveal>
           <BrandMarquee />
           <Reveal><Testimonials /></Reveal>
+          <Reveal><InstagramFeed /></Reveal>
 
           <UrgencyCTA />
 
           <ChapterMark number="06" kicker="Capítulo" label="Contato" title="TRAGA SEU CARRO." />
           <Reveal><FAQ /></Reveal>
           <Reveal><Contact /></Reveal>
+          <LocalPresence />
         </main>
         <Footer />
         <WhatsAppFloat />
