@@ -46,7 +46,7 @@ export const ExitIntentOffer = () => {
       const { error } = await supabase.from("leads").insert({
         nome: nome.trim(),
         telefone: telefone.trim(),
-        servico: "Diagnóstico gratuito (exit intent)",
+        servico: "Promo Fechou, Ganhou! (exit intent)",
         origem: "exit_intent",
       });
       if (error) throw error;
@@ -70,7 +70,7 @@ export const ExitIntentOffer = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           role="dialog"
-          aria-label="Oferta de diagnóstico gratuito"
+          aria-label="Promoção Fechou, Ganhou"
         >
           <motion.div
             initial={{ scale: 0.9, y: 20 }}
@@ -89,22 +89,23 @@ export const ExitIntentOffer = () => {
             <div className="flex items-center gap-2 mb-3">
               <Wrench className="w-4 h-4 text-secondary" />
               <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-secondary">
-                Espera! Antes de sair...
+                Espera! Promoção da semana
               </span>
             </div>
-            <h3 className="font-display text-3xl leading-tight text-white">
-              DIAGNÓSTICO <span className="text-fire">GRATUITO</span> DO SEU CARRO
+            <h3 className="font-display text-3xl leading-tight">
+              <span className="block text-metal">FECHOU,</span>
+              <span className="block text-fire">GANHOU!</span>
             </h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              Deixe seu WhatsApp e agendamos uma avaliação sem custo — 30 anos de
-              oficina no Grajaú, mais de 5 mil carros atendidos.
+              Fechou serviço acima de R$ 300 e ganhou <span className="font-bold text-secondary">alinhamento
+              grátis</span>. Deixe seu WhatsApp que a gente reserva a sua vaga na agenda desta semana.
             </p>
 
             <form onSubmit={submit} className="mt-5 space-y-3">
               <Input value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Seu nome" aria-label="Seu nome" maxLength={80} />
               <Input value={telefone} onChange={(e) => setTelefone(e.target.value)} placeholder="WhatsApp" aria-label="Seu WhatsApp" type="tel" maxLength={20} />
               <Button type="submit" variant="hero" size="lg" className="w-full" disabled={loading}>
-                {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Enviando...</> : "Quero meu diagnóstico grátis"}
+                {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Enviando...</> : "Quero minha promoção"}
               </Button>
             </form>
           </motion.div>

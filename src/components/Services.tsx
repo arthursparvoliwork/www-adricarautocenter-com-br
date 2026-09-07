@@ -11,13 +11,13 @@ import { CarXRay } from "@/components/CarXRay";
 
 const services: { icon: LucideIcon; title: string; desc: string; slug?: string }[] = [
   { icon: Wrench, title: "Mecânica Geral", desc: "Manutenção completa para todas as marcas" },
-  { icon: CircleDot, title: "Rodas e Pneus", desc: "Pirelli, Michelin, Bridgestone, Firestone" },
+  { icon: CircleDot, title: "Rodas e Pneus", desc: "Pirelli, Michelin, Bridgestone, Firestone", slug: "rodas-e-pneus" },
   { icon: Droplets, title: "Troca de Óleo", desc: "Óleos sintéticos e semissintéticos" },
   { icon: Wind, title: "Escapamentos", desc: "Reparo, troca e personalização" },
   { icon: Gauge, title: "Alinhamento", desc: "Precisão e segurança na direção", slug: "alinhamento-balanceamento" },
   { icon: Disc, title: "Balanceamento", desc: "Conforto e durabilidade dos pneus", slug: "alinhamento-balanceamento" },
-  { icon: Zap, title: "Elétrica Automotiva", desc: "Diagnóstico e reparo elétrico" },
-  { icon: Cpu, title: "Eletrônica Embarcada", desc: "ABS, Air Bag, Rede CAN, ECU" },
+  { icon: Zap, title: "Elétrica Automotiva", desc: "Diagnóstico e reparo elétrico", slug: "eletromecanica" },
+  { icon: Cpu, title: "Eletrônica Embarcada", desc: "ABS, Air Bag, Rede CAN, ECU", slug: "eletromecanica" },
   { icon: Wind, title: "Ar Condicionado", desc: "Higienização, gás e manutenção" },
   { icon: Settings, title: "Caixa de Direção", desc: "Hidráulica e elétrica" },
   { icon: Activity, title: "Suspensão", desc: "Estabilidade e absorção de impactos", slug: "suspensao" },
