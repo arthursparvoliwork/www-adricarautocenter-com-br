@@ -153,6 +153,80 @@ export const SERVICES: ServiceContent[] = [
     ],
     ctaWhats: "Olá Adricar! Quero agendar alinhamento e balanceamento.",
   },
+  {
+    slug: "rodas-e-pneus",
+    shortTitle: "Rodas e Pneus",
+    title: "Rodas e Pneus — Venda, Montagem e Balanceamento",
+    metaTitle: "Rodas e Pneus no Grajaú SP | Adricar Centro Automotivo",
+    metaDescription:
+      "Rodas e pneus no Grajaú, São Paulo: Pirelli, Michelin, Bridgestone, Firestone e Continental. Montagem, balanceamento e alinhamento no mesmo dia. Aro 13 ao 22.",
+    hero: "Mais que pneus: mais segurança para você.",
+    intro:
+      "Vendemos e instalamos rodas e pneus das melhores marcas, do aro 13 ao 22 — inclusive low profile e run-flat. Tudo com montagem correta, balanceamento fino e alinhamento na sequência.",
+    benefits: [
+      { title: "Marcas de confiança", desc: "Pirelli, Michelin, Bridgestone, Firestone e Continental." },
+      { title: "Serviço completo", desc: "Montagem, balanceamento e alinhamento no mesmo atendimento." },
+      { title: "Economia real", desc: "Geometria e calibragem certas reduzem consumo e desgaste." },
+      { title: "Visual esportivo", desc: "Rodas para uso urbano e esportivo, com acabamento impecável." },
+    ],
+    process: [
+      "Avaliação dos pneus atuais e da medida ideal",
+      "Orçamento com opções de marca e faixa de preço",
+      "Desmontagem e montagem com equipamento sem risco à roda",
+      "Balanceamento dinâmico das 4 rodas",
+      "Alinhamento e teste de estrada",
+    ],
+    faq: [
+      {
+        q: "Quando devo trocar os pneus?",
+        a: "Quando a banda de rodagem chegar a 1,6 mm, houver bolhas, cortes ou o pneu passar de 5 anos de uso.",
+      },
+      {
+        q: "Posso aumentar o aro do meu carro?",
+        a: "Sim, desde que a medida do pneu compense a diferença. A gente calcula a equivalência para não afetar suspensão nem velocímetro.",
+      },
+      {
+        q: "Vocês parcelam?",
+        a: "Sim, parcelamos em até 18x no cartão. Também aceitamos Pix e débito.",
+      },
+    ],
+    ctaWhats: "Olá Adricar! Quero orçamento de rodas e pneus.",
+  },
+  {
+    slug: "eletromecanica",
+    shortTitle: "Eletromecânica",
+    title: "Eletromecânica — Elétrica e Eletrônica Automotiva",
+    metaTitle: "Eletromecânica e Elétrica Automotiva no Grajaú | Adricar",
+    metaDescription:
+      "Elétrica e eletrônica automotiva no Grajaú, SP: ABS, Air Bag, rede CAN, módulos, bateria, alternador, ar-condicionado e iluminação. Diagnóstico com scanner.",
+    hero: "Elétrica e eletrônica sem achismo.",
+    intro:
+      "Luz de injeção acesa, carro morrendo, vidro ou trava sem funcionar? Nossa equipe formada pelo SENAI diagnostica com scanner e multímetro antes de trocar qualquer peça.",
+    benefits: [
+      { title: "Diagnóstico primeiro", desc: "Você paga pelo problema resolvido, não por chute." },
+      { title: "Eletrônica embarcada", desc: "ABS, Air Bag, rede CAN e módulos (ECU)." },
+      { title: "Equipe certificada", desc: "Profissionais formados pelo SENAI." },
+      { title: "Garantia no serviço", desc: "Reparo testado e conferido antes da entrega." },
+    ],
+    process: [
+      "Escuta do relato e teste do sintoma no veículo",
+      "Leitura de todos os módulos com scanner",
+      "Medição elétrica (multímetro, osciloscópio) do circuito suspeito",
+      "Orçamento explicado antes de qualquer reparo",
+      "Reparo, apagamento das falhas e reteste",
+    ],
+    faq: [
+      {
+        q: "A luz da injeção acendeu, posso rodar assim?",
+        a: "Dá para rodar com cuidado, mas não ignore: falhas de sensor aumentam consumo e podem danificar o catalisador. Traga para leitura.",
+      },
+      {
+        q: "Vocês mexem em ABS e Air Bag?",
+        a: "Sim. Fazemos diagnóstico e reparo dos módulos de ABS e Air Bag, com scanner específico para cada montadora.",
+      },
+    ],
+    ctaWhats: "Olá Adricar! Preciso de eletromecânica no meu carro.",
+  },
 ];
 
 export const getServiceBySlug = (slug: string) => SERVICES.find((s) => s.slug === slug);
