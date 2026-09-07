@@ -31,6 +31,11 @@ import { LeadMagnet } from "@/components/LeadMagnet";
 import { ExitIntentOffer } from "@/components/ExitIntentOffer";
 import { LocalPresence } from "@/components/LocalPresence";
 import { InstagramFeed } from "@/components/InstagramFeed";
+import { PromoBanner } from "@/components/PromoBanner";
+import { WheelsTires } from "@/components/WheelsTires";
+import { Electromechanical } from "@/components/Electromechanical";
+import { ScannerDiagnostics } from "@/components/ScannerDiagnostics";
+import { PartnerProgram } from "@/components/PartnerProgram";
 
 const Index = () => {
   return (
@@ -46,6 +51,7 @@ const Index = () => {
           <HexServiceStrip />
           <PhoneCTABar />
           <div className="divider-tread" />
+          <PromoBanner />
           <LeadMagnet />
 
           <ChapterMark number="01" kicker="Capítulo" label="Sobre a Adricar" title="TRÊS DÉCADAS DE ASFALTO." />
@@ -60,6 +66,9 @@ const Index = () => {
 
           <ChapterMark number="03" kicker="Capítulo" label="Serviços" title="MECÂNICA COMPLETA." />
           <Services />
+          <Reveal><WheelsTires /></Reveal>
+          <Reveal><Electromechanical /></Reveal>
+          <Reveal><ScannerDiagnostics /></Reveal>
           <SpecSheet />
           <Reveal><PlansComparison /></Reveal>
 
@@ -71,6 +80,7 @@ const Index = () => {
           <ChapterMark number="05" kicker="Capítulo" label="Parceria" title="MARCAS QUE CONFIAM." />
           <Reveal><Brands /></Reveal>
           <BrandMarquee />
+          <Reveal><PartnerProgram /></Reveal>
           <Reveal><Testimonials /></Reveal>
           <Reveal><InstagramFeed /></Reveal>
 
