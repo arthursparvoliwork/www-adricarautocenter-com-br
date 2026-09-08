@@ -56,7 +56,7 @@ export const Hero = () => {
               initial={{ opacity: 0, scale: 0.94 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="w-full drop-shadow-[0_10px_50px_rgba(230,57,70,0.55)]"
+              className="logo-mark-glow w-full"
             />
           </LogoAura>
         </div>
