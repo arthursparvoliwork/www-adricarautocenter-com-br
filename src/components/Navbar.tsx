@@ -58,18 +58,14 @@ export const Navbar = () => {
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
 
       <div className="container-x flex items-center justify-between h-20 gap-4">
-        <a href="#inicio" className="flex items-center gap-3 group shrink-0">
-          <LogoAura intensity="sm">
+        <a href="#inicio" className="group shrink-0" aria-label="Adricar Centro Automotivo — início">
+          <LogoAura intensity="sm" className="w-[148px] sm:w-[172px]">
             <img
               src={lockup}
               alt="Adricar Centro Automotivo"
-              className="h-10 w-auto object-contain drop-shadow-[0_4px_18px_rgba(230,57,70,0.45)]"
+              className="logo-mark-glow h-11 w-full object-contain sm:h-12"
             />
           </LogoAura>
-          <span className="hidden sm:flex flex-col leading-none">
-            <span className="font-display text-lg text-foreground tracking-wide">ADRICAR</span>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-secondary">Centro Automotivo</span>
-          </span>
         </a>
 
         <nav className="hidden lg:flex items-center gap-1 rounded-full border border-border/60 bg-card/40 backdrop-blur-md px-1.5 py-1.5">

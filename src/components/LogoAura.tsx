@@ -15,6 +15,7 @@ interface LogoAuraProps {
 export const LogoAura = ({ children, intensity = "lg", className = "" }: LogoAuraProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState(false);
+  const big = intensity === "lg";
 
   const mx = useMotionValue(0.5);
   const my = useMotionValue(0.5);
@@ -29,8 +30,6 @@ export const LogoAura = ({ children, intensity = "lg", className = "" }: LogoAur
     mx.set((e.clientX - r.left) / r.width);
     my.set((e.clientY - r.top) / r.height);
   };
-
-  const big = intensity === "lg";
 
   return (
     <div
