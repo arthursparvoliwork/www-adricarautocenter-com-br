@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+import { useIsTouch } from "@/hooks/useMotionPrefs";
 import heroVideo from "@/assets/hero-bg.mp4";
 import workshopVideoMeta from "@/assets/workshop-bg.mp4.asset.json";
 import nightDriveMeta from "@/assets/night-drive-bg.mp4.asset.json";
@@ -27,6 +29,19 @@ export const VideoBackdrop = ({
   source = "pagani",
   tint = "fire",
 }: VideoBackdropProps) => {
+  const ref = useRef<HTMLVideoElement>(null);
+  const touch = useIsTouch();
+  // Só carrega/toca quando visível; pausa ao sair. No toque, sem vídeo.
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) v.play().catch(() => {});
+      else v.pause();
+    }, { rootMargin: "200px" });
+    io.observe(v);
+    return () => io.disconnect();
+  }, [touch]);
   const videoSrc =
     source === "workshop"
       ? workshopVideoMeta.url
@@ -47,8 +62,9 @@ export const VideoBackdrop = ({
 
   return (
     <div className={`absolute inset-0 overflow-hidden z-0 pointer-events-none ${className}`} aria-hidden="true">
-      <video
-        autoPlay
+      {!touch && <video
+        ref={ref}
+        preload="none"
         muted
         loop
         playsInline
@@ -56,7 +72,7 @@ export const VideoBackdrop = ({
         style={{ transform: flip ? "scaleX(-1)" : undefined }}
       >
         <source src={videoSrc} type="video/mp4" />
-      </video>
+      </video>}
       {/* Heavy dark overlay for content legibility */}
       <div
         className="absolute inset-0 bg-background"
