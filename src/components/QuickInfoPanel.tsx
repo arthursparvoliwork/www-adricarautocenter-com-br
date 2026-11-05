@@ -16,7 +16,7 @@ export const QuickInfoPanel = () => {
   const isOpen = status.open;
 
   return (
-    <div className="fixed top-24 right-4 z-40 hidden md:block">
+    <div className="fixed top-36 right-4 z-40 hidden md:block">
       <motion.button
         onClick={() => setOpen((o) => !o)}
         whileHover={{ scale: 1.03 }}
