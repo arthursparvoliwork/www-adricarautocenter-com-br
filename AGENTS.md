@@ -4,3 +4,5 @@
 - Cards use the single `.card-metal` style; section titles use `SectionHeading` so the visual language stays uniform.
 - The 3D wheel (src/components/wheel/) is lazy-loaded only on desktop without reduced motion; its scroll math lives in wheelMath.ts (pure, tested). Uses local Lightformers instead of drei Environment presets to avoid runtime CDN HDR fetches.
 - Pinned scroll sections must not have overflow-hidden ancestors (use overflow-clip) or position: sticky breaks.
+- Lead capture goes through src/features/leads (leadService = DB access + validation, useSubmitLead = idempotent hook); components only render. Why: one place for validation, idempotency and tests.
+- Owner notifications for new leads are fired by the database trigger on public.leads (pg_net → notify-new-lead with a DB-held shared secret); the browser never calls that function. Why: clients can't be trusted to trigger e-mails.
