@@ -1,21 +1,22 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, X, Phone, Calendar } from "lucide-react";
+import { getShopStatus } from "@/lib/hours";
 
 /** Painel flutuante no canto superior direito com horário, ofertas e atalhos. Persiste estado fechado. */
 export const QuickInfoPanel = () => {
   const [open, setOpen] = useState(false);
-  const [hour, setHour] = useState(new Date().getHours());
+  const [status, setStatus] = useState(getShopStatus);
 
   useEffect(() => {
-    const t = setInterval(() => setHour(new Date().getHours()), 60_000);
+    const t = setInterval(() => setStatus(getShopStatus()), 60_000);
     return () => clearInterval(t);
   }, []);
 
-  const isOpen = hour >= 8 && hour < 18;
+  const isOpen = status.open;
 
   return (
-    <div className="fixed top-24 right-4 z-40 hidden md:block">
+    <div className="fixed top-36 right-4 z-40 hidden md:block">
       <motion.button
         onClick={() => setOpen((o) => !o)}
         whileHover={{ scale: 1.03 }}

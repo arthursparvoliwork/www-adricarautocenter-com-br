@@ -56,7 +56,7 @@ export const GoogleReviews = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-card border-2 border-secondary/30 rounded-3xl p-6 lg:p-10 max-w-5xl mx-auto"
+          className="card-metal p-6 lg:p-10 max-w-5xl mx-auto"
         >
           <div className="grid lg:grid-cols-3 gap-8 items-center">
             <div className="text-center lg:text-left">
@@ -100,7 +100,7 @@ export const GoogleReviews = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-background/50 border border-border rounded-xl p-4"
+                  className="card-metal p-4"
                 >
                   <div className="flex gap-0.5 mb-2">
                     {Array.from({ length: r.rating }).map((_, j) => (

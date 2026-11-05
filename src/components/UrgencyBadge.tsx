@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Clock, Flame } from "lucide-react";
+import { Flame } from "lucide-react";
+import { spNow, getShopStatus } from "@/lib/hours";
 
 /** Mostra urgência baseada em horário real: vagas restantes do dia / próximo horário disponível. */
 export const UrgencyBadge = () => {
@@ -10,32 +11,12 @@ export const UrgencyBadge = () => {
 
   useEffect(() => {
     const update = () => {
-      const now = new Date();
-      const day = now.getDay(); // 0 = dom, 6 = sáb
-      const hour = now.getHours();
-      const min = now.getMinutes();
-
-      let open = false;
-      let closeHour = 18;
-      if (day === 0) { open = hour >= 10 && hour < 15; closeHour = 15; }
-      else { open = hour >= 8 && hour < 18; }
-
-      // Vagas restantes simuladas: 5 vagas/dia, decai conforme passa o horário
+      const { day, hour } = spNow();
+      const st = getShopStatus();
       const totalHours = day === 0 ? 5 : 10;
       const elapsedHours = day === 0 ? Math.max(0, hour - 10) : Math.max(0, hour - 8);
       const vagas = Math.max(1, Math.ceil(5 * (1 - elapsedHours / totalHours)));
-
-      let message = "";
-      if (open) {
-        message = `Aberto agora — fecha às ${closeHour}h`;
-      } else if (day === 0 && hour < 10) {
-        message = "Abre hoje às 10h";
-      } else if (day === 6 && hour >= 18) {
-        message = "Abre amanhã às 10h";
-      } else {
-        message = "Abre amanhã às 8h";
-      }
-      setInfo({ open, message, vagas });
+      setInfo({ open: st.open, message: st.open ? `Aberto agora — fecha às ${st.closesAt}h` : st.label.replace("Fechado · a", "A"), vagas });
     };
     update();
     const id = setInterval(update, 60000);

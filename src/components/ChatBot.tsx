@@ -44,7 +44,7 @@ export const ChatBot = () => {
       {/* Toggle */}
       <motion.button
         onClick={() => setOpen((o) => !o)}
-        className="fixed bottom-6 left-6 z-[60] w-14 h-14 rounded-full bg-gradient-fire shadow-[0_0_30px_hsl(0_100%_55%/0.6)] flex items-center justify-center text-primary-foreground"
+        className="hidden md:flex fixed bottom-24 right-6 z-[60] w-14 h-14 rounded-full bg-gradient-fire shadow-[0_0_30px_hsl(0_100%_55%/0.6)] items-center justify-center text-primary-foreground"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         aria-label="Abrir chat de pré-atendimento"
@@ -72,7 +72,7 @@ export const ChatBot = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 left-6 z-[60] w-[calc(100vw-3rem)] max-w-sm bg-card border-2 border-primary/40 rounded-2xl shadow-2xl overflow-hidden"
+            className="fixed bottom-44 right-6 z-[60] w-[calc(100vw-3rem)] max-w-sm bg-card border-2 border-primary/40 rounded-2xl shadow-2xl overflow-hidden"
           >
             {/* Header */}
             <div className="bg-gradient-fire p-4 flex items-center gap-3">
