@@ -58,7 +58,7 @@ const DockingLogo = ({ slot }: { slot: React.RefObject<HTMLDivElement> }) => {
       animate={{ opacity: 1, filter: "blur(0px)" }}
       transition={{ duration: DURATION.hero, ease: EASE_BRAND }}
       className="logo-mark-glow pointer-events-none fixed z-[55] origin-top-left"
-      style={{ left: from.left, top: from.top, width: from.width, x, y: useTransform(y, (v) => v - 0), scale, opacity }}
+      style={{ left: from.left, top: from.top, width: from.width, x, y, scale, opacity }}
     />,
     document.body
   );
