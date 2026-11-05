@@ -8,6 +8,7 @@ import { MobileActionBar } from "@/components/MobileActionBar";
 import { QuickInfoPanel } from "@/components/QuickInfoPanel";
 import { Reveal } from "@/components/motion";
 import { useIsTouch } from "@/hooks/useMotionPrefs";
+import { SectionBackdrop } from "@/components/SectionBackdrop";
 
 // Seções abaixo da dobra: carregadas sob demanda.
 const named = <K extends string>(loader: () => Promise<Record<K, React.ComponentType<any>>>, key: K) =>
@@ -25,6 +26,7 @@ const PartnerProgram = named(() => import("@/components/PartnerProgram"), "Partn
 const FAQ = named(() => import("@/components/FAQ"), "FAQ");
 const ContactSection = named(() => import("@/components/ContactSection"), "ContactSection");
 const Footer = named(() => import("@/components/Footer"), "Footer");
+const WheelSection = named(() => import("@/components/wheel/WheelSection"), "WheelSection");
 const ExitIntentOffer = named(() => import("@/components/ExitIntentOffer"), "ExitIntentOffer");
 
 const Lazy = ({ children, h = "60vh" }: { children: ReactNode; h?: string }) => (
@@ -43,6 +45,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-clip relative pb-16 md:pb-0">
       <SEO />
+      <SectionBackdrop />
       <QuickInfoPanel />
       <div className="relative z-10">
         <Navbar />
@@ -50,13 +53,14 @@ const Index = () => {
           <Hero />
           <TrustStrip />
           <Lazy><Services /></Lazy>
+          <Lazy><WheelSection /></Lazy>
           <Lazy h="40vh"><PromoBanner /></Lazy>
           <div id="sobre">
             <Lazy><Reveal><WhyChoose /></Reveal></Lazy>
             <Lazy h="40vh"><Timeline30Years compact /></Lazy>
           </div>
-          <Lazy><Reveal><BeforeAfterSection /></Reveal></Lazy>
-          <Lazy><Reveal><Gallery /></Reveal></Lazy>
+          <Lazy><BeforeAfterSection /></Lazy>
+          <Lazy><Gallery /></Lazy>
           <Lazy><Reveal><GoogleReviews /></Reveal></Lazy>
           <div id="marcas">
             <Lazy h="20vh"><BrandMarquee /></Lazy>

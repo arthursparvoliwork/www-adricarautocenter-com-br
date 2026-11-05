@@ -20,7 +20,7 @@ const reasons = [
 
 export const WhyChoose = () => {
   return (
-    <section className="relative py-20 lg:py-28 overflow-hidden">
+    <section className="relative py-24 lg:py-32 overflow-hidden">
       <VideoBackdrop overlay={0.88} source="nightDrive" tint="fire" />
       {/* White accent rails (top + bottom) */}
       <div className="absolute top-0 inset-x-0 accent-line-white z-10" />
