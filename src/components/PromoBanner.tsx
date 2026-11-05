@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/SectionHeading";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Gift, Timer, CheckCircle2, BadgePercent } from "lucide-react";
@@ -43,6 +44,7 @@ export const PromoBanner = () => {
       <div className="absolute top-0 inset-x-0 accent-line-white" />
 
       <div className="container-x relative z-10">
+        <SectionHeading kicker="Promoção da semana" title="Oferta que *acelera* | sua economia." />
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/SectionHeading";
 import { Trophy, Clock4, Wrench, Shield, CreditCard, MapPinned } from "lucide-react";
 import { VideoBackdrop } from "@/components/VideoBackdrop";
 
@@ -52,15 +53,7 @@ export const WhyChoose = () => {
         </div>
 
         {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 bg-white/5 mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-white/80">Diferenciais</span>
-          </div>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-tight">
-            Por que escolher a <span className="text-fire">Adricar</span>?
-          </h2>
-        </div>
+        <SectionHeading kicker="Diferenciais" title="Por que escolher a *Adricar?*" />
 
         {/* Reasons grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">

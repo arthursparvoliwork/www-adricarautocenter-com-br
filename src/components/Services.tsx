@@ -39,7 +39,7 @@ export const Services = () => {
       <div className="container-x relative z-10">
         <SectionHeading
           kicker="Nossos serviços"
-          title={<>Tudo o que seu carro <span className="text-fire">precisa</span>, em um só lugar.</>}
+          title="Tudo o que seu carro *precisa*, | em um só lugar."
           sub="Especialistas em veículos nacionais e importados — mais de 16 serviços com equipamentos de última geração."
         />
 
