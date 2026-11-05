@@ -85,7 +85,7 @@ describe("leads", () => {
     const url = whatsappLink(text);
     expect(url).toContain("Jos%C3%A9%20%26%20Cia%20%231");
     expect(url).toContain("%0A");
-    expect(url).not.toMatch(/[ &#](?!.*\?text=)/.source ? /text=.*[ #]/ : /x/);
+    expect(url.split("?text=")[1]).not.toMatch(/[ &#\n]/);
     expect(decodeURIComponent(url.split("?text=")[1])).toBe(text);
   });
 
