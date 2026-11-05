@@ -37,7 +37,7 @@ const services: { icon: LucideIcon; title: string; desc: string; slug?: string }
 export const Services = () => {
   const touch = useIsTouch();
   return (
-    <section id="servicos" className="relative py-24 lg:py-32 bg-stripes overflow-hidden">
+    <section id="servicos" className="relative py-24 lg:py-32 bg-stripes overflow-clip">
       <VideoBackdrop overlay={0.9} flip />
       <div className="container-x relative z-10">
         <SectionHeading
