@@ -4,7 +4,8 @@ import { Loader2, Gift, CheckCircle2, ShieldCheck, Timer, Percent } from "lucide
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { useSubmitLead } from "@/features/leads/useSubmitLead";
+import { whatsappLink } from "@/features/leads/whatsapp";
 import { StarRail } from "@/components/StarRail";
 import arte from "@/assets/arte-adricar.jpg";
 import { fireSparks } from "@/components/ConfettiSparks";
@@ -22,37 +23,23 @@ export const LeadMagnet = () => {
   const navigate = useNavigate();
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { submit: submitLead, status } = useSubmitLead();
+  const loading = status === "loading";
   const [done, setDone] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (nome.trim().length < 2 || telefone.replace(/\D/g, "").length < 10) {
-      toast.error("Informe seu nome e um WhatsApp válido.");
+    const res = await submitLead({ nome, telefone, servico: "Cupom 10% + Checklist 30 pontos", origem: originLabel("lead_magnet_cupom") });
+    if (!res.ok) {
+      toast.error(res.reason === "invalid" ? "Informe seu nome e um WhatsApp válido." : "Erro ao enviar. Chame direto no WhatsApp.");
       return;
     }
-    setLoading(true);
-    try {
-      const { error } = await supabase.from("leads").insert({
-        nome: nome.trim(),
-        telefone: telefone.trim(),
-        servico: "Cupom 10% + Checklist 30 pontos",
-        origem: originLabel("lead_magnet_cupom"),
-      });
-      if (error) throw error;
-      supabase.functions.invoke("notify-new-lead", { body: { nome, telefone, origem: "lead_magnet_cupom" } }).catch(() => {});
-      setDone(true);
-      fireSparks();
-      toast.success("Cupom garantido! Te chamamos no WhatsApp.");
-      const msg = `Ol%C3%A1! Sou ${encodeURIComponent(nome)} e quero resgatar meu cupom de 10%25 OFF + checklist de 30 pontos.`;
-      setTimeout(() => window.open(`https://wa.me/5511985370952?text=${msg}`, "_blank", "noopener"), 700);
-      setTimeout(() => navigate("/obrigado?src=lead_magnet_cupom"), 1400);
-    } catch (err) {
-      console.error(err);
-      toast.error("Erro ao enviar. Chame direto no WhatsApp.");
-    } finally {
-      setLoading(false);
-    }
+    setDone(true);
+    fireSparks();
+    toast.success("Cupom garantido! Te chamamos no WhatsApp.");
+    const url = whatsappLink(`Olá! Sou ${nome} e quero resgatar meu cupom de 10% OFF + checklist de 30 pontos.`);
+    setTimeout(() => window.open(url, "_blank", "noopener"), 700);
+    setTimeout(() => navigate("/obrigado?src=lead_magnet_cupom"), 1400);
   };
 
   return (

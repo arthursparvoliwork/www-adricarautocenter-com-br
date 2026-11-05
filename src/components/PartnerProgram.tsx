@@ -1,12 +1,12 @@
 import { SectionHeading } from "@/components/SectionHeading";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Handshake, Building2, Percent, CalendarClock, Loader2 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { Handshake, Building2, Percent, CalendarClock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
+import { useSubmitLead } from "@/features/leads/useSubmitLead";
+import { maskPhone } from "@/features/leads/phone";
+import { FloatingInput, FloatingTextarea } from "@/features/leads/LeadFields";
 import { originLabel } from "@/lib/tracking";
 
 const partners = ["WEBMOTORS", "CAR10", "SENAI", "BOSCH", "PIRELLI", "NAKATA"];
@@ -20,31 +20,29 @@ const benefits = [
 
 /** Parcerias (Webmotors, Car10) + captação de novos parceiros. */
 export const PartnerProgram = () => {
-  const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
+  const { submit, status, errors, setErrors, reset } = useSubmitLead();
   const [form, setForm] = useState({ nome: "", telefone: "", empresa: "", mensagem: "" });
+  const set = (k: keyof typeof form, v: string) => {
+    setForm((f) => ({ ...f, [k]: v }));
+    if (k in errors) setErrors((e) => ({ ...e, [k]: undefined }));
+  };
 
-  const submit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (form.nome.trim().length < 2 || form.telefone.trim().length < 8) {
-      toast({ title: "Confira os dados", description: "Preencha nome e telefone válidos.", variant: "destructive" });
-      return;
-    }
-    setLoading(true);
-    const { error } = await supabase.from("leads").insert({
-      nome: form.nome.trim(),
-      telefone: form.telefone.trim(),
+    const res = await submit({
+      nome: form.nome,
+      telefone: form.telefone,
       servico: "Programa de parcerias",
-      mensagem: [form.empresa && `Empresa: ${form.empresa}`, form.mensagem].filter(Boolean).join(" — ").slice(0, 2000) || null,
+      mensagem: [form.empresa && `Empresa: ${form.empresa}`, form.mensagem].filter(Boolean).join(" — ").slice(0, 2000),
       origem: originLabel("parceria"),
     });
-    setLoading(false);
-    if (error) {
-      toast({ title: "Não foi possível enviar", description: "Tente novamente ou fale no WhatsApp.", variant: "destructive" });
+    if (!res.ok) {
+      if (res.reason === "network") toast.error("Não foi possível enviar. Tente novamente ou fale no WhatsApp.");
       return;
     }
     setForm({ nome: "", telefone: "", empresa: "", mensagem: "" });
-    toast({ title: "Proposta recebida!", description: "Entraremos em contato para fechar a parceria." });
+    toast.success("Proposta recebida!", { description: "Entraremos em contato para fechar a parceria." });
+    setTimeout(reset, 2500);
   };
 
   return (
@@ -94,43 +92,21 @@ export const PartnerProgram = () => {
             ))}
           </div>
 
-          <form onSubmit={submit} className="chamfer-lg border-2 border-primary/35 bg-card/90 p-6 sm:p-8 backdrop-blur-sm">
+          <form onSubmit={onSubmit} noValidate className="chamfer-lg border-2 border-primary/35 bg-card/90 p-6 sm:p-8 backdrop-blur-sm">
             <h3 className="font-display text-2xl text-metal">SEJA PARCEIRO</h3>
             <p className="mt-1.5 text-sm text-muted-foreground">
               Deixe seus dados: respondemos em horário comercial.
             </p>
-            <div className="mt-5 space-y-3">
-              <Input
-                placeholder="Seu nome"
-                value={form.nome}
-                maxLength={100}
-                onChange={(e) => setForm({ ...form, nome: e.target.value })}
-                required
-              />
-              <Input
-                placeholder="WhatsApp com DDD"
-                value={form.telefone}
-                maxLength={20}
-                onChange={(e) => setForm({ ...form, telefone: e.target.value })}
-                required
-              />
-              <Input
-                placeholder="Empresa / loja (opcional)"
-                value={form.empresa}
-                maxLength={100}
-                onChange={(e) => setForm({ ...form, empresa: e.target.value })}
-              />
-              <Textarea
-                placeholder="Conte rapidamente sobre a sua operação"
-                value={form.mensagem}
-                maxLength={2000}
-                rows={3}
-                onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
-              />
+            <div className="mt-5 space-y-1">
+              <FloatingInput name="p_nome" label="Seu nome" value={form.nome} maxLength={100} onChange={(e) => set("nome", e.target.value)} error={errors.nome} />
+              <FloatingInput name="p_telefone" label="WhatsApp (11) 99999-9999" type="tel" inputMode="numeric" value={form.telefone} onChange={(e) => set("telefone", maskPhone(e.target.value))} error={errors.telefone} />
+              <FloatingInput name="p_empresa" label="Empresa / loja (opcional)" value={form.empresa} maxLength={100} onChange={(e) => set("empresa", e.target.value)} />
+              <FloatingTextarea name="p_mensagem" label="Conte rapidamente sobre a sua operação" rows={3} maxLength={1800} value={form.mensagem} onChange={(e) => set("mensagem", e.target.value)} error={errors.mensagem} />
             </div>
-            <Button type="submit" variant="hero" size="lg" className="mt-5 w-full" disabled={loading}>
-              {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Handshake className="h-5 w-5" />}
+            <Button type="submit" variant="hero" size="lg" className="mt-3 w-full" state={status === "loading" ? "loading" : status === "success" ? "success" : "idle"} disabled={status === "loading"}>
+              <Handshake className="h-5 w-5" />
               Quero ser parceiro
+              <ArrowRight className="btn-arrow h-4 w-4" />
             </Button>
           </form>
         </div>
