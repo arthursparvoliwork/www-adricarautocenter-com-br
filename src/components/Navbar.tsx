@@ -8,8 +8,8 @@ import { useLogoDocked } from "@/lib/logoDock";
 
 const links = [
   { href: "#inicio", label: "Início" },
-  { href: "#sobre", label: "Sobre" },
   { href: "#servicos", label: "Serviços" },
+  { href: "#sobre", label: "Sobre" },
   { href: "#galeria", label: "Galeria" },
   { href: "#marcas", label: "Marcas" },
   { href: "#contato", label: "Contato" },
@@ -28,7 +28,8 @@ export const Navbar = () => {
       const y = window.scrollY;
       setScrolled(y > 30);
       // esconde ao descer, reaparece ao subir (só depois do logo encaixar)
-      setHidden(y > 480 && y > last + 4 ? true : y < last - 4 || y <= 480 ? false : (h => h) as never);
+      if (y <= 480 || y < last - 4) setHidden(false);
+      else if (y > last + 4) setHidden(true);
       last = y;
     };
     onScroll();
@@ -57,7 +58,8 @@ export const Navbar = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 inset-x-0 z-50 transition-all duration-500",
+        "fixed top-0 inset-x-0 z-50 transition-[transform,background-color,box-shadow] duration-300",
+        hidden && !open ? "-translate-y-full" : "translate-y-0",
         scrolled
           ? "bg-background/85 backdrop-blur-xl shadow-[0_4px_30px_hsl(0_100%_50%/0.15)]"
           : "bg-transparent"
@@ -68,13 +70,16 @@ export const Navbar = () => {
 
       <div className="container-x flex items-center justify-between h-20 gap-4">
         <a href="#inicio" className="group shrink-0" aria-label="Adricar Centro Automotivo — início">
-          <LogoAura intensity="sm" className="w-[148px] sm:w-[172px]">
+          <div id="nav-logo-slot" className="w-[118px] sm:w-[136px]">
             <img
               src={lockup}
               alt="Adricar Centro Automotivo"
-              className="logo-mark-glow h-11 w-full object-contain sm:h-12"
+              className={cn(
+                "logo-mark-glow w-full h-auto transition-opacity duration-200",
+                docked ? "opacity-100" : "opacity-0"
+              )}
             />
-          </LogoAura>
+          </div>
         </a>
 
         <nav className="hidden lg:flex items-center gap-1 rounded-full border border-border/60 bg-card/40 backdrop-blur-md px-1.5 py-1.5">
@@ -86,7 +91,7 @@ export const Navbar = () => {
                 href={l.href}
                 aria-current={isActive ? "true" : undefined}
                 className={cn(
-                  "relative px-3.5 py-1.5 rounded-full text-[13px] font-semibold uppercase tracking-wider transition-colors duration-300",
+                  "group/link relative px-3.5 py-1.5 rounded-full text-[13px] font-semibold uppercase tracking-wider transition-colors duration-300",
                   isActive ? "text-secondary-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -99,6 +104,9 @@ export const Navbar = () => {
                   />
                 )}
                 <span className="relative z-10">{l.label}</span>
+                {!isActive && (
+                  <span className="absolute left-3.5 right-3.5 bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-primary to-secondary transition-transform duration-200 group-hover/link:scale-x-100" aria-hidden="true" />
+                )}
               </a>
             );
           })}
