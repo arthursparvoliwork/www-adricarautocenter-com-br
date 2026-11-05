@@ -12,12 +12,13 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Russo One"', '"Racing Sans One"', "sans-serif"],
-        racing: ['"Racing Sans One"', "sans-serif"],
+        display: ['"Russo One"', "sans-serif"],
+        racing: ['"Russo One"', "sans-serif"],
         body: ['"Rajdhani"', "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
+        whatsapp: { DEFAULT: "hsl(var(--whatsapp))", foreground: "hsl(var(--whatsapp-foreground))" },
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
