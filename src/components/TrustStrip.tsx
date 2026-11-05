@@ -1,5 +1,6 @@
 import { Award, Star, ShieldCheck, CreditCard } from "lucide-react";
 import { Stagger, StaggerItem } from "@/components/motion";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 
 const ITEMS = [
   { icon: Award, value: "30+", label: "anos no mercado" },
@@ -16,7 +17,7 @@ export const TrustStrip = () => (
         <StaggerItem key={it.label} className="flex items-center justify-center gap-3 py-6 px-3">
           <it.icon className="w-6 h-6 text-secondary shrink-0" aria-hidden="true" />
           <div className="leading-tight">
-            <div className="font-display text-2xl sm:text-3xl text-foreground">{it.value}</div>
+            <AnimatedCounter value={it.value} className="block font-display text-2xl sm:text-3xl text-foreground tabular-nums" />
             <div className="text-xs sm:text-sm uppercase tracking-wider text-muted-foreground">{it.label}</div>
           </div>
         </StaggerItem>

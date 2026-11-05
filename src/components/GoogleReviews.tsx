@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/SectionHeading";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Star, MapPin, Clock } from "lucide-react";
@@ -50,8 +51,9 @@ export const GoogleReviews = () => {
   }, []);
 
   return (
-    <section className="py-12 bg-carbon">
+    <section id="avaliacoes" className="py-24 lg:py-32 bg-carbon">
       <div className="container-x">
+        <SectionHeading kicker="Avaliações no Google" title="A voz de quem *confia.*" />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

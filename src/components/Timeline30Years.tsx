@@ -1,4 +1,7 @@
-import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useMotionValueEvent, useScroll, useSpring } from "framer-motion";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { DURATION, EASE_BRAND } from "@/lib/motion";
 import { Flag, Wrench, Award, Users, Rocket, Trophy } from "lucide-react";
 
 const MILESTONES = [
@@ -9,6 +12,68 @@ const MILESTONES = [
   { year: "2022", icon: Rocket, title: "INJEÇÃO ELETRÔNICA AVANÇADA", desc: "Scanners multimarca, reprogramação de módulos e diagnóstico digital em tempo real." },
   { year: "2026", icon: Trophy, title: "30 ANOS DE ESTRADA", desc: "Três décadas cuidando do carro de quem confia. E ainda estamos só na primeira marcha." },
 ];
+
+/** Trilho com linha SVG que se desenha conforme o scroll e nó pulsante no marco atual. */
+const TimelineRail = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 70%", "end 50%"] });
+  const draw = useSpring(scrollYProgress, { stiffness: 120, damping: 26 });
+  const [current, setCurrent] = useState(0);
+  useMotionValueEvent(scrollYProgress, "change", (p) =>
+    setCurrent(Math.min(MILESTONES.length - 1, Math.floor(p * MILESTONES.length)))
+  );
+
+  return (
+    <div ref={ref} className="relative max-w-4xl mx-auto">
+      <svg className="absolute left-4 sm:left-1/2 top-0 h-full w-[6px] -translate-x-1/2 overflow-visible" preserveAspectRatio="none" viewBox="0 0 6 100" aria-hidden="true">
+        <line x1="3" y1="0" x2="3" y2="100" stroke="hsl(var(--border))" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+        <defs>
+          <linearGradient id="tl-fire" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="hsl(var(--primary))" />
+            <stop offset="1" stopColor="hsl(var(--secondary))" />
+          </linearGradient>
+        </defs>
+        <motion.line x1="3" y1="0" x2="3" y2="100" stroke="url(#tl-fire)" strokeWidth="3" vectorEffect="non-scaling-stroke" style={{ pathLength: draw }} />
+      </svg>
+
+      <div className="space-y-16">
+        {MILESTONES.map((m, i) => {
+          const isRight = i % 2 === 1;
+          const isCurrent = i === current;
+          return (
+            <motion.div
+              key={m.year}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: DURATION.enter, ease: EASE_BRAND, delay: 0.06 }}
+              className={`relative grid sm:grid-cols-2 gap-6 items-center ${isRight ? "sm:[&>*:first-child]:order-2" : ""}`}
+            >
+              <div className={`pl-12 sm:pl-0 ${isRight ? "sm:pl-12" : "sm:pr-12 sm:text-right"}`}>
+                <div className={`inline-flex flex-col ${isRight ? "" : "sm:items-end"}`}>
+                  <AnimatedCounter value={m.year} className="font-display text-5xl sm:text-6xl text-secondary leading-none tabular-nums" />
+                  <div className={`mt-3 max-w-md ${isRight ? "" : "sm:ml-auto"}`}>
+                    <h3 className="font-display text-xl sm:text-2xl text-fire leading-tight">{m.title}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="absolute left-4 sm:left-1/2 top-1 -translate-x-1/2 z-10">
+                <div className="relative">
+                  {isCurrent && <span className="absolute inset-0 rounded-full bg-primary opacity-60 animate-ping" />}
+                  <div className={`relative w-10 h-10 rounded-full flex items-center justify-center border-2 border-background transition-colors duration-300 ${i <= current ? "bg-gradient-fire" : "bg-muted"}`}>
+                    <m.icon className="w-4 h-4 text-primary-foreground" strokeWidth={2.5} />
+                  </div>
+                </div>
+              </div>
+              <div className="hidden sm:block" />
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 /** Vertical racing timeline — 30 years of Adricar as a story. */
 export const Timeline30Years = ({ compact = false }: { compact?: boolean }) => {
@@ -30,62 +95,9 @@ export const Timeline30Years = ({ compact = false }: { compact?: boolean }) => {
         </div>
 
         {/* Timeline rail */}
+        <TimelineRail />
+
         <div className="relative max-w-4xl mx-auto">
-          {/* Central line */}
-          <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/25 to-transparent -translate-x-px" />
-          {/* Animated fire pulse traveling */}
-          <motion.div
-            className="absolute left-4 sm:left-1/2 top-0 w-[3px] h-24 bg-gradient-to-b from-primary via-secondary to-transparent rounded-full -translate-x-[1px] blur-[1px]"
-            animate={{ y: ["-10%", "110%"] }}
-            transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
-          />
-
-          <div className="space-y-16">
-            {MILESTONES.map((m, i) => {
-              const isRight = i % 2 === 1;
-              return (
-                <motion.div
-                  key={m.year}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: i * 0.08 }}
-                  className={`relative grid sm:grid-cols-2 gap-6 items-center ${isRight ? "sm:[&>*:first-child]:order-2" : ""}`}
-                >
-                  {/* Card */}
-                  <div className={`pl-12 sm:pl-0 ${isRight ? "sm:pl-12" : "sm:pr-12 sm:text-right"}`}>
-                    <div className={`inline-flex flex-col ${isRight ? "" : "sm:items-end"}`}>
-                      <div className="font-display text-5xl sm:text-6xl text-neon-yellow leading-none tabular-nums">
-                        {m.year}
-                      </div>
-                      <div className={`mt-3 max-w-md ${isRight ? "" : "sm:ml-auto"}`}>
-                        <h3 className="font-display text-xl sm:text-2xl text-fire leading-tight">
-                          {m.title}
-                        </h3>
-                        <p className="mt-2 text-sm text-white/70 leading-relaxed">
-                          {m.desc}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Node */}
-                  <div className="absolute left-4 sm:left-1/2 top-1 -translate-x-1/2 z-10">
-                    <div className="relative">
-                      <div className="absolute inset-0 rounded-full bg-primary blur-lg opacity-60 animate-pulse" />
-                      <div className="relative w-10 h-10 rounded-full bg-gradient-fire flex items-center justify-center border-2 border-background shadow-[0_0_25px_hsl(0_100%_55%/0.6)]">
-                        <m.icon className="w-4 h-4 text-primary-foreground" strokeWidth={2.5} />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Empty side (kept for grid) */}
-                  <div className="hidden sm:block" />
-                </motion.div>
-              );
-            })}
-          </div>
-
           {/* Finish line */}
           <div className="mt-16 flex items-center justify-center gap-3">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/30" />

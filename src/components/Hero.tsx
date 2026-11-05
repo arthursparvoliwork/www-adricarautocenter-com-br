@@ -4,6 +4,7 @@ import { ArrowRight, Clock, MessageCircle, ChevronDown } from "lucide-react";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { SparkParticles } from "@/components/SparkParticles";
 import { Magnetic } from "@/components/Magnetic";
+import { Spotlight } from "@/components/Spotlight";
 import { useIsTouch, useRichMotion } from "@/hooks/useMotionPrefs";
 import { getShopStatus } from "@/lib/hours";
 import { setLogoDocked } from "@/lib/logoDock";
@@ -106,6 +107,8 @@ export const Hero = () => {
           <SparkParticles density={35} />
         </motion.div>
       )}
+
+      <Spotlight />
 
       {/* Faixa de slogan — abaixo da navbar, nunca cortada */}
       <div className="relative z-10 border-y border-border/50 bg-background/40 backdrop-blur-sm">

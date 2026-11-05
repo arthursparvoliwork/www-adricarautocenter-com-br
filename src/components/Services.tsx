@@ -11,6 +11,8 @@ import { CarXRay } from "@/components/CarXRay";
 import { SectionHeading } from "@/components/SectionHeading";
 import { STAGGER, EASE_BRAND, DURATION } from "@/lib/motion";
 import { ScanLine } from "lucide-react";
+import { ServicesStory } from "@/components/ServicesStory";
+import { useIsTouch } from "@/hooks/useMotionPrefs";
 
 const services: { icon: LucideIcon; title: string; desc: string; slug?: string }[] = [
   { icon: Wrench, title: "Mecânica Geral", desc: "Manutenção completa para todas as marcas" },
@@ -33,16 +35,23 @@ const services: { icon: LucideIcon; title: string; desc: string; slug?: string }
 ];
 
 export const Services = () => {
+  const touch = useIsTouch();
   return (
-    <section id="servicos" className="relative py-24 lg:py-32 bg-stripes overflow-hidden">
+    <section id="servicos" className="relative py-24 lg:py-32 bg-stripes overflow-clip">
       <VideoBackdrop overlay={0.9} flip />
       <div className="container-x relative z-10">
         <SectionHeading
           kicker="Nossos serviços"
-          title={<>Tudo o que seu carro <span className="text-fire">precisa</span>, em um só lugar.</>}
+          title="Tudo o que seu carro *precisa*, | em um só lugar."
           sub="Especialistas em veículos nacionais e importados — mais de 16 serviços com equipamentos de última geração."
         />
 
+        {!touch && (
+          <div className="hidden lg:block">
+            <ServicesStory />
+            <div className="mt-24 mb-8 section-kicker text-center">Todos os serviços</div>
+          </div>
+        )}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {services.map((s, i) => {
             const cls = "group card-metal card-metal-hover p-6 block h-full";

@@ -22,7 +22,7 @@ export const ContactSection = () => {
       <div className="container-x relative z-10">
         <SectionHeading
           kicker="Contato · Onde estamos"
-          title={<>Traga seu carro. <span className="text-fire">A gente resolve.</span></>}
+          title="Traga seu carro. | *A* *gente* *resolve.*"
           sub="Peça seu orçamento pelo formulário ou venha direto: Av. Dona Belmira Marin, 1670 — Grajaú, São Paulo."
         />
 

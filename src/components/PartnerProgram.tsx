@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/SectionHeading";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Handshake, Building2, Percent, CalendarClock, Loader2 } from "lucide-react";
@@ -47,23 +48,16 @@ export const PartnerProgram = () => {
   };
 
   return (
-    <section id="parcerias" className="relative py-24 overflow-hidden">
+    <section id="parcerias" className="relative py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/60 to-background" />
       <div className="absolute inset-0 tire-tracks opacity-50" />
 
       <div className="container-x relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-          <span className="inline-block rounded-full border border-primary/45 bg-primary/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.28em] text-primary">
-            Parcerias
-          </span>
-          <h2 className="mt-5 font-display text-4xl sm:text-5xl lg:text-6xl leading-[0.92]">
-            <span className="block text-metal">QUEM CONFIA</span>
-            <span className="block text-fire">NA ADRICAR.</span>
-          </h2>
-          <p className="mt-5 text-lg text-muted-foreground">
+          <SectionHeading className="mb-0" kicker="Marcas & Parcerias" title="Quem confia | *na* *Adricar.*" sub={<>
             Somos oficina parceira de plataformas e empresas do setor automotivo. Tem loja,
             revenda ou frota? Vamos fechar uma parceria.
-          </p>
+          </>} />
         </div>
 
         {/* Faixa de parceiros */}

@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/SectionHeading";
 import { motion } from "framer-motion";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
@@ -43,20 +44,7 @@ export const FAQ = () => {
   return (
     <section id="faq" className="relative py-24 lg:py-32 bg-background overflow-hidden">
       <div className="container-x relative z-10 max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-12 text-center"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/40 bg-primary/10 mb-6">
-            <HelpCircle className="w-4 h-4 text-primary" />
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Dúvidas Frequentes</span>
-          </div>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-tight">
-            Perguntas <span className="text-fire">comuns</span>.
-          </h2>
-        </motion.div>
+        <SectionHeading kicker="Dúvidas frequentes" title="Perguntas *comuns.*" />
 
         <Accordion type="single" collapsible className="space-y-3">
           {faqs.map((faq, i) => (

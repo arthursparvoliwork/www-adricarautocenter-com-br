@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, animate, useInView } from "framer-motion";
+import { EASE_BRAND, DURATION } from "@/lib/motion";
+import { usePrefersReducedMotion } from "@/hooks/useMotionPrefs";
 
 interface BeforeAfterProps {
   before: string;
@@ -12,6 +14,17 @@ export const BeforeAfter = ({ before, after, alt, caption }: BeforeAfterProps) =
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(50);
   const [dragging, setDragging] = useState(false);
+  const inView = useInView(containerRef, { once: true, margin: "-120px" });
+  const reduced = usePrefersReducedMotion();
+
+  // Microanimação de "convite": o handle oscila uma vez ao aparecer.
+  useEffect(() => {
+    if (!inView || reduced) return;
+    const c = animate(50, [50, 64, 38, 50], {
+      duration: 1.6, delay: DURATION.hero, ease: "easeInOut", onUpdate: (v) => setPosition(v),
+    });
+    return () => c.stop();
+  }, [inView, reduced]);
 
   const handleMove = (clientX: number) => {
     if (!containerRef.current) return;
@@ -41,15 +54,15 @@ export const BeforeAfter = ({ before, after, alt, caption }: BeforeAfterProps) =
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      initial={{ clipPath: "inset(0 100% 0 0)" }}
+      whileInView={{ clipPath: "inset(0 0% 0 0)" }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: DURATION.hero, ease: EASE_BRAND }}
       className="space-y-2"
     >
       <div
         ref={containerRef}
-        className="relative w-full aspect-video rounded-2xl overflow-hidden border-2 border-primary/30 cursor-ew-resize select-none glow-red"
+        className="relative w-full aspect-video chamfer-lg overflow-hidden bevel-metal cursor-ew-resize select-none"
         onMouseDown={(e) => { setDragging(true); handleMove(e.clientX); }}
         onTouchStart={(e) => { setDragging(true); handleMove(e.touches[0].clientX); }}
       >

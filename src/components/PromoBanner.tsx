@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/SectionHeading";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Gift, Timer, CheckCircle2, BadgePercent } from "lucide-react";
@@ -37,12 +38,13 @@ export const PromoBanner = () => {
   ];
 
   return (
-    <section id="promocao" className="relative py-16 lg:py-20 overflow-hidden">
+    <section id="promocao" className="relative py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 bg-carbon" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,hsl(0_90%_45%/0.35),transparent_55%),radial-gradient(circle_at_85%_90%,hsl(50_100%_50%/0.18),transparent_55%)]" />
       <div className="absolute top-0 inset-x-0 accent-line-white" />
 
       <div className="container-x relative z-10">
+        <SectionHeading kicker="Promoção da semana" title="Oferta que *acelera* | sua economia." />
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -7,10 +7,12 @@ interface LightboxProps {
   index: number | null;
   onClose: () => void;
   onIndexChange: (i: number) => void;
+  /** prefixo de layoutId para expandir a partir da miniatura */
+  layoutPrefix?: string;
 }
 
 /** Lightbox em tela cheia com setas e fechar via ESC. */
-export const Lightbox = ({ images, index, onClose, onIndexChange }: LightboxProps) => {
+export const Lightbox = ({ images, index, onClose, onIndexChange, layoutPrefix }: LightboxProps) => {
   useEffect(() => {
     if (index === null) return;
     const onKey = (e: KeyboardEvent) => {
@@ -68,14 +70,16 @@ export const Lightbox = ({ images, index, onClose, onIndexChange }: LightboxProp
 
           <motion.div
             key={index}
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={layoutPrefix ? false : { opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             className="relative max-w-5xl max-h-[85vh] w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
+            <motion.img
+              layoutId={layoutPrefix ? `${layoutPrefix}-${index}` : undefined}
+              transition={{ type: "spring", stiffness: 260, damping: 30 }}
               src={images[index].src}
               alt={images[index].label}
               className="w-full h-full object-contain rounded-2xl border-2 border-primary/40 shadow-[0_0_60px_hsl(0_100%_55%/0.4)]"
