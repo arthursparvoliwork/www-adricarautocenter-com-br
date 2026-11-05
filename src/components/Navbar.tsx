@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import lockup from "@/assets/adricar-lockup-clean.png";
-import { LogoAura } from "@/components/LogoAura";
+import { useLogoDocked } from "@/lib/logoDock";
 
 const links = [
   { href: "#inicio", label: "Início" },
@@ -17,11 +17,20 @@ const links = [
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const docked = useLogoDocked();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("#inicio");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 30);
+      // esconde ao descer, reaparece ao subir (só depois do logo encaixar)
+      setHidden(y > 480 && y > last + 4 ? true : y < last - 4 || y <= 480 ? false : (h => h) as never);
+      last = y;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);

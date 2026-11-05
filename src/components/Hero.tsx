@@ -32,8 +32,9 @@ const DockingLogo = ({ slot }: { slot: React.RefObject<HTMLDivElement> }) => {
       if (n) setTo({ left: n.left, top: n.top, width: n.width });
     };
     measure();
+    const t = setTimeout(measure, 600);
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    return () => { clearTimeout(t); window.removeEventListener("resize", measure); };
   }, [slot]);
 
   useEffect(() => {
