@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useSubmitLead } from "@/features/leads/useSubmitLead";
+import { maskPhone } from "@/features/leads/phone";
 
 const KEY = "adricar_exit_offer_v1";
 
@@ -89,7 +90,7 @@ export const ExitIntentOffer = () => {
 
             <form onSubmit={submit} className="mt-5 space-y-3">
               <Input value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Seu nome" aria-label="Seu nome" maxLength={80} />
-              <Input value={telefone} onChange={(e) => setTelefone(e.target.value)} placeholder="WhatsApp" aria-label="Seu WhatsApp" type="tel" maxLength={20} />
+              <Input value={telefone} onChange={(e) => setTelefone(maskPhone(e.target.value))} placeholder="WhatsApp" aria-label="Seu WhatsApp" type="tel" maxLength={20} />
               <Button type="submit" variant="hero" size="lg" className="w-full" disabled={loading}>
                 {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Enviando...</> : "Quero minha promoção"}
               </Button>

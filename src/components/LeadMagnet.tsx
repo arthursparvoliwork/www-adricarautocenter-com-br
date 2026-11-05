@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useSubmitLead } from "@/features/leads/useSubmitLead";
+import { maskPhone } from "@/features/leads/phone";
 import { whatsappLink } from "@/features/leads/whatsapp";
 import { StarRail } from "@/components/StarRail";
 import arte from "@/assets/arte-adricar.jpg";
@@ -106,7 +107,7 @@ export const LeadMagnet = () => {
             />
             <Input
               value={telefone}
-              onChange={(e) => setTelefone(e.target.value)}
+              onChange={(e) => setTelefone(maskPhone(e.target.value))}
               placeholder="WhatsApp (11) 99999-9999"
               aria-label="Seu WhatsApp"
               type="tel"
