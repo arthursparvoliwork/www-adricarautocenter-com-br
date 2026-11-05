@@ -8,7 +8,8 @@ import { Loader2 } from "lucide-react";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { ScrollProgress } from "@/components/ScrollProgress";
-import { LoadingScreen } from "@/components/LoadingScreen";
+import { MotionConfig } from "framer-motion";
+import { DURATION, EASE_BRAND } from "@/lib/motion";
 import { ChatBot } from "@/components/ChatBot";
 import { captureCampaign } from "@/lib/tracking";
 
@@ -31,11 +32,11 @@ const App = () => {
   }, []);
 
   return (
+  <MotionConfig reducedMotion="user" transition={{ duration: DURATION.enter, ease: EASE_BRAND }}>
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <LoadingScreen />
       <ScrollProgress />
       
       <BrowserRouter>
@@ -54,6 +55,7 @@ const App = () => {
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
+  </MotionConfig>
   );
 };
 
