@@ -11,15 +11,15 @@ const MILESTONES = [
 ];
 
 /** Vertical racing timeline — 30 years of Adricar as a story. */
-export const Timeline30Years = () => {
+export const Timeline30Years = ({ compact = false }: { compact?: boolean }) => {
   return (
-    <section className="relative py-24 sm:py-32 overflow-hidden">
+    <section className={`relative overflow-hidden ${compact ? "py-12" : "py-24 sm:py-32"}`}>
       <div className="absolute inset-0 bg-carbon opacity-60" />
       <div className="absolute inset-0 bg-gradient-radial-glow opacity-30" />
 
       <div className="container-x relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className={compact ? "sr-only" : "text-center mb-16"}>
           <div className="text-[10px] font-mono uppercase tracking-[0.4em] text-secondary/80 mb-3">
             1996 — 2026 · TIMELINE
           </div>

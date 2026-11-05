@@ -1,100 +1,74 @@
+import { lazy, Suspense, type ReactNode } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { About } from "@/components/About";
-import { WhyChoose } from "@/components/WhyChoose";
-import { Services } from "@/components/Services";
-import { Gallery } from "@/components/Gallery";
-import { BeforeAfterSection } from "@/components/BeforeAfterSection";
-import { Brands } from "@/components/Brands";
-import { Testimonials } from "@/components/Testimonials";
-import { FAQ } from "@/components/FAQ";
-import { Contact } from "@/components/Contact";
-import { Footer } from "@/components/Footer";
-import { WhatsAppFloat } from "@/components/WhatsAppFloat";
-import { FloatingDecorations } from "@/components/FloatingDecorations";
+import { TrustStrip } from "@/components/TrustStrip";
 import { SEO } from "@/components/SEO";
-import { Reveal } from "@/components/Reveal";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { MobileActionBar } from "@/components/MobileActionBar";
 import { QuickInfoPanel } from "@/components/QuickInfoPanel";
-import { PlansComparison } from "@/components/PlansComparison";
-import { GoogleReviews } from "@/components/GoogleReviews";
-import { RaceMode } from "@/components/RaceMode";
-import { ChapterMark } from "@/components/ChapterMark";
-import { EngineBlueprint } from "@/components/EngineBlueprint";
-import { AssemblyLine } from "@/components/AssemblyLine";
-import { SpecSheet } from "@/components/SpecSheet";
-import { BrandMarquee } from "@/components/BrandMarquee";
-import { UrgencyCTA } from "@/components/UrgencyCTA";
-import { Timeline30Years } from "@/components/Timeline30Years";
-import { HexServiceStrip } from "@/components/HexServiceStrip";
-import { PhoneCTABar } from "@/components/PhoneCTABar";
-import { LeadMagnet } from "@/components/LeadMagnet";
-import { ExitIntentOffer } from "@/components/ExitIntentOffer";
-import { LocalPresence } from "@/components/LocalPresence";
-import { InstagramFeed } from "@/components/InstagramFeed";
-import { PromoBanner } from "@/components/PromoBanner";
-import { WheelsTires } from "@/components/WheelsTires";
-import { Electromechanical } from "@/components/Electromechanical";
-import { ScannerDiagnostics } from "@/components/ScannerDiagnostics";
-import { PartnerProgram } from "@/components/PartnerProgram";
+import { Reveal } from "@/components/motion";
+import { useIsTouch } from "@/hooks/useMotionPrefs";
 
+// Seções abaixo da dobra: carregadas sob demanda.
+const named = <K extends string>(loader: () => Promise<Record<K, React.ComponentType<any>>>, key: K) =>
+  lazy(() => loader().then((m) => ({ default: m[key] })));
+
+const Services = named(() => import("@/components/Services"), "Services");
+const PromoBanner = named(() => import("@/components/PromoBanner"), "PromoBanner");
+const WhyChoose = named(() => import("@/components/WhyChoose"), "WhyChoose");
+const Timeline30Years = named(() => import("@/components/Timeline30Years"), "Timeline30Years");
+const BeforeAfterSection = named(() => import("@/components/BeforeAfterSection"), "BeforeAfterSection");
+const Gallery = named(() => import("@/components/Gallery"), "Gallery");
+const GoogleReviews = named(() => import("@/components/GoogleReviews"), "GoogleReviews");
+const BrandMarquee = named(() => import("@/components/BrandMarquee"), "BrandMarquee");
+const PartnerProgram = named(() => import("@/components/PartnerProgram"), "PartnerProgram");
+const FAQ = named(() => import("@/components/FAQ"), "FAQ");
+const ContactSection = named(() => import("@/components/ContactSection"), "ContactSection");
+const Footer = named(() => import("@/components/Footer"), "Footer");
+const ExitIntentOffer = named(() => import("@/components/ExitIntentOffer"), "ExitIntentOffer");
+
+const Lazy = ({ children, h = "60vh" }: { children: ReactNode; h?: string }) => (
+  <Suspense fallback={<div style={{ minHeight: h }} aria-hidden="true" />}>{children}</Suspense>
+);
+
+/*
+ * Fora da home nesta rodada (componentes continuam no disco):
+ * EngineBlueprint, AssemblyLine, SpecSheet, HexServiceStrip, PhoneCTABar, LeadMagnet,
+ * Testimonials, Brands, InstagramFeed, UrgencyCTA, RaceMode, PlansComparison, ChapterMark,
+ * About, LocalPresence/Contact (fundidos em ContactSection), WheelsTires/Electromechanical/
+ * ScannerDiagnostics (viraram cards em Services), FloatingDecorations.
+ */
 const Index = () => {
+  const touch = useIsTouch();
   return (
-    <div className="min-h-screen bg-background overflow-x-clip relative">
+    <div className="min-h-screen bg-background overflow-x-clip relative pb-16 md:pb-0">
       <SEO />
-      <FloatingDecorations />
       <QuickInfoPanel />
-
       <div className="relative z-10">
         <Navbar />
         <main>
           <Hero />
-          <HexServiceStrip />
-          <PhoneCTABar />
-          <div className="divider-tread" />
-          <PromoBanner />
-          <LeadMagnet />
-
-          <ChapterMark number="01" kicker="Capítulo" label="Sobre a Adricar" title="TRÊS DÉCADAS DE ASFALTO." />
-          <Reveal><About /></Reveal>
-          <Timeline30Years />
-
-          <ChapterMark number="02" kicker="Capítulo" label="Diferenciais" title="POR QUE ADRICAR." />
-          <Reveal><WhyChoose /></Reveal>
-
-          <EngineBlueprint />
-          <AssemblyLine />
-
-          <ChapterMark number="03" kicker="Capítulo" label="Serviços" title="MECÂNICA COMPLETA." />
-          <Services />
-          <Reveal><WheelsTires /></Reveal>
-          <Reveal><Electromechanical /></Reveal>
-          <Reveal><ScannerDiagnostics /></Reveal>
-          <SpecSheet />
-          <Reveal><PlansComparison /></Reveal>
-
-          <ChapterMark number="04" kicker="Capítulo" label="Reputação" title="A VOZ DE QUEM ROLOU CONOSCO." />
-          <Reveal><GoogleReviews /></Reveal>
-          <Reveal><Gallery /></Reveal>
-          <Reveal><BeforeAfterSection /></Reveal>
-
-          <ChapterMark number="05" kicker="Capítulo" label="Parceria" title="MARCAS QUE CONFIAM." />
-          <Reveal><Brands /></Reveal>
-          <BrandMarquee />
-          <Reveal><PartnerProgram /></Reveal>
-          <Reveal><Testimonials /></Reveal>
-          <Reveal><InstagramFeed /></Reveal>
-
-          <UrgencyCTA />
-
-          <ChapterMark number="06" kicker="Capítulo" label="Contato" title="TRAGA SEU CARRO." />
-          <Reveal><FAQ /></Reveal>
-          <Reveal><Contact /></Reveal>
-          <LocalPresence />
+          <TrustStrip />
+          <Lazy><Services /></Lazy>
+          <Lazy h="40vh"><PromoBanner /></Lazy>
+          <div id="sobre">
+            <Lazy><Reveal><WhyChoose /></Reveal></Lazy>
+            <Lazy h="40vh"><Timeline30Years compact /></Lazy>
+          </div>
+          <Lazy><Reveal><BeforeAfterSection /></Reveal></Lazy>
+          <Lazy><Reveal><Gallery /></Reveal></Lazy>
+          <Lazy><Reveal><GoogleReviews /></Reveal></Lazy>
+          <div id="marcas">
+            <Lazy h="20vh"><BrandMarquee /></Lazy>
+            <Lazy><Reveal><PartnerProgram /></Reveal></Lazy>
+          </div>
+          <Lazy><Reveal><FAQ /></Reveal></Lazy>
+          <Lazy><ContactSection /></Lazy>
         </main>
-        <Footer />
+        <Lazy h="20vh"><Footer /></Lazy>
         <WhatsAppFloat />
-        <RaceMode />
-        <ExitIntentOffer />
+        <MobileActionBar />
+        {!touch && <Lazy h="0"><ExitIntentOffer /></Lazy>}
       </div>
     </div>
   );
