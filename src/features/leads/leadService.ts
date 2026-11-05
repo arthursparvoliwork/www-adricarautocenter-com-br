@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
+import type { TablesInsert } from "@/integrations/supabase/types";
 import { isValidPhone } from "./phone";
 
 const opt = (max: number) =>
@@ -54,7 +55,7 @@ export const validateLead = (input: LeadInput) => {
  */
 export const insertLead = async (input: LeadInput): Promise<{ duplicate: boolean }> => {
   const lead = validateLead(input);
-  const { error } = await supabase.from("leads").insert(lead);
+  const { error } = await supabase.from("leads").insert(lead as TablesInsert<"leads">);
   if (!error) return { duplicate: false };
   if (error.code === "23505" && /idempotency/i.test(`${error.message} ${error.details ?? ""}`)) {
     return { duplicate: true };

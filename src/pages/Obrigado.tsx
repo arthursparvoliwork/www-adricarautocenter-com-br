@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { CheckCircle2, MessageCircle, Phone, Star, Instagram, ArrowLeft, Clock, MapPin } from "lucide-react";
+import { MessageCircle, Phone, Star, Instagram, ArrowLeft, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackLead } from "@/lib/tracking";
 import { EASE_BRAND } from "@/lib/motion";
