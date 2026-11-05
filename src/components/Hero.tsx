@@ -90,7 +90,7 @@ export const Hero = () => {
       <motion.div className="absolute inset-0" style={{ y: videoY }} aria-hidden="true">
         <div className="absolute inset-0 animate-ken-burns">
           {touch ? (
-            <img src={heroCar} alt="" className="w-full h-full object-cover" fetchPriority="high" />
+            <img src={heroCar} alt="" className="w-full h-full object-cover" {...{ fetchpriority: "high" }} />
           ) : (
             <video autoPlay muted loop playsInline preload="auto" poster={heroCar} className="w-full h-full object-cover">
               <source src={engineHeroMeta.url} type="video/mp4" />
