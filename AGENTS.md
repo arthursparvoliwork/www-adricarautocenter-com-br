@@ -2,3 +2,5 @@
 - Shop open/closed status must come from src/lib/hours.ts (America/Sao_Paulo via Intl), never the visitor's local clock.
 - Home sections below the fold are React.lazy-loaded in src/pages/Index.tsx; components removed from the home stay on disk so they can be restored.
 - Cards use the single `.card-metal` style; section titles use `SectionHeading` so the visual language stays uniform.
+- The 3D wheel (src/components/wheel/) is lazy-loaded only on desktop without reduced motion; its scroll math lives in wheelMath.ts (pure, tested). Uses local Lightformers instead of drei Environment presets to avoid runtime CDN HDR fetches.
+- Pinned scroll sections must not have overflow-hidden ancestors (use overflow-clip) or position: sticky breaks.
