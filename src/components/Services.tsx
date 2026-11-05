@@ -5,7 +5,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { VideoBackdrop } from "@/components/VideoBackdrop";
-import { TiltCard } from "@/components/TiltCard";
+import { rememberRect } from "@/lib/sharedElement";
 import { motion } from "framer-motion";
 import { CarXRay } from "@/components/CarXRay";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -58,7 +58,7 @@ export const Services = () => {
             const inner = (
               <>
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/0 group-hover:bg-primary/10 blur-2xl rounded-full transition-all duration-500" />
-                <div className="relative" style={{ transform: "translateZ(30px)" }}>
+                <div className="relative" >
                   <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-[0_0_20px_hsl(0_100%_50%/0.3)]">
                     <s.icon className="w-7 h-7 text-primary-foreground" />
                   </div>
@@ -70,8 +70,8 @@ export const Services = () => {
                   <div className="mt-4 h-px w-12 bg-gradient-to-r from-primary to-transparent group-hover:w-full transition-all duration-500" />
                   {s.slug && (
                     <>
-                      <div className="mt-3 max-h-0 group-hover:max-h-32 overflow-hidden transition-all duration-500 opacity-0 group-hover:opacity-100">
-                        <CarXRay highlight={s.slug} />
+                      <div className="card-reveal mt-3">
+                        <div><CarXRay highlight={s.slug} /></div>
                       </div>
                       <div className="mt-3 text-xs uppercase tracking-wider text-secondary font-bold">
                         Saiba mais →
@@ -89,13 +89,12 @@ export const Services = () => {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: DURATION.enter, delay: (i % 4) * STAGGER, ease: EASE_BRAND }}
               >
-                <TiltCard className="h-full">
+                
                   {s.slug ? (
-                    <Link to={`/servicos/${s.slug}`} className={cls}>{inner}</Link>
+                    <Link to={`/servicos/${s.slug}`} className={cls} onClick={(e) => rememberRect(s.slug!, e.currentTarget)}>{inner}</Link>
                   ) : (
                     <div className={cls}>{inner}</div>
                   )}
-                </TiltCard>
               </motion.div>
             );
           })}
