@@ -234,14 +234,14 @@ const MobileMenu = ({ open, onClose, active }: { open: boolean; onClose: () => v
           transition={{ duration: DURATION.enter, ease: EASE_BRAND }}
         >
           <div className="absolute inset-0 bg-gradient-radial-glow opacity-50 pointer-events-none" />
-          <div className="container-x relative flex h-20 items-center justify-between">
+          <div className="container-x w-full relative flex h-20 items-center justify-between">
             <span className="section-kicker">Menu</span>
             <button data-autofocus onClick={onClose} aria-label="Fechar menu" className="p-2 rounded-md text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">
               <X />
             </button>
           </div>
           <motion.nav
-            className="container-x relative flex-1 flex flex-col justify-center gap-1 pb-10"
+            className="container-x w-full relative flex-1 flex flex-col justify-center gap-1 pb-10"
             initial="hidden"
             animate="show"
             variants={{ show: { transition: { staggerChildren: STAGGER, delayChildren: 0.12 } } }}
