@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
@@ -8,7 +8,10 @@ import { Loader2 } from "lucide-react";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { ScrollProgress } from "@/components/ScrollProgress";
-import { MotionConfig } from "framer-motion";
+import { AnimatePresence, MotionConfig } from "framer-motion";
+import { PageTransition } from "@/components/motion/PageTransition";
+import { CardFx } from "@/components/motion/CardFx";
+import { BackToTop } from "@/components/BackToTop";
 import { DURATION, EASE_BRAND } from "@/lib/motion";
 import { ChatBot } from "@/components/ChatBot";
 import { captureCampaign } from "@/lib/tracking";
@@ -26,6 +29,27 @@ const PageFallback = () => (
   </div>
 );
 
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <PageTransition key={location.pathname}>
+        <Suspense fallback={<PageFallback />}>
+          <Routes location={location}>
+            <Route path="/" element={<Index />} />
+            <Route path="/servicos/:slug" element={<ServicePage />} />
+            <Route path="/obrigado" element={<Obrigado />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/admin" element={<Admin />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </PageTransition>
+    </AnimatePresence>
+  );
+};
+
 const App = () => {
   useEffect(() => {
     captureCampaign();
@@ -38,19 +62,11 @@ const App = () => {
       <Toaster />
       <Sonner />
       <ScrollProgress />
+      <CardFx />
       
       <BrowserRouter>
-        <Suspense fallback={<PageFallback />}>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/servicos/:slug" element={<ServicePage />} />
-            <Route path="/obrigado" element={<Obrigado />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/admin" element={<Admin />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+        <AnimatedRoutes />
+        <BackToTop />
         <ChatBot />
       </BrowserRouter>
     </TooltipProvider>
