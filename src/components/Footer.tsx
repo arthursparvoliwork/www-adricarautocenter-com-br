@@ -11,7 +11,7 @@ export const Footer = () => {
         <div className="grid md:grid-cols-4 gap-10 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-4 mb-4">
-              <img src={lockup} alt="Adricar Centro Automotivo" className="w-40 sm:w-52 drop-shadow-[0_8px_30px_rgba(230,57,70,0.45)]" />
+              <img loading="lazy" decoding="async" src={lockup} alt="Adricar Centro Automotivo" className="w-40 sm:w-52 drop-shadow-[0_8px_30px_rgba(230,57,70,0.45)]" />
               <span className="flex flex-col leading-none">
                 <span className="font-display text-2xl text-foreground tracking-wide">ADRICAR</span>
                 <span className="text-[11px] uppercase tracking-[0.3em] text-secondary">Centro Automotivo</span>

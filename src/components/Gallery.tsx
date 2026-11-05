@@ -40,7 +40,7 @@ export const Gallery = () => {
               key={it.label}
               onClick={() => setLightbox(i)}
               aria-label={`Ampliar foto: ${it.label}`}
-              className={`group relative overflow-hidden rounded-2xl border border-border hover:border-primary/60 transition-all duration-500 text-left ${
+              className={`group relative card-metal card-metal-hover overflow-hidden text-left ${
                 i === 0 ? "lg:col-span-2 lg:row-span-2 aspect-square lg:aspect-auto" : "aspect-square"
               }`}
             >
