@@ -1,5 +1,6 @@
 import { useRef, MouseEvent, ReactNode } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useRichMotion } from "@/hooks/useMotionPrefs";
 
 interface MagneticProps {
   children: ReactNode;
@@ -15,6 +16,8 @@ export const Magnetic = ({ children, className, strength = 0.35 }: MagneticProps
   const sx = useSpring(x, { stiffness: 220, damping: 18, mass: 0.4 });
   const sy = useSpring(y, { stiffness: 220, damping: 18, mass: 0.4 });
 
+  const rich = useRichMotion();
+
   const handleMove = (e: MouseEvent<HTMLDivElement>) => {
     const el = ref.current;
     if (!el) return;
@@ -28,6 +31,8 @@ export const Magnetic = ({ children, className, strength = 0.35 }: MagneticProps
     x.set(0);
     y.set(0);
   };
+
+  if (!rich) return <div className={className}>{children}</div>;
 
   return (
     <motion.div

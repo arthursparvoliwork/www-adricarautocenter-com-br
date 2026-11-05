@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { motion } from "framer-motion";
+import { motion, animate } from "framer-motion";
+import { takeRect } from "@/lib/sharedElement";
+import { EASE_BRAND } from "@/lib/motion";
 import { ArrowLeft, CheckCircle2, MessageCircle, Phone, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,8 +20,26 @@ export default function ServicePage() {
   const { slug } = useParams<{ slug: string }>();
   const service = slug ? getServiceBySlug(slug) : undefined;
 
-  useEffect(() => {
+  const plateRef = useRef<HTMLDivElement>(null);
+
+  // Rola ao topo e faz o "shared element": a placa do hero cresce a partir do card clicado.
+  useLayoutEffect(() => {
     window.scrollTo(0, 0);
+    const from = slug ? takeRect(slug) : null;
+    const el = plateRef.current;
+    if (!from || !el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const to = el.getBoundingClientRect();
+    const ctl = animate(
+      el,
+      {
+        x: [from.left - to.left, 0],
+        y: [from.top - to.top, 0],
+        scaleX: [from.width / to.width, 1],
+        scaleY: [from.height / to.height, 1],
+      },
+      { duration: 0.5, ease: EASE_BRAND }
+    );
+    return () => ctl.stop();
   }, [slug]);
 
   if (!service) return <Navigate to="/404" replace />;
@@ -87,6 +107,12 @@ export default function ServicePage() {
         {/* Hero */}
         <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-radial-glow opacity-40" />
+          <div
+            ref={plateRef}
+            aria-hidden="true"
+            className="card-metal absolute inset-x-3 sm:inset-x-6 top-24 bottom-4 lg:top-28 opacity-60"
+            style={{ transformOrigin: "0 0" }}
+          />
           <div className="container-x relative z-10">
             <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
               <Link to="/" className="hover:text-secondary">Início</Link>

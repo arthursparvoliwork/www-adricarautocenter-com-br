@@ -99,6 +99,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          idempotency_key: string | null
           mensagem: string | null
           modelo_carro: string | null
           nome: string
@@ -111,6 +112,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          idempotency_key?: string | null
           mensagem?: string | null
           modelo_carro?: string | null
           nome: string
@@ -123,6 +125,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          idempotency_key?: string | null
           mensagem?: string | null
           modelo_carro?: string | null
           nome?: string
@@ -165,6 +168,10 @@ export type Database = {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      verify_lead_webhook_secret: {
+        Args: { _secret: string }
         Returns: boolean
       }
     }

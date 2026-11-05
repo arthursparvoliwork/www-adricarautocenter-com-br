@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Menu, X, Phone, MessageCircle } from "lucide-react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { DURATION, EASE_BRAND, STAGGER } from "@/lib/motion";
+import { whatsappLink } from "@/features/leads/whatsapp";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import lockup from "@/assets/adricar-lockup-clean.png";
@@ -143,11 +146,13 @@ export const Navbar = () => {
         </div>
 
         <button
-          className="lg:hidden text-foreground p-2"
-          onClick={() => setOpen(!open)}
-          aria-label="Menu"
+          className="lg:hidden text-foreground p-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+          onClick={() => setOpen(true)}
+          aria-label="Abrir menu"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
         >
-          {open ? <X /> : <Menu />}
+          <Menu />
         </button>
       </div>
 
@@ -177,44 +182,98 @@ export const Navbar = () => {
       </div>
 
 
+      <MobileMenu open={open} onClose={() => setOpen(false)} active={active} />
+    </header>
+  );
+};
+
+const ORIGIN = "calc(100% - 2.25rem) 2.5rem";
+
+/** Menu mobile fullscreen: abre em máscara circular a partir do botão, Esc fecha, trava scroll e prende o foco. */
+const MobileMenu = ({ open, onClose, active }: { open: boolean; onClose: () => void; active: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const prevOverflow = document.body.style.overflow;
+    const prevFocus = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = "hidden";
+    const t = window.setTimeout(() => ref.current?.querySelector<HTMLElement>("[data-autofocus]")?.focus(), 50);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") return onClose();
+      if (e.key !== "Tab" || !ref.current) return;
+      const items = Array.from(ref.current.querySelectorAll<HTMLElement>("a[href], button:not([disabled])"));
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      window.clearTimeout(t);
+      document.body.style.overflow = prevOverflow;
+      document.removeEventListener("keydown", onKey);
+      prevFocus?.focus?.();
+    };
+  }, [open, onClose]);
+
+  return createPortal(
+    <AnimatePresence>
       {open && (
-        <div className="lg:hidden bg-background/95 backdrop-blur-xl border-t border-primary/30 animate-fade-in">
-          <nav className="container-x py-6 flex flex-col gap-1">
+        <motion.div
+          ref={ref}
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu"
+          className="lg:hidden fixed inset-0 z-[70] bg-background/[0.97] backdrop-blur-xl flex flex-col"
+          initial={{ clipPath: `circle(0% at ${ORIGIN})` }}
+          animate={{ clipPath: `circle(150% at ${ORIGIN})` }}
+          exit={{ clipPath: `circle(0% at ${ORIGIN})` }}
+          transition={{ duration: DURATION.enter, ease: EASE_BRAND }}
+        >
+          <div className="absolute inset-0 bg-gradient-radial-glow opacity-50 pointer-events-none" />
+          <div className="container-x w-full relative flex h-20 items-center justify-between">
+            <span className="section-kicker">Menu</span>
+            <button data-autofocus onClick={onClose} aria-label="Fechar menu" className="p-2 rounded-md text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary">
+              <X />
+            </button>
+          </div>
+          <motion.nav
+            className="container-x w-full relative flex-1 flex flex-col justify-center gap-1 pb-10"
+            initial="hidden"
+            animate="show"
+            variants={{ show: { transition: { staggerChildren: STAGGER, delayChildren: 0.12 } } }}
+          >
             {links.map((l) => (
-              <a
+              <motion.a
                 key={l.href}
                 href={l.href}
-                onClick={() => setOpen(false)}
+                onClick={onClose}
+                variants={{ hidden: { opacity: 0, x: -24 }, show: { opacity: 1, x: 0 } }}
                 className={cn(
-                  "py-3 border-b border-border/60 text-base font-semibold uppercase tracking-wider transition-colors",
+                  "py-3 border-b border-border/50 font-display text-3xl uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:text-secondary",
                   active === l.href ? "text-secondary" : "text-foreground hover:text-secondary"
                 )}
               >
                 {l.label}
-              </a>
+              </motion.a>
             ))}
-            <a
-              href="tel:+5511985370952"
-              onClick={() => setOpen(false)}
-              className="mt-4 flex items-center gap-3 rounded-lg border border-secondary/30 bg-secondary/5 px-4 py-3 text-secondary"
-            >
-              <Phone className="w-4 h-4" />
-              <span className="font-semibold tabular-nums">(11) 98537-0952</span>
-            </a>
-            <Button variant="whatsapp" className="mt-2 rounded-lg" asChild>
-              <a
-                href="https://wa.me/5511985370952?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento%20na%20Adricar."
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setOpen(false)}
-              >
-                <MessageCircle className="w-4 h-4" />
-                Solicitar Orçamento WhatsApp
-              </a>
-            </Button>
-          </nav>
-        </div>
+            <motion.div variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }} className="mt-8 grid grid-cols-2 gap-3">
+              <Button variant="outline" size="lg" asChild>
+                <a href="tel:+5511985370952" onClick={onClose}><Phone className="w-4 h-4" /> Ligar</a>
+              </Button>
+              <Button variant="whatsapp" size="lg" asChild>
+                <a href={whatsappLink("Olá! Gostaria de um orçamento na Adricar.")} target="_blank" rel="noopener noreferrer" onClick={onClose}>
+                  <MessageCircle className="w-4 h-4" /> WhatsApp
+                </a>
+              </Button>
+            </motion.div>
+          </motion.nav>
+        </motion.div>
       )}
-    </header>
+    </AnimatePresence>,
+    document.body
   );
 };

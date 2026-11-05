@@ -2,13 +2,15 @@ import { useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { CheckCircle2, MessageCircle, Phone, Star, Instagram, ArrowLeft, Clock, MapPin } from "lucide-react";
+import { MessageCircle, Phone, Star, Instagram, ArrowLeft, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trackLead } from "@/lib/tracking";
+import { EASE_BRAND } from "@/lib/motion";
 import { fireSparks } from "@/components/ConfettiSparks";
+import { whatsappLink } from "@/features/leads/whatsapp";
 import lockup from "@/assets/adricar-lockup-clean.png";
 
-const WHATSAPP = "https://wa.me/5511985370952?text=Ol%C3%A1!%20Acabei%20de%20pedir%20um%20or%C3%A7amento%20no%20site%20da%20Adricar.";
+const WHATSAPP = whatsappLink("Olá! Acabei de pedir um orçamento no site da Adricar.");
 const MAPS_REVIEW = "https://search.google.com/local/writereview?placeid=ChIJ_____ADRICAR";
 const MAPS_DIR = "https://www.google.com/maps/dir/?api=1&destination=Av.+Dona+Belmira+Marin,+1670+S%C3%A3o+Paulo";
 
@@ -24,7 +26,12 @@ const Obrigado = () => {
 
   useEffect(() => {
     trackLead(source);
-    fireSparks();
+    // confete leve, uma vez por sessão
+    const k = "adricar_thanks_confetti";
+    if (!sessionStorage.getItem(k) && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      sessionStorage.setItem(k, "1");
+      fireSparks();
+    }
   }, [source]);
 
   return (
@@ -53,9 +60,14 @@ const Obrigado = () => {
           initial={{ scale: 0.6, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.15, type: "spring", stiffness: 200 }}
-          className="mt-7 mx-auto w-20 h-20 rounded-full bg-primary/15 border border-primary/40 flex items-center justify-center"
+          className="mt-7 mx-auto w-24 h-24 rounded-full bg-whatsapp/10 border border-whatsapp/30 flex items-center justify-center"
         >
-          <CheckCircle2 className="w-10 h-10 text-primary" />
+          <svg viewBox="0 0 52 52" className="w-14 h-14" fill="none" aria-hidden="true">
+            <motion.circle cx="26" cy="26" r="23" stroke="hsl(var(--whatsapp))" strokeWidth="3"
+              initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.6, delay: 0.2, ease: EASE_BRAND }} />
+            <motion.path d="M15 27l7 7 15-16" stroke="hsl(var(--whatsapp))" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"
+              initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.4, delay: 0.75, ease: EASE_BRAND }} />
+          </svg>
         </motion.div>
 
         <h1 className="font-display text-3xl sm:text-5xl mt-6 leading-tight">

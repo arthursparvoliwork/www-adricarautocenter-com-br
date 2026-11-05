@@ -4,7 +4,8 @@ import { X, Loader2, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { useSubmitLead } from "@/features/leads/useSubmitLead";
+import { maskPhone } from "@/features/leads/phone";
 
 const KEY = "adricar_exit_offer_v1";
 
@@ -13,7 +14,8 @@ export const ExitIntentOffer = () => {
   const [open, setOpen] = useState(false);
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { submit: submitLead, status } = useSubmitLead();
+  const loading = status === "loading";
 
   useEffect(() => {
     if (localStorage.getItem(KEY)) return;
@@ -37,28 +39,13 @@ export const ExitIntentOffer = () => {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (nome.trim().length < 2 || telefone.replace(/\D/g, "").length < 10) {
-      toast.error("Informe nome e WhatsApp válidos.");
+    const res = await submitLead({ nome, telefone, servico: "Promo Fechou, Ganhou! (exit intent)", origem: "exit_intent" });
+    if (!res.ok) {
+      toast.error(res.reason === "invalid" ? "Informe nome e WhatsApp válidos." : "Erro ao enviar. Chame no WhatsApp.");
       return;
     }
-    setLoading(true);
-    try {
-      const { error } = await supabase.from("leads").insert({
-        nome: nome.trim(),
-        telefone: telefone.trim(),
-        servico: "Promo Fechou, Ganhou! (exit intent)",
-        origem: "exit_intent",
-      });
-      if (error) throw error;
-      supabase.functions.invoke("notify-new-lead", { body: { nome, telefone, origem: "exit_intent" } }).catch(() => {});
-      toast.success("Pronto! Vamos te chamar no WhatsApp.");
-      setOpen(false);
-    } catch (err) {
-      console.error(err);
-      toast.error("Erro ao enviar. Chame no WhatsApp.");
-    } finally {
-      setLoading(false);
-    }
+    toast.success("Pronto! Vamos te chamar no WhatsApp.");
+    setOpen(false);
   };
 
   return (
@@ -103,7 +90,7 @@ export const ExitIntentOffer = () => {
 
             <form onSubmit={submit} className="mt-5 space-y-3">
               <Input value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Seu nome" aria-label="Seu nome" maxLength={80} />
-              <Input value={telefone} onChange={(e) => setTelefone(e.target.value)} placeholder="WhatsApp" aria-label="Seu WhatsApp" type="tel" maxLength={20} />
+              <Input value={telefone} onChange={(e) => setTelefone(maskPhone(e.target.value))} placeholder="WhatsApp" aria-label="Seu WhatsApp" type="tel" maxLength={20} />
               <Button type="submit" variant="hero" size="lg" className="w-full" disabled={loading}>
                 {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Enviando...</> : "Quero minha promoção"}
               </Button>

@@ -1,125 +1,86 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Loader2, Send, CheckCircle2 } from "lucide-react";
+import { Send, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 import { UrgencyBadge } from "@/components/UrgencyBadge";
 import { fireSparks } from "@/components/ConfettiSparks";
 import { GuaranteePDF } from "@/components/GuaranteePDF";
 import { useNavigate } from "react-router-dom";
 import { originLabel } from "@/lib/tracking";
+import { useSubmitLead } from "@/features/leads/useSubmitLead";
+import { maskPhone } from "@/features/leads/phone";
+import { buildLeadWhatsappText, whatsappLink } from "@/features/leads/whatsapp";
+import { FloatingInput, FloatingTextarea, ServiceChips } from "@/features/leads/LeadFields";
+import { useRichMotion } from "@/hooks/useMotionPrefs";
+
+const EMPTY = { nome: "", telefone: "", modelo_carro: "", servico: "", mensagem: "" };
 
 export const QuoteForm = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [form, setForm] = useState({
-    nome: "",
-    telefone: "",
-    modelo_carro: "",
-    servico: "",
-    mensagem: "",
-  });
+  const rich = useRichMotion();
+  const { submit, status, errors, setErrors } = useSubmitLead();
+  const [form, setForm] = useState(EMPTY);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const set = (k: keyof typeof EMPTY, v: string) => {
+    setForm((f) => ({ ...f, [k]: v }));
+    if (errors[k]) setErrors((e) => ({ ...e, [k]: undefined }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.nome.trim() || !form.telefone.trim()) {
-      toast.error("Preencha nome e telefone.");
+    const res = await submit({ ...form, origem: originLabel("formulario_site") });
+    if (!res.ok) {
+      if (res.reason === "network") toast.error("Erro ao enviar. Tente de novo ou chame no WhatsApp.");
       return;
     }
-    setLoading(true);
-    try {
-      const { error } = await supabase.from("leads").insert({
-        nome: form.nome.trim(),
-        telefone: form.telefone.trim(),
-        modelo_carro: form.modelo_carro.trim() || null,
-        servico: form.servico.trim() || null,
-        mensagem: form.mensagem.trim() || null,
-        origem: originLabel("formulario_site"),
-      });
-      if (error) throw error;
-
-      // Dispara notificação ao dono via edge function (fire-and-forget)
-      supabase.functions.invoke("notify-new-lead", { body: form }).catch(() => {});
-
-      setSuccess(true);
-      fireSparks();
-      toast.success("Pedido enviado! Te chamamos no WhatsApp em instantes.");
-
-      // Abre WhatsApp com mensagem pré-formatada
-      const msg = `Olá! Vim pelo site da Adricar.%0A%0A*Nome:* ${form.nome}%0A*Carro:* ${form.modelo_carro || "—"}%0A*Serviço:* ${form.servico || "—"}%0A*Mensagem:* ${form.mensagem || "—"}`;
-      setTimeout(() => {
-        window.open(`https://wa.me/5511985370952?text=${msg}`, "_blank", "noopener");
-      }, 800);
-
-      setForm({ nome: "", telefone: "", modelo_carro: "", servico: "", mensagem: "" });
-      setTimeout(() => navigate("/obrigado?src=formulario_site"), 1200);
-    } catch (err) {
-      console.error(err);
-      toast.error("Erro ao enviar. Chame direto no WhatsApp.");
-    } finally {
-      setLoading(false);
-    }
+    if (rich) fireSparks();
+    toast.success("Pedido enviado! Te chamamos no WhatsApp em instantes.");
+    const url = whatsappLink(buildLeadWhatsappText(form));
+    setTimeout(() => window.open(url, "_blank", "noopener"), 800);
+    setForm(EMPTY);
+    setTimeout(() => navigate("/obrigado?src=formulario_site"), 1200);
   };
+
+  const btnState = status === "loading" ? "loading" : status === "success" ? "success" : "idle";
 
   return (
     <motion.form
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6 }}
       onSubmit={handleSubmit}
-      className="bg-card/80 backdrop-blur-md border border-border rounded-2xl p-6 lg:p-8 space-y-4 hover:border-primary/40 transition-colors"
+      noValidate
+      className="bg-card/80 backdrop-blur-md border border-border rounded-2xl p-6 lg:p-8 space-y-3 hover:border-primary/40 transition-colors"
     >
       <UrgencyBadge />
-      <div>
+      <div className="pb-1">
         <h3 className="font-display text-2xl mb-1">Peça seu <span className="text-fire">orçamento grátis</span></h3>
         <p className="text-sm text-muted-foreground">Resposta em até 30 minutos no horário comercial.</p>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div className="space-y-1.5">
-          <Label htmlFor="nome">Nome *</Label>
-          <Input id="nome" name="nome" value={form.nome} onChange={handleChange} required placeholder="Seu nome" />
-        </div>
-        <div className="space-y-1.5">
-          <Label htmlFor="telefone">WhatsApp *</Label>
-          <Input id="telefone" name="telefone" value={form.telefone} onChange={handleChange} required placeholder="(11) 99999-9999" type="tel" />
-        </div>
+      <div className="grid sm:grid-cols-2 gap-x-4">
+        <FloatingInput name="nome" label="Nome *" value={form.nome} maxLength={100} autoComplete="name" onChange={(e) => set("nome", e.target.value)} error={errors.nome} />
+        <FloatingInput
+          name="telefone"
+          label="WhatsApp * (11) 99999-9999"
+          type="tel"
+          inputMode="numeric"
+          autoComplete="tel-national"
+          value={form.telefone}
+          onChange={(e) => set("telefone", maskPhone(e.target.value))}
+          error={errors.telefone}
+        />
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div className="space-y-1.5">
-          <Label htmlFor="modelo_carro">Modelo do carro</Label>
-          <Input id="modelo_carro" name="modelo_carro" value={form.modelo_carro} onChange={handleChange} placeholder="Ex: Civic 2018" />
-        </div>
-        <div className="space-y-1.5">
-          <Label htmlFor="servico">Serviço desejado</Label>
-          <Input id="servico" name="servico" value={form.servico} onChange={handleChange} placeholder="Ex: Revisão, freios..." />
-        </div>
-      </div>
+      <FloatingInput name="modelo_carro" label="Modelo do carro (ex: Civic 2018)" value={form.modelo_carro} maxLength={100} onChange={(e) => set("modelo_carro", e.target.value)} error={errors.modelo_carro} />
 
-      <div className="space-y-1.5">
-        <Label htmlFor="mensagem">Mensagem (opcional)</Label>
-        <Textarea id="mensagem" name="mensagem" value={form.mensagem} onChange={handleChange} placeholder="Conte mais sobre o que precisa..." rows={3} />
-      </div>
+      <ServiceChips value={form.servico} onChange={(v) => set("servico", v)} />
 
-      <Button type="submit" variant="hero" size="lg" disabled={loading || success} className="w-full">
-        {loading ? (
-          <><Loader2 className="w-4 h-4 animate-spin" /> Enviando...</>
-        ) : success ? (
-          <><CheckCircle2 className="w-4 h-4" /> Enviado!</>
-        ) : (
-          <><Send className="w-4 h-4" /> Enviar e abrir WhatsApp</>
-        )}
+      <FloatingTextarea name="mensagem" label="Mensagem (opcional)" rows={3} maxLength={2000} value={form.mensagem} onChange={(e) => set("mensagem", e.target.value)} error={errors.mensagem} />
+
+      <Button type="submit" variant="hero" size="lg" state={btnState} disabled={status === "loading" || status === "success"} className="w-full">
+        <Send className="w-4 h-4" /> Enviar e abrir WhatsApp <ArrowRight className="btn-arrow w-4 h-4" />
       </Button>
 
       <p className="text-xs text-muted-foreground text-center">
