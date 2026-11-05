@@ -1,4 +1,4 @@
-import { motion, type Variants } from "framer-motion";
+import { motion, type Variants, type TargetAndTransition } from "framer-motion";
 import type { ReactNode } from "react";
 import { DURATION, EASE_BRAND, SPRING } from "@/lib/motion";
 
@@ -6,7 +6,7 @@ export type RevealVariant =
   | "fadeUp" | "fadeDown" | "fadeLeft" | "fadeRight" | "scaleIn" | "blur" | "clip"
   | "mask" | "wipe" | "circle" | "diagonal" | "flip" | "spring";
 
-const HIDDEN: Record<RevealVariant, Record<string, unknown>> = {
+const HIDDEN: Record<RevealVariant, TargetAndTransition> = {
   fadeUp: { opacity: 0, y: 40 },
   fadeDown: { opacity: 0, y: -40 },
   fadeLeft: { opacity: 0, x: -48 },
@@ -21,7 +21,7 @@ const HIDDEN: Record<RevealVariant, Record<string, unknown>> = {
   flip: { opacity: 0, rotateX: -70, transformPerspective: 900 },
   spring: { opacity: 0, y: 60, scale: 0.96 },
 };
-const SHOWN: Record<RevealVariant, Record<string, unknown>> = {
+const SHOWN: Record<RevealVariant, TargetAndTransition> = {
   fadeUp: { opacity: 1, y: 0 }, fadeDown: { opacity: 1, y: 0 },
   fadeLeft: { opacity: 1, x: 0 }, fadeRight: { opacity: 1, x: 0 },
   scaleIn: { opacity: 1, scale: 1 }, blur: { opacity: 1, filter: "blur(0px)" },
