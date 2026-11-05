@@ -28,7 +28,13 @@ export const SectionHeading = ({
       >
         {kicker}
       </motion.div>
-      <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[0.98] mt-3" aria-label={title.replace(/[*|]/g, "")}>
+      <motion.h2
+        className="font-display text-4xl sm:text-5xl lg:text-6xl leading-[0.98] mt-3"
+        aria-label={title.replace(/[*|]/g, "")}
+        initial={reduced ? false : "hidden"}
+        whileInView="show"
+        viewport={vp}
+      >
         {lines.map((words, li) => (
           <span key={li} className="block" aria-hidden="true">
             {words.map((w, wi) => {
@@ -39,10 +45,10 @@ export const SectionHeading = ({
                 <span key={wi} className="inline-block overflow-hidden align-bottom pb-[0.08em]">
                   <motion.span
                     className={cn("inline-block", hl && "text-fire")}
-                    initial={reduced ? false : { y: "110%" }}
-                    whileInView={{ y: "0%" }}
-                    viewport={vp}
-                    transition={{ duration: DURATION.enter, ease: EASE_BRAND, delay: 0.1 + i * STAGGER }}
+                    variants={{
+                      hidden: { y: "110%" },
+                      show: { y: "0%", transition: { duration: DURATION.enter, ease: EASE_BRAND, delay: 0.1 + i * STAGGER } },
+                    }}
                   >
                     {text}
                   </motion.span>
@@ -52,7 +58,7 @@ export const SectionHeading = ({
             })}
           </span>
         ))}
-      </h2>
+      </motion.h2>
       <motion.div
         className={cn("section-rule mt-5 origin-left", align === "center" && "mx-auto")}
         initial={reduced ? false : { scaleX: 0 }}

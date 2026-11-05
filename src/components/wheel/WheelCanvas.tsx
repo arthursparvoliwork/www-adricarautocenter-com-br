@@ -87,7 +87,7 @@ const Wheel = ({ progress }: { progress: MotionValue<number> }) => {
             <group key={a} rotation={[0, 0, a]}>
               <mesh position={[0, 0.5, 0.16]} rotation={[0.12, 0, 0]}>
                 <boxGeometry args={[0.16, 0.8, 0.08]} />
-                <meshStandardMaterial color="#cfcfcf" metalness={1} roughness={0.2} />
+                <meshStandardMaterial color="#e6e6e6" metalness={0.85} roughness={0.25} />
               </mesh>
             </group>
           ))}
@@ -129,11 +129,11 @@ const WheelCanvas = ({ progress, active }: { progress: MotionValue<number>; acti
     onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}
     data-scene-ready
   >
-    <ambientLight intensity={0.25} />
+    <ambientLight intensity={0.45} />
     <directionalLight position={[3, 4, 4]} intensity={2.2} color="#ffd9a8" />
     <pointLight position={[-2.5, 0.5, -2]} intensity={30} color={RED} distance={8} />
     <pointLight position={[2.5, -0.5, -2]} intensity={14} color={RED} distance={8} />
-    <Environment resolution={128}>
+    <Environment resolution={128} environmentIntensity={1.4}>
       <Lightformer intensity={2} position={[0, 5, 0]} scale={[10, 10, 1]} rotation-x={Math.PI / 2} />
       <Lightformer intensity={1.2} color="#ffcf99" position={[-5, 1, -1]} rotation-y={Math.PI / 2} scale={[20, 1, 1]} />
       <Lightformer intensity={1.4} color={RED} position={[5, 1, -1]} rotation-y={-Math.PI / 2} scale={[20, 1, 1]} />
