@@ -1,0 +1,4 @@
+- Motion tokens live in src/lib/motion.ts and reusable motion primitives in src/components/motion/; use them instead of ad-hoc durations/eases so the whole site moves consistently.
+- Shop open/closed status must come from src/lib/hours.ts (America/Sao_Paulo via Intl), never the visitor's local clock.
+- Home sections below the fold are React.lazy-loaded in src/pages/Index.tsx; components removed from the home stay on disk so they can be restored.
+- Cards use the single `.card-metal` style; section titles use `SectionHeading` so the visual language stays uniform.
